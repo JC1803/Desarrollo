@@ -48,7 +48,7 @@ export class AddtareaPage implements OnInit {
 
     // this.creacion=new Date();
 
-
+//josetupadre
       // this.creacion = formatDate(new Date().toISOString().substr(0,10), 'dark', this.locale);
      }
 
