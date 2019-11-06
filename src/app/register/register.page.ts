@@ -23,6 +23,10 @@ export class RegisterPage implements OnInit {
   fechanac: Date;
   registros: any[] = [];
   iduser: string= "";
+  facebook: string="";
+  twitter: string= "";
+  instagram: string= "";
+  intereses: string= "";
 
   username: string = "";
   apellido: string = "";
