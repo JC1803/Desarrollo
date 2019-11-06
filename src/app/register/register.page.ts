@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
   rol: string="";
   subareas: any[] = [];
   subarea: string="";
-  
+  fechanac: Date;
   registros: any[] = [];
   iduser: string= "";
 
