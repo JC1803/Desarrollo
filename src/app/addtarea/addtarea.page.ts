@@ -47,7 +47,7 @@ export class AddtareaPage implements OnInit {
    // console.log(this.creacion.toISOString());
 
     // this.creacion=new Date();
-
+//vamos a ver si puedes ver esto puta de mierda
 //josetupadre
       // this.creacion = formatDate(new Date().toISOString().substr(0,10), 'dark', this.locale);
      }
