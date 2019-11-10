@@ -22,17 +22,5 @@ export class HomePage implements OnInit {
   ngOnInit() {
     
   }
-  calendar = {
-    mode: 'month',
-    currentDate: new Date()
-  }
-  onEventSelected (){
-
-  }
-  onViewTitleChanged (){
-
-  }
-  onTimeSelected(){
-
-  }
+  
 }

@@ -6,6 +6,7 @@ import { PostProvider } from 'src/providers/post-providers';
 import { Router } from '@angular/router';
 import { Time } from '@angular/common';
 import { formatDate } from '@angular/common';
+import { IfStmt } from '@angular/compiler';
 
 //import { format } from 'path';
 @Component({
@@ -19,11 +20,13 @@ export class AddtareaPage implements OnInit {
   descripcion: string = "";
   fechai: Date;
   horai: Time;
-  fechaf: Date= new Date();
+  fechaf: Date;
   horaf: Time;
   creacion;
   fechacrea:Date;
   idusuario: string = "";
+  idtareacreada: string="";
+  idtareacreadas: any[]=[];
 
 
 
@@ -59,6 +62,25 @@ export class AddtareaPage implements OnInit {
     
   }
 
+
+  public obtenerTareasp(id2){
+
+
+    this.postPvdr.getTareasP(id2).subscribe(
+      (data) => {
+       if(data.json()!= null){
+         console.log(data.json());
+          this.postPvdr.Globaltpersonal= data.json();
+          
+        }
+      },
+      (error)=> {
+      console.error(error);
+      }
+
+    )
+  }
+
   closeModal() {
    this.modalCtrl.dismiss(
    );
@@ -80,10 +102,35 @@ export class AddtareaPage implements OnInit {
       duration: 3000
     });
     toast.present();
-  }else{
+  }else if (this.fechai==null){ 
+    const toast = await this.toastCtrl.create({
+      message: 'Falta fecha de inicio de tarea',
+      duration: 3000
+    });
+    toast.present();
+  }else if (this.fechaf==null){ 
+    const toast = await this.toastCtrl.create({
+      message: 'Falta fecha de fin de tarea',
+      duration: 3000
+    });
+    toast.present();
+  }else if (this.horai==null){ 
+    const toast = await this.toastCtrl.create({
+      message: 'Falta hora de inicio de tarea',
+      duration: 3000
+    });
+    toast.present();
+  }else if (this.horaf==null){ 
+    const toast = await this.toastCtrl.create({
+      message: 'Falta hora final de tarea',
+      duration: 3000
+    });
+    toast.present();
+  }
+  else{
     let body = {
-      Id_Usuario: "118",
-      //Id_Usuario: id,
+     // Id_Usuario: "118",
+      Id_Usuario: id,
       Estado_Tarea: "Pendiente",
       Id_Tipo_Tarea: "4",
       Nombre: this.nombre,
@@ -97,14 +144,31 @@ export class AddtareaPage implements OnInit {
 
       //aksi: 'register'
     };
+
+   
     console.log(body);
     this.postPvdr.postTareasP(body).subscribe(async data =>{
+      this.idtareacreada= data.Id_tarea;
+      console.log(this.idtareacreada);
+
+      let body1={
+        Id_Usuario: id,
+        Id_Tarea: this.idtareacreada
+      };
+      console.log(body1);
+
+        this.postPvdr.postResTap(body1).subscribe(async dat =>{
+          console.log("correcto");
+        });
+
       const toast = await this.toastCtrl.create({
         message: 'Guardado',
         duration: 3000
       });
       toast.present();
+   this.obtenerTareasp(id);
       this.closeModal();
+      
     })
     
   }

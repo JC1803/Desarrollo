@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { LoginPage } from '../login/login.page';
 import { NavController } from '@ionic/angular';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostProvider } from '../../providers/post-providers';
 @Component({
   selector: 'app-bienvenido',
@@ -15,7 +15,8 @@ export class BienvenidoPage implements OnInit {
   constructor(private menu: MenuController,
     public _navCtrl: NavController,
     private activatedRoute: ActivatedRoute,
-    private postPvdr: PostProvider
+    private postPvdr: PostProvider,
+    private router: Router
 
     //private navPr: NavParams
 
@@ -33,4 +34,14 @@ export class BienvenidoPage implements OnInit {
 
   }
 
+  irtareas(){
+    this.router.navigate(['/tareas']);
+  }
+  irreunion(){
+    this.router.navigate(['/reunion']);
+  }
+
+  irdashboard(){
+
+  }
 }

@@ -17,6 +17,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddtareaPageModule } from './addtarea/addtarea.module';
 import { VerrolesPageModule } from './verroles/verroles.module';
 import { VerperfilPageModule } from './verperfil/verperfil.module';
+import { ComentariosPageModule } from './comentarios/comentarios.module';
+//import { VertareaPage } from './vertarea/vertarea.page';
+//import { TpersonalPageModule } from './tpersonal/tpersonal.module';
+
 //import { LoginPage } from './login/login.page';
 
 
@@ -28,9 +32,11 @@ import { VerperfilPageModule } from './verperfil/verperfil.module';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),  
     AppRoutingModule, 
+  
     AddtareaPageModule,
     VerrolesPageModule,
     VerperfilPageModule,
+    ComentariosPageModule,
     HttpModule,
     AuthModule],
   providers: [

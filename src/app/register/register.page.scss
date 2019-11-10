@@ -14,8 +14,22 @@
 
  }
 .tama {
-    color: rgb(5, 12, 77);
-    font-size: 85%
+    color: rgb(80, 81, 82);
+    font-size: 85%;
+
+    
+   
+}
+
+
+.fuent {
+   font-size: 15px;
+   ion-select{
+    max-width:100%;
+   }
+   ion-input{
+    align-items: center;
+   }
 }
 
 .colorb{
@@ -25,13 +39,13 @@
 
 
 .margenes {
-    --inner-padding-end: 0px;
-    --inner-padding-start: 0px;
-   --padding-inline-start: 0px;
-   
-
+    ion-input{
+      padding: 0px 0px 0px 0px;
+    }
+    display: block;
+    font-size: 14px;
     color: darkgray;
-        padding: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
     ion-item{   padding: 0px 0px 0px 0px; }
   
 }
