@@ -11,6 +11,19 @@ export class PostProvider {
 	// if you test in real device "http://localhost" change use the your IP	
     // server: string = "http://192.199.122.100/IONIC4_CRUD_LOGINREGIS_PHP_MYSQL/server_api/"; 
 	
+	//variable Global para guardar las tareas personales
+	public Globaltpersonal: any[];
+
+   //arreglo global para guardar los datos del usuario logeado
+   public Globalusuario: any[];
+
+   //arreglo global para guardar los de un usuario de contactos
+
+   public Gusuarioc: any[];
+
+    //arreglo global para guardar las subtareas
+
+	public Gsubta: any[];
 
 	//VARIABLES PARA ALAMCENAR DATOS OBTENIDOS DE LAS API Y SER USADAS EN CUALQUIER LADO
 	private listSource = new BehaviorSubject<any[]>([]);
@@ -18,6 +31,9 @@ export class PostProvider {
 
 	private listTarea = new BehaviorSubject<any[]>([]);
 	$getLisTarea =  this.listTarea.asObservable();
+	//(no la uso aun)
+	private listComen = new BehaviorSubject<any[]>([]);
+	$getLisComen =  this.listComen.asObservable();
 
 	constructor(public http : Http) {
 		
@@ -38,14 +54,14 @@ export class PostProvider {
 		console.log(body);
 		console.log(id);
 		let  params= new HttpParams().set(id,id);
-		return this.http.put('http://18.188.234.88/Usuarios', body+ id);
+		return this.http.put('http://18.188.234.88/Usuarios/'+id, body);
 		
 		
 	};
     //FUNCION PARA BUSCAR UN USUARIO POR ID
 
      buscarUsers(id) { 
-	  return this.http.get('http://18.188.234.88/Usuarios/'+id);
+	  return this.http.get('http://18.188.234.88/Usuarios/'+id).map(res => res.json());
 
       };
 
@@ -159,7 +175,9 @@ export class PostProvider {
     //Almacenar las tareas buscadas
      sendListTarea(list:any[]){
 	   this.listTarea.next(list);
-    }
+	}
+	
+	
  /////////////////////////////////////////////TAREAS PERSONALES////////////////////////////////
  
     //FUNCION PARA EXTRAER TAREAS PERSONALES
@@ -171,6 +189,35 @@ export class PostProvider {
 	//FUNCION PARA CREAR UNA TAREA PERSONAL
 
 	postTareasP(body) { 
-		return this.http.post('http://18.188.234.88/Tareas', body);
+		return this.http.post('http://18.188.234.88/Tareas', body).map(res => res.json());
 	  };
+
+
+	  //Funcion para guardar responsable de tareas personales
+	  
+	  postResTap(body) { 
+		return this.http.post('http://18.188.234.88/Responsables', body).map(res => res.json());
+	  };
+
+	  ///////////////////////////////////////OBSERVACIONES////////////////////////////////////////////
+
+//FUNCION PARA INGRESAR OBSERVACION
+
+ingreObserv(body) { 
+	return this.http.post('http://18.188.234.88/Observaciones', body);
+  };
+
+  //Almacenar las lista de comentarios (no la uso aun)
+
+  sendListComen(list:any[]){
+	this.listComen.next(list);
+  }
+
+// Buscar las observaciones por tareas
+  buscarObser(idt){
+    return this.http.get('http://18.188.234.88/Observaciones/'+idt);
+  }
 }
+
+
+

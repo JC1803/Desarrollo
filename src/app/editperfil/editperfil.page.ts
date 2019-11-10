@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostProvider } from '../../providers/post-providers';
 import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-editperfil',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class EditperfilPage implements OnInit {
   datos: any[] = [];
+  datosu: any[] = [];
   id: string="";
 
   username: string="";
@@ -19,30 +21,58 @@ export class EditperfilPage implements OnInit {
   direccion: string="";
   celular: string = "";
   sexo: string = "";
+  fecha: string = "";
+  intereses: string="";
+  facebook: string="";
+  twitter: string= "";
+  instagram: string= "";
+ 
+
   constructor(
     private router:  Router,
-    private postPvdr: PostProvider
+    private postPvdr: PostProvider,
+    public alertController: AlertController,
+    private menu: MenuController
   ) { }
 
   ngOnInit() {
-    this.postPvdr.$getListSource.subscribe(list => {
-      //console.log(list)
-      this.datos= list;
+    this.menu.enable(true,'first');
     
-      this.id=this.datos[0].Id_Usuario;
-      this.username = this.datos[0].Nombre;
-      this.apellido = this.datos[0].Apellido;
-      this.cedula = this.datos[0].Cedula;
-      this.email = this.datos[0].email;
-      this.direccion = this.datos[0].Direccion;
-      this.celular = this.datos[0].Celular;
-      this.sexo = this.datos[0].Sexo;
+      this.cargarDatosUsuarios();
 
+      
+  }
 
-      console.log(this.id);
-      });
+ async cargarDatosUsuarios(){
+  this.postPvdr.$getListSource.subscribe(list => {
+    console.log(list)
+    this.datos= list;
+  
+    this.id=this.datos[0].Id_Usuario;
+    
 
+    //console.log(this.sexo);
+   // console.log(this.id);
+    });
+  this.postPvdr.buscarUsers(this.id).subscribe(
+    (data) => { // Success
+      this.postPvdr.Globalusuario= data;
+      this.username = data.Nombre;
+    this.apellido = data.Apellido;
+    this.cedula = data.Cedula;
+    this.email = data.email;
+    this.direccion = data.Direccion;
+    this.celular = data.Celular;
+    this.sexo = data.Sexo;
+      this.fecha= data.Fecha_Nacimiento;
+      this.facebook= data.Facebook;
+      this.twitter= data.Twitter;
+      this.instagram= data.Instagram;
+      this.intereses= data.Intereses;
+      this.postPvdr.Globalusuario= data;
 
+      //console.log(this.datos);
+    },)  
   }
 
 async actualizar(){
@@ -50,16 +80,27 @@ async actualizar(){
     Nombre: this.username,
     Apellido: this.apellido,
     Cedula: this.cedula,
-    email: this.email,
     Direccion: this.direccion,
     Celular: this.celular,
     Sexo: this.sexo,
+    Instagram: this.instagram, 
+    Twitter: this.twitter,
+    Facebook:this.facebook,
+    Fecha_Nacimiento: this.fecha,
+    Intereses: this.intereses
     
 };
 
 this.postPvdr.modUser(body, this.id).subscribe(async data=> {
-
-this.router.navigate(['/perfil']);
+  const alert = await this.alertController.create({
+    header: 'Datos Actualizados',
+    message: 'Exito...!',
+    cssClass: 'alertDanger',
+    buttons: ['OK']
+  });
+  await alert.present();
+  this.cargarDatosUsuarios();
+//this.router.navigate(['/tabs/perfil']);
 
 });
 }

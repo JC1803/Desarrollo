@@ -14,7 +14,7 @@ export class PerfilPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.postPvdr.$getListSource.subscribe(list => {console.log(list)
+    this.postPvdr.$getListSource.subscribe(list => {//console.log(list)
       
       //this.dato= list;
       this.id= list[0].Id_Usuario;
@@ -22,12 +22,24 @@ export class PerfilPage implements OnInit {
       
       });
 
-      this.postPvdr.buscarUsers(this.id).subscribe(
-        (data) => { // Success
-           
-          this.datos= data.json();
-          console.log(this.datos);
-        },)  
+      this.cargarDatosUsuario();
   }
 
+  cargarDatosUsuario(){
+    this.postPvdr.buscarUsers(this.id).subscribe(
+      (data) => { // Success
+      this.postPvdr.Globalusuario= data;
+         
+      this.datos= this.postPvdr.Globalusuario;
+        console.log(this.datos);
+      },)  
+  }
+
+ // ionViewWillEnter(){
+   // this.cargarDatosUsuario()
+ // }
+  //ionViewDidEnter(){
+
+    //this.cargarDatosUsuario()
+  //}
 }

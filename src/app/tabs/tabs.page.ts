@@ -16,6 +16,7 @@ export class TabsPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.menu.enable(true,'first');
     this.menu.close();
     
   }

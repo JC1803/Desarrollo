@@ -67,7 +67,7 @@ export class AppComponent {
     this.postPvdr.buscarUsers(this.id).subscribe(
       (data) => { // Success
          
-        this.datos= data.json();
+        this.datos= data;
         //console.log(this.datos);
       },)  
 

@@ -59,6 +59,15 @@
                  <ion-item-divider color="light">
                    <ion-label>Archivos:</ion-label>
                  </ion-item-divider>
+
+                 <ion-item *ngFor = "let doc of tarea.documento">
+                  {{doc.Descripcion}}
+                    
+             </ion-item>
+
+             <ion-item-divider color="light">
+            </ion-item-divider>
+
                  <ion-item>
                      <ion-icon  slot="start" name="attach" color="tertiary"></ion-icon>
                      <ion-input ></ion-input>
@@ -86,24 +95,92 @@
                       <ion-text>
                      <ion-label> {{ sub.Nombre }}  </ion-label>
                       </ion-text>  
+                      <p> {{ sub.Descripcion}}  </p>
                     <p> <b>Estado: </b>{{ sub.Estado_Tarea }} <b>Limite:</b> {{ sub.FechaFin}} </p>
                     
                      </ion-label> 
-                      <ion-icon  slot="end" name="eye" color="tertiary"></ion-icon>
+                     
                 </ion-item>
    
              </div>
-             <ion-item lines="none">  
+             <!--ion-item lines="none">  
               <ion-button class="butn" color="secondary" (click)="addTareap()" > Crear Subtarea </ion-button>
-              </ion-item>
+              </ion-item-->
+
+              <ion-card>
+                <ion-card-header text-center class="btn" button (click)="collapseCard = !collapseCard" class="organ">
+                  <ion-card-title class="texto1">
+                   Crear Subtarea  
+                   
+                  </ion-card-title>
+                  <ion-icon name="add" slot="end"></ion-icon>
+                </ion-card-header>
+                
+                <ion-card-content *ngIf="collapseCard">
+                  <ion-item>
+                    <ion-input placeholder="Titulo" [(ngModel)]="nombre"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input placeholder="Descripcion" [(ngModel)]="descripcion"></ion-input>
+                  </ion-item>
+                  <ion-item-divider></ion-item-divider>
+                  <ion-item>
+                    <ion-label>Fecha Inicio</ion-label>
+                    <ion-datetime value="fechai" placeholder="Seleccionar" displayFormat="YYYY-MM-DD" [(ngModel)]="fechai" cancelText = "Cancelar"
+                    doneText = "Aceptar" min="2019" max="2100" picker-format="YYYY MMM DD" ></ion-datetime>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Hora Inicio</ion-label>
+                    <ion-datetime value="horaf"  placeholder="Seleccionar"  display-format="hh:mm" picker-format="hh:mm A"  [(ngModel)]="horai" cancelText = "Cancelar"
+                    doneText = "Aceptar"></ion-datetime>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Fecha Fin</ion-label>
+                    <ion-datetime  value="fechaf"  placeholder="Seleccionar" displayFormat="YYYY-MM-DD" [(ngModel)]="fechaf"  cancelText = "Cancelar"
+                    doneText = "Aceptar" min="2019" max="2200" picker-format="YYYY MMM DD"> ></ion-datetime>
+                  </ion-item>
+                  <ion-item>
+                      <ion-label>Hora Fin</ion-label>
+                      <ion-datetime value="horaf"   placeholder="Seleccionar" display-format="hh:mm" picker-format="hh:mm A" [(ngModel)]="horaf" cancelText = "Cancelar"
+                      doneText = "Aceptar"></ion-datetime>
+                    </ion-item>
+                    <ion-item-divider color="light">
+                    </ion-item-divider>
+                    <ion-item> 
+                  <ion-button fill="outline" class="butn" color="dark" expand="block" (click)="guardarSubtarea()">Guardar</ion-button>
+                  <ion-button fill="outline" class="butn" color="danger" expand="block" (click)="collapseCard = !collapseCard ; limpiar()">Cancelar</ion-button>
+                </ion-item>
+                </ion-card-content>
+              </ion-card>
+
+
+
+
 
               <ion-item-divider color="light"  buttons (click)="tarea.open = !tarea.open">
                   <ion-icon slot="end" name="arrow-dropright" *ngIf="!tarea.open"></ion-icon>
                   <ion-icon slot="end" name="arrow-dropdown" *ngIf="tarea.open"></ion-icon>
                 <ion-label>OBSERVACIONES:</ion-label>
               </ion-item-divider>
+
               <ion-item  *ngIf="tarea.open" lines="none">
-                 
+                  <ion-content class="conte" delegate-handle="chatScroll">
+                    <div class="conte2" *ngFor = "let com of comentarios">
+                        
+                          <ion-item class="conte3">
+                              <ion-avatar slot="start">
+                                  <img  src="/assets/sinfoto.jpg" >
+                                </ion-avatar>
+                                <ion-label>
+                                  <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b>  </h2>
+                                  <h3> <ion-text> {{ com.Descripcion }} </ion-text></h3>
+                                  <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b>{{ com.usuario.email }}</b></p>
+                                  <p> </p>
+                                </ion-label>                  
+                              </ion-item>
+                      </div>
+                    
+                  </ion-content>
                 
               </ion-item >
   </ion-list>
@@ -113,9 +190,9 @@
 <ion-footer>
   <ion-toolbar>
     <ion-item>
-      <ion-textarea placeholder="Escribe tu observacion aqui..." ></ion-textarea>
+      <ion-textarea placeholder="Escribe tu observacion aqui..." [(ngModel)]='comentario' ></ion-textarea>
       <ion-buttons>
-         <ion-button>
+         <ion-button (click)="enviarComentario()">
                <ion-icon  slot="end" name="send" color="dark"></ion-icon>
          </ion-button>
       </ion-buttons>

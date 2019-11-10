@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, MenuController } from '@ionic/angular';
 import { PostProvider } from '../../providers/post-providers';
 import { Storage } from '@ionic/Storage';
 import { HttpClient} from '@angular/common/http';
@@ -27,7 +27,7 @@ export class RegisterPage implements OnInit {
   twitter: string= "";
   instagram: string= "";
   intereses: string= "";
-
+ 
   username: string = "";
   apellido: string = "";
   cedula: string = "";
@@ -50,14 +50,19 @@ export class RegisterPage implements OnInit {
     private storage: Storage,
     public alertController: AlertController,
     public toastCtrl: ToastController,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
+    private menu: MenuController
   ) { }
 
   ngOnInit() {
+   // this.menu.enable(false,'first');
+    
+
+  
     this.postPvdr.getArea() .subscribe(
       (data) => { // Success
         if(data.json()!=null){
-          console.log(data.json());
+          //console.log(data.json());
           this.areas = data.json();
         }
       },
@@ -66,8 +71,13 @@ export class RegisterPage implements OnInit {
       }
     )
   }
+  ionViewDidEnter() {
+    this.menu.enable(false,'first');
+  }
 
   clicAre($event){
+    this.subareas= [""];
+    this.roles= [""];
     
       console.log(this.area);
       this.postPvdr.getSubareas(this.area).subscribe(
@@ -75,6 +85,8 @@ export class RegisterPage implements OnInit {
           this.subareas =dato.json();
         } 
       )
+
+      this.rol="";
   }
 
   clicSuba ($event){
@@ -143,7 +155,9 @@ export class RegisterPage implements OnInit {
         });
       toast.present();
       
-    } else{
+    }
+  
+    }else{
       let body = {
         Nombre: this.username,
         Apellido: this.apellido,
@@ -152,9 +166,13 @@ export class RegisterPage implements OnInit {
         Direccion: this.direccion,
         Celular: this.celular,
         Sexo: this.sexo,
-        Password: this.password,
         Id_tipo_Usuarios : this.tipousuario,
-
+        Password: btoa(this.password),
+        Instagram: this.instagram, 
+        Twitter: this.twitter,
+        Facebook:this.facebook,
+        Fecha_Nacimiento: this.fechanac,
+        Intereses: this.intereses
         //aksi: 'register'
       };
       

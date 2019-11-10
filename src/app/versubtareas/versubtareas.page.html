@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Subtareas</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div padding>
+      <div *ngFor ="let subt of subtareas">     
+        <ion-item buttons (click)="subt.open = !subt.open"  class="sub-item2">
+          <ion-icon slot="end" name="arrow-dropright" *ngIf="!subt.open"></ion-icon>
+          <ion-icon slot="end" name="arrow-dropdown" *ngIf="subt.open"></ion-icon>
+          <ion-label>
+            <ion-text> 
+              <h2> {{ subt.Nombre }}</h2>
+            </ion-text>
+            <p> <b>Descrpcion: </b>{{ subt.Descripcion }}   </p>
+            <p> <b>Estado: </b>{{ subt.Estado_Tarea }} <b>Limite:</b> {{ subt.FechaFin}}  </p>
+            <p *ngFor ="let resp of subt.responsables"> <b> Responsable:</b> {{resp.usuario.Nombre}} {{resp.usuario.Apellido}}</p>
+          </ion-label>
+        </ion-item>
+         
+        <div *ngIf="subt.open">
+            <ion-item *ngFor ="let sub of subt.sub_tareas" class="sub-item1">
+              <ion-icon   name="remove" class="icon" slot="start"></ion-icon>
+              <ion-label> 
+                <ion-text>
+                  <ion-label> {{ sub.Nombre }}  </ion-label>
+                </ion-text>  
+                <p> <b>Estado: </b>{{ sub.Estado_Tarea }} <b>Limite:</b> {{ sub.FechaFin}}  </p>
+              </ion-label> 
+            </ion-item> 
+        </div>
+      
+      </div>
+    </div>
+
+</ion-content>

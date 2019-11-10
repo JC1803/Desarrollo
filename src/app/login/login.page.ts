@@ -8,6 +8,7 @@ import { MenuController } from '@ionic/angular';
 import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { async } from 'q';
 import { Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -26,13 +27,21 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     public navCtrl: NavController,
     private menu: MenuController,
-   
+ 
   	public toastCtrl: ToastController) {
    }
 
   ngOnInit() {
     this.menu.close('first');
+    
+  
+  //  this.menu.swipeEnable(false, 'first');
+  
   }
+  ionViewDidEnter() {
+    this.menu.enable(false,'first');
+  }
+  
 
   async prosesLogin(){
    
@@ -40,7 +49,7 @@ export class LoginPage implements OnInit {
     if(this.email != "" && this.password != ""){
       let body = {
         email: this.email,
-        password: this.password
+        password: btoa(this.password) 
        
       };
    

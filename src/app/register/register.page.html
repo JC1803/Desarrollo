@@ -70,24 +70,24 @@
                   </ion-select>
             </ion-item>
 
-              <ion-item lines="none">
-                  <ion-icon  slot="start" name="business" color="tertiary"></ion-icon>
-                  <ion-label color="medium">Area:</ion-label>
-                  <ion-select interface="action-sheet" class="tama" (ionChange) = "clicAre($event)" placeholder="Seleccione" [(ngModel)]="area" okText="Ok" cancelText="Cancelar" name="sexo">
-                    <ion-select-option  *ngFor ="let ar of areas"  value= "{{ ar.Id_Area }}" >{{ ar.Descripcion }}</ion-select-option>
-                  </ion-select>
+              <ion-item lines="none"class="fuent">
+                    <ion-icon  slot="start" name="business" color="tertiary"></ion-icon>
+                    <ion-label color="medium">Area:</ion-label>
+                      <ion-select interface="action-sheet" class="tama" (ionChange) = "clicAre($event)" placeholder="Seleccione" [(ngModel)]="area" okText="Ok" cancelText="Cancelar"  name="sexo">
+                          <ion-select-option  *ngFor ="let ar of areas"  value= "{{ ar.Id_Area }}" >{{ ar.Descripcion }}</ion-select-option>
+                      </ion-select>
                 </ion-item>
                 
 
-            <ion-item lines="none" >
+            <ion-item lines="none" class="fuent" >
                     <ion-icon  slot="start" name="today" color="tertiary"></ion-icon>
                     <ion-label color="medium">Subarea:</ion-label>
                     <ion-select  class="tama" (ionChange) = "clicSuba($event)" placeholder="Seleccione" [(ngModel)]="subarea" okText="Ok" cancelText="Cancelar" name="sexo">
-                      <ion-select-option *ngFor ="let sub of subareas" value="{{ sub.Id_Sub_Area }}">{{ sub.Descripcion }}</ion-select-option>
+                      <ion-select-option   *ngFor ="let sub of subareas" value="{{ sub.Id_Sub_Area }}">{{ sub.Descripcion }}</ion-select-option>
                       
                     </ion-select>
               </ion-item>
-              <ion-item >
+              <ion-item class="fuent">
                       <ion-icon  slot="start" name="briefcase" color="tertiary"></ion-icon>
                       <ion-label color="medium">Rol:</ion-label>
                       <ion-select class="tama" placeholder="Seleccione" [(ngModel)]="rol" okText="Ok" cancelText="Cancelar" name="sexo">
@@ -103,7 +103,7 @@
                 <ion-input name="confirm" type="password" placeholder="Password again" [(ngModel)]="confirm_password"></ion-input>
             </ion-item>
             
-              <ion-item>
+              <ion-item class="fuent">
                   <ion-icon  slot="start" name="star" color="tertiary"></ion-icon>
                   <ion-textarea name="intereses" type="text" placeholder="Escribe tu intereses aqui...." [(ngModel)]="intereses"></ion-textarea>
               </ion-item>

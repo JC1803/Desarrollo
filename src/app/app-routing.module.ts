@@ -29,6 +29,8 @@ const routes: Routes = [
   { path: 'addtareat', loadChildren: './addtareat/addtareat.module#AddtareatPageModule' },
   { path: 'vertareap', loadChildren: './vertareap/vertareap.module#VertareapPageModule' },
   { path: 'verreunion', loadChildren: './verreunion/verreunion.module#VerreunionPageModule' },
+  { path: 'comentarios', loadChildren: './comentarios/comentarios.module#ComentariosPageModule' },
+  { path: 'versubtareas', loadChildren: './versubtareas/versubtareas.module#VersubtareasPageModule' },
 ];
 
 @NgModule({
