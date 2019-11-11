@@ -14,7 +14,6 @@ export class TareasPage implements OnInit {
   tarea1: any[ ]= [];
   valor: string = "";
   id1: string = "";
-  
   tipo: string = "";
   
   constructor(private menu: MenuController,
@@ -23,6 +22,8 @@ export class TareasPage implements OnInit {
 
   ngOnInit() {
     this.menu.close();
+
+    //extrae la lista de usuarios
     this.postPvdr.$getListSource.subscribe(list => {
       //console.log(list)
       this.datos= list;
@@ -30,14 +31,17 @@ export class TareasPage implements OnInit {
       console.log(this.id2);
       });
 
-//extraer todas las tareas donde el usuarip loggeado es responsable
-
-  this.postPvdr.getTareasRes(this.id2)
+   //extraer todas las tareas donde el usuarip loggeado es responsable
+   this.postPvdr.getTareasRes(this.id2)
    .subscribe(
     (data) => { // Success
     if(data.json()!=null){
     console.log(data.json());
+    //ojo con la variable demora mucho en mostrar los datos
+    this.postPvdr.Gresta= data.json();
     this.tareas = data.json();
+    this.postPvdr.Gbutunt=true;
+    this.postPvdr.Gtipouser= "1";
     }
   },
   (error) =>{
@@ -46,16 +50,19 @@ export class TareasPage implements OnInit {
 )
 
   }
-
+//Funcion para filtrar dependiendo del tipo de usuario observador participante y otros
   segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
+   // console.log('Segment changed', ev);
     if ( this.tipo == "1"){
       this.postPvdr.getTareasRes(this.id2)
        .subscribe(
       (data) => { // Success
         if(data.json()!=null){
         console.log(data.json());
+        this.postPvdr.Gresta= data.json();
         this.tareas = data.json();
+        this.postPvdr.Gbutunt=true;
+        this.postPvdr.Gtipouser= "1";
         }
       },
       (error) =>{
@@ -68,7 +75,10 @@ export class TareasPage implements OnInit {
      (data) => { // Success
        if(data.json()!=null){
        console.log(data.json());
+       this.postPvdr.Gresta= data.json();
        this.tareas = data.json();
+       this.postPvdr.Gbutunt=false;
+       this.postPvdr.Gtipouser= "2";
        }
        
 
@@ -83,7 +93,10 @@ export class TareasPage implements OnInit {
      (data) => { // Success
        if(data.json()!=null){
        console.log(data.json());
+       this.postPvdr.Gresta= data.json();
        this.tareas = data.json();
+       this.postPvdr.Gbutunt=false;
+       this.postPvdr.Gtipouser= "3";
        }
        
 

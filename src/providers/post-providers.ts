@@ -22,18 +22,36 @@ export class PostProvider {
    public Gusuarioc: any[];
 
     //arreglo global para guardar las subtareas
-
 	public Gsubta: any[];
 
+
+	//Arreglo global para guardar las tareas laborales del responsable
+	public Gresta: any[];
+	
+
+	//variable para activar o desactivar boton de tareas laborales
+
+	public Gbutunt: boolean;
+	public Gtipouser: string;
+
+
+	
+
+
 	//VARIABLES PARA ALAMCENAR DATOS OBTENIDOS DE LAS API Y SER USADAS EN CUALQUIER LADO
+	//ALMACENA LA LISTA DEL USUARIO LOGUEADO
 	private listSource = new BehaviorSubject<any[]>([]);
 	$getListSource =  this.listSource.asObservable();
-
+    //ALMACENA  LA LISTA DE TAREAS 
 	private listTarea = new BehaviorSubject<any[]>([]);
 	$getLisTarea =  this.listTarea.asObservable();
 	//(no la uso aun)
 	private listComen = new BehaviorSubject<any[]>([]);
 	$getLisComen =  this.listComen.asObservable();
+
+	//ALMACENAR LOS DATOS DE REUNIONES
+	private listReunion = new BehaviorSubject<any[]>([]);
+	$getListReunion =  this.listReunion.asObservable();
 
 	constructor(public http : Http) {
 		
@@ -176,7 +194,16 @@ export class PostProvider {
      sendListTarea(list:any[]){
 	   this.listTarea.next(list);
 	}
+//////////////////////////////////////////////Actualizar Tareas/////////////////////////////////
+
+postTarea(body, id) {
+
+	return this.http.put('http://18.188.234.88/Tareas/'+id, body);
 	
+	
+};
+
+
 	
  /////////////////////////////////////////////TAREAS PERSONALES////////////////////////////////
  
@@ -217,7 +244,35 @@ ingreObserv(body) {
   buscarObser(idt){
     return this.http.get('http://18.188.234.88/Observaciones/'+idt);
   }
-}
 
+
+  //////////////////////////////////////////////Documentos/////////////////////////////////////////////
+  
+ //Funcion para extraer los documentos de un usuario
+  buscarDoc(iduser){
+    return this.http.get('http://18.188.234.88/DocPorUsuarios/'+iduser);
+  }
+
+
+
+  /////////////////////////////////////////////REUNION/////////////////////////////////////////////////
+
+  //Extraer las reunioes del usuario
+
+  getReunionEstado(iduser, estado){
+    return this.http.get('http://18.188.234.88/ReunionPorEstado_User/'+estado+ '/'+iduser);
+  }
+  
+
+  //Enviar la lista de reunion
+  sendListReunion(list:any[]){
+	this.listReunion.next(list);
+  }
+
+  //Funcion para buscar Reunion 
+  getReunion(id){
+	return this.http.get('http://18.188.234.88/Reunion/'+id);
+  }
+}
 
 

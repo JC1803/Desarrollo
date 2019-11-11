@@ -23,21 +23,7 @@ export class TpersonalPage implements OnInit {
     public modalController: ModalController,
     private router: Router,
     private postPvdr: PostProvider
-  
-
-
-    ) { 
-
-      
-
-  
-    }
-
-   
-
-
-
-
+    ) {   }
 
   ngOnInit() {
     this.menu.close();

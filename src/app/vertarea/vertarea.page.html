@@ -5,7 +5,7 @@
         <ion-back-button></ion-back-button>
            </ion-buttons> 
 
-    <ion-buttons slot="end">  
+    <ion-buttons slot="end" *ngIf="ocultar1"  (click)="confirmaract()">  
             <ion-button slot="end" fill="outline">Terminar Tarea</ion-button>
           
           </ion-buttons>

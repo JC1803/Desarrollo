@@ -15,10 +15,10 @@
   </ion-header>
 
 <ion-content>
-    <ion-list class="fuente">
+    <ion-list class="fuente" *ngFor ="let  reu of datos">
         <ion-item-divider color="light">
             <ion-icon  slot="start" name="cafe" color="dark"></ion-icon>
-              <h3 class="center"> <b>ENTREGA DE BIENES</b> </h3>
+              <h3 class="center"> <b>{{reu.Tema }}</b> </h3>
          </ion-item-divider>
   
          <ion-item lines="none" class="taicon">
@@ -26,7 +26,7 @@
                <ion-icon   slot="start" name="list-box" color="dark"></ion-icon>
                <ion-text>  
                   <p> 
-               aqui va la descripcion
+              {{reu.Conclusion}}
                </p>
              </ion-text>
           </ion-item>
@@ -35,23 +35,30 @@
               </ion-icon>
               <label> Estado: </label>
               <p>
-                  inasistida / asistida / por asistir 
+                  {{reu.Estado}}
               </p>
          </ion-item>
          <ion-item lines="none" class="taicon">
                <label> Fecha Inicio: </label>
                <ion-icon   slot="start" name="clock" color=" dark"></ion-icon>
-               <p > </p>
+               <p >
+                {{reu.FechadeReunion}}   
+              </p>
               
           </ion-item>
          
           <ion-item-divider color="light">
              </ion-item-divider>
          <ion-item lines="none" > 
+            <ion-label class="ion-text-wrap">
+           <ion-text>  
                  <label> <b> Responsable: </b> </label>
-               <p>
-                Maria
+                </ion-text>
+               <p *ngFor ="let  res of reu.responsables">
+                  <ion-icon  slot="start" name="person" color="dark"> </ion-icon>
+              {{res.usuario.Nombre}}  {{res.usuario.Apellido}}
               </p>
+            </ion-label>
          </ion-item>
          <ion-item >
             <ion-label class="ion-text-wrap">
@@ -59,9 +66,9 @@
                     <ion-label> <b> Participantes:</b>  </ion-label>
                  </ion-text>
                  
-                  <p>
+                  <p *ngFor ="let  par of reu.participantes">
                       <ion-icon  slot="start" name="person" color="dark"> </ion-icon>
-                   Jose 
+                      {{par.usuario.Nombre}}  {{par.usuario.Apellido}}
                  </p>
                </ion-label>
                </ion-item>
@@ -72,7 +79,7 @@
                    </ion-item-divider>
 
                    <ion-item class="taicon esp">
-                      <p> Vente pa ca </p>
+                      <p> {{ reu.Orden_del_Dia}} </p>
                       <ion-icon slot="start" name="arrow-dropright-circle" color="dark"></ion-icon>
                     </ion-item>
   

@@ -31,8 +31,9 @@ export class VertareapPage implements OnInit {
   fechaf: Date;
   horaf: Time;
   fechacrea:Date;
- 
-  
+  public ocultar: boolean = true;
+  estado: string= "";
+
   constructor(
     public alertController: AlertController,
     private postPvdr: PostProvider,
@@ -43,6 +44,7 @@ export class VertareapPage implements OnInit {
 
   ngOnInit() {
     this.cargarTareas();
+    this.botones();
    
       this.fecha1= new Date().toISOString().substr(0,10);
       this.fecha2= new Date().toISOString().substr(11,8);
@@ -50,12 +52,28 @@ export class VertareapPage implements OnInit {
 
       this.postPvdr.$getListSource.subscribe( data => {
         this.usuario=data[0].Id_Usuario;
+       
         console.log(this.id);
         });
-
+ 
         this.buscarobservacion()
+       
   }
   
+
+//Funcion para esconder o mostrar el boton de terminar tarea
+  public botones(){
+    
+   console.log(this.ocultar);
+   console.log(this.estado);
+   // console.log(this.postPvdr.Gtipouser);
+
+    if( this.estado=="Terminada"){
+         this.ocultar=false;
+    }
+  }
+
+  //Funcion para recargar las tarea cuando se crea una subtarea
   async recargarSubta(id) {
     this.postPvdr.buscarTareas(id).subscribe(
       (dato) => { // Success
@@ -64,8 +82,6 @@ export class VertareapPage implements OnInit {
         console.log(dato);
         this.postPvdr.sendListTarea(this.tareasdetalle);
         }
-        
-  
       },
       (error) =>{
         console.error(error);
@@ -73,21 +89,27 @@ export class VertareapPage implements OnInit {
     )
     
   }
+
+
+  //Funcion para mostrar la tarea
   cargarTareas(){
     this.postPvdr.$getLisTarea.subscribe(list => {
       console.log(list)
       this.datos= list;
       this.id=list[0].Id_tarea;
+      this.estado= list[0].Estado_Tarea;
       });
 
   }
+
+  //funcion para buscar la observaciones que tiene la tarea
   buscarobservacion(){
     
     this.postPvdr.buscarObser(this.id).subscribe( data => {
      this.comentarios = data.json();
       });
   }
-
+ // funcion para enviar la observacion a la tarea
   async enviarComentario(){
 
     console.log(new Date());
@@ -115,6 +137,7 @@ export class VertareapPage implements OnInit {
      }
    }
 
+   //metodo que no lo uso
 
   async addTareap() {
     const alert = await this.alertController.create({
@@ -184,7 +207,7 @@ export class VertareapPage implements OnInit {
 
 
 
-
+ //Funcion para guardar un subtarea
  async guardarSubtarea(){
     if(this.nombre ==''){
       const toast = await this.toastCtrl.create({
@@ -256,10 +279,12 @@ export class VertareapPage implements OnInit {
     
     })
     
-}
+ }
 
    //aksi: 'register'
  };
+
+ //Funcion para limpiar los iputs al ingresar subtarea
  limpiar(){
   this.nombre="";
       this.descripcion="";
@@ -268,5 +293,72 @@ export class VertareapPage implements OnInit {
       this.horaf=null;
       this.horai=null;
  }
-  
+   
+
+ //Funcion para obtenr las tareas una vez que se ha actualizado algun campo
+ public obtenerTareasp(id2){
+  this.postPvdr.getTareasP(id2).subscribe(
+    (data) => {
+     if(data.json()!= null){
+       console.log(data.json());
+        this.postPvdr.Globaltpersonal= data.json();
+        
+      }
+    },
+    (error)=> {
+    console.error(error);
+    }
+
+  )
+ }
+
+ //Funcion para confirmar la terminacion de una tarea
+ async confirmaract(){
+  const alert = await this.alertController.create({
+    header: 'Alerta',
+    message: 'Desea terminar con la Tarea',
+    cssClass: 'alertDanger',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm Cancel');
+        }
+      }, {
+        text: 'Aceptar',
+        handler: () => {
+         this.terminarTarea( );
+          console.log('Confirm Ok');
+        }
+      }
+    ]
+  });
+  await alert.present();
+
+ }
+
+ //Funcion para terminar la tarea guardar los cambios
+ async terminarTarea(){
+   //console.log("llamo");
+   let body2 ={
+    Estado_Tarea: "Terminada",
+    FechaEntrega: this.fecha
+   };
+   this.postPvdr.postTarea(body2, this.id).subscribe(async data=> {
+    const toast = await this.toastCtrl.create({
+      message: 'Tarea finalizada con exito',
+      duration: 4000
+    });
+    toast.present();
+   this.recargarSubta(this.id);
+    this.cargarTareas();
+    this.botones();
+    this.obtenerTareasp(this.usuario);
+  //this.router.navigate(['/tabs/perfil']);
+  });
+
+ }
+
 }

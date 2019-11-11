@@ -45,4 +45,33 @@
       text-align: center;
       font-family: serif;
     }
-    
+    ion-segment-button {
+      --padding-start: unset;
+      --padding-end: unset; 
+      --padding-top: 2px; 
+      --padding-bottom: 2px;   
+     --border-color:#251f81;
+     //--font-size: 12px;
+     //--background-checked: #d3f8f0;
+      --color: #a5b7ac;;
+      --color-checked: #251f81;
+     ion-button {  --max-width: 500px; }
+     ion-label {
+       font-size: smaller;
+     }
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+
+    .sc-ion-segment-ios-hion-toolbar.sc-ion-segment-ios-s > ion-segment-button, ion-toolbar .sc-ion-segment-ios-h.sc-ion-segment-ios-s > ion-segment-button {
+      max-width: unset;
+      --background-checked: #251f81;;
+      --color-checked: #ffffff;
+     /* font-size: 12px; */
+     /* line-height: 22px; */
+ }
+   
+   .espacio {
+     margin: 5px 5px;
+   }
