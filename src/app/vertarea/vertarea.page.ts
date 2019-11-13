@@ -96,7 +96,7 @@ export class VertareaPage implements OnInit {
       });
   }
 
-//Funcion para buscar subcomentarios 
+//Funcion para ingresar comentarios 
   async enviarComentario(){
 
    console.log(new Date().toLocaleDateString());

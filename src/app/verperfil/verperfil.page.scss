@@ -2,17 +2,15 @@ div.iner
 .center {
     text-align: center;
     margin: 0px 0px;
-    padding {
-        color: #70cde9; 
-    }
+    
   }
 
   .bordes {
-     --border-inline-color: #70cde9;
+   //  --border-inline-color: #70cde9;
      border: 0px !important;
      bottom: 0px;
       border {
-         background: #70cde9;
+         background: #ffffff;
       }
           margin-bottom: unset;
   }
@@ -22,7 +20,7 @@ div.iner
     max-width: 100px !important;  //any size
     max-height: 100px !important; //any size 
     overflow: hidden !important;
-    border: 2px solid #12abda !important;
+   // border: 2px solid #12abda !important;
     //padding: .5em;
     }
     .marco {
@@ -37,31 +35,39 @@ div.iner
         padding-left: 0px;
         padding-right: 0px;
         font-size: small;
-        padding: 0px 0px 0px 0px
+        padding: 0px 0px 0px 0px;
+        color: white;
     }
 
     .nombre1 {
+    
      margin-bottom: 0px;
      margin-top: 0px;
+     color: #131563;
     }
 
+    .nombre2 {
+      margin-bottom: 0px;
+     margin-top: 0px;
+     color: #575964; 
+    }
   
     .fondo{
-        background-color: #bce9f8;
+      //  background-color: #bce9f8;
         background-size: cover;
         width:100%;
 
        
         
       ion-item {
-        --border-color:  #bce9f8;
+        --border-color:  #ffffff;
 
       } 
         padding {
-            color: #bce9f8;
+            color: #ffffff;
         }
         ion-toolbar {
-            background: #6ecff0;
+            background: #ffffff;
         }
     }
 
@@ -77,4 +83,9 @@ div.iner
     width: 90%;
     position: absolute; 
     display: block;  
+ }
+
+ .color {
+   background:#f1f1f1;
+   
  }

@@ -46,7 +46,7 @@ export class AppComponent {
 
     this.storage.get('session_storage').then((res)=>{
       if(res == null){
-        this.router.navigate(['/login']);
+        this.router.navigate(['/planificador']);
       }else{
         this.router.navigate(['/login']);
       }

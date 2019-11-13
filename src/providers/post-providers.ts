@@ -273,6 +273,18 @@ ingreObserv(body) {
   getReunion(id){
 	return this.http.get('http://18.188.234.88/Reunion/'+id);
   }
+
+
+  ///////////////////////////////////////////////OBSERVACION REUNION//////////////////////////////////////
+  
+ //Funcion para buscar observaciones de reuniones
+  buscarObsereu(idt){
+    return this.http.get('http://18.188.234.88/ObservacionesReuniones/'+idt);
+  }
+//Funcion para ingresar observacion en reunion
+  ingreObservr(body) { 
+	return this.http.post('http://18.188.234.88/ObservacionesReuniones', body);
+  };
 }
 
 

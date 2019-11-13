@@ -56,9 +56,17 @@
   p{
     font-size: 10px;
     display: flexbox;
-    margin: 5px 5px 0px 0px;
+    margin: 0px 5px 0px 0px;
     b{
       font-size: 10px;
+    }
+    ion-text{
+      font-size: 14px;
+      p{
+        font-size: 14px;
+        color: black;
+        text-align: justify;
+      }
     }
   }
   }
@@ -82,4 +90,26 @@
       p{
           margin: 5px 0px;
       }
+  }
+  .message-text {
+    padding: 0px 0px;
+    
+  }
+  .chat {
+    height: 400px;
+    background: #E0DAD6;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  .message-list {
+    margin-top: 12px;
+    padding: 0px 0px;
+  }
+
+  .sub-item1 {
+    padding-left: 15px;
+    ion-textarea{
+      padding: 10px 0px 0px 0px;
+      font-size: 14px;
+    }
   }

@@ -6,7 +6,17 @@
     <ion-title>Archivos</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<div> <ion-searchbar showCancelButton="always"></ion-searchbar></div>
 <ion-content>
-    <ion-searchbar showCancelButton="always"></ion-searchbar>
+    
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let doc of archivos">
+          <img src="/assets/archivo.png"/>
+          <!--p> {{ doc.Ruta}} </p-->
+         <ion-text> <p> {{doc.Descripcion}} </p> </ion-text> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
