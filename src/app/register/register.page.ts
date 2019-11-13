@@ -97,16 +97,82 @@ export class RegisterPage implements OnInit {
   async registro(){
     if(this.username==""){
         const toast = await this.toastCtrl.create({
-          message: 'Falta Usuario',
+          message: 'Falta Nombre',
           duration: 3000
         });
         toast.present();
-    }else if(this.password==""){
+    }else if(this.apellido==""){
+          const toast = await this.toastCtrl.create({
+          message: 'Falta Apellido',
+          duration: 3000
+        });
+        toast.present();
+      }else if(this.fechanac==null){
+        const toast = await this.toastCtrl.create({
+        message: 'Falta Fecha de nacimiento',
+        duration: 3000
+      });
+      toast.present();
+    }else if(this.cedula==""){
+      const toast = await this.toastCtrl.create({
+      message: 'Falta cedula',
+      duration: 3000
+    });
+    toast.present();
+  }else if(this.direccion==""){
+    const toast = await this.toastCtrl.create({
+    message: 'Falta Direccion',
+    duration: 3000
+  });
+  toast.present();
+      }else if(this.password==""){
           const toast = await this.toastCtrl.create({
           message: 'Falta Password',
           duration: 3000
         });
         toast.present();
+      }else if(this.cedula==""){
+        const toast = await this.toastCtrl.create({
+        message: 'Falta número de celular',
+        duration: 3000
+      });
+      toast.present();
+    }else if(this.sexo==""){
+      const toast = await this.toastCtrl.create({
+      message: 'Falta su sexo',
+      duration: 3000
+    });
+    toast.present();
+  }else if(this.tipousuario==""){
+    const toast = await this.toastCtrl.create({
+    message: 'Falta Apellido',
+    duration: 3000
+  });
+  toast.present();
+}else if(this.area==""){
+  const toast = await this.toastCtrl.create({
+  message: 'Falta seleccionar área',
+  duration: 3000
+});
+toast.present();
+}else if(this.subarea==""){
+  const toast = await this.toastCtrl.create({
+  message: 'Falta seleccionar subarea',
+  duration: 3000
+});
+toast.present();
+}else if(this.rol==""){
+  const toast = await this.toastCtrl.create({
+  message: 'Falta seleccionar rol',
+  duration: 3000
+});
+toast.present();
+}else if(this.intereses==""){
+  const toast = await this.toastCtrl.create({
+  message: 'Falta intereses',
+  duration: 3000
+});
+toast.present();
     }else if(this.password!=this.confirm_password){
           const toast = await this.toastCtrl.create({
           message: 'No coiniciden las passwords',

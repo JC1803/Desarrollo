@@ -13,6 +13,7 @@ export class VerperfilPage implements OnInit {
 
   ngOnInit() {
   }
+  //funcion para cerrar el modal
   closeModal() {
     this.modalCtr.dismiss(
     );}
