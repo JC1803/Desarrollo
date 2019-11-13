@@ -39,6 +39,11 @@ export class RegisterPage implements OnInit {
   sexo: string = "";
   tipousuario: string = "";
 
+  longitud: number;
+  loncheck: number;
+  total: number;
+  aux: number;
+  
   constructor( 
     private router:  Router,
     private postPvdr: PostProvider,
@@ -185,8 +190,40 @@ toast.present();
           duration: 3000
           });
         toast.present();
+    }else if(this.cedula != "" && this.cedula.length == 10){
+
+    //validar cedula
+    this.aux=0;
+    this.total=0;
+    
+    this.longitud=this.cedula.length;
+    this.loncheck=this.longitud - 1;
+    
+    for(let i=0 ; i< this.loncheck; i++){
+        if (i%2 == 0) {
+          this.aux = parseInt(this.cedula.charAt(i)) * 2 ;
+          if (this.aux > 9) {
+            this.aux -=9;
+          }
+
+          this.total += this.aux;
+        }else{
+          this.total += parseInt(this.cedula.charAt(i));
+        }
+    }
+    this.total = this.total % 10 ? 10 - this.total % 10 : 0;
+
+      if (parseInt(this.cedula.charAt(this.longitud - 1)) != this.total) {
+        
+        const toast = await this.toastCtrl.create({
+        message: 'Cedula Incorrecta',
+        duration: 3000
+        });
+      toast.present();
+      
+    }
+  
     }else{
-     
       let body = {
         Nombre: this.username,
         Apellido: this.apellido,
