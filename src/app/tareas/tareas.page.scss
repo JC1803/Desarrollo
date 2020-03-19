@@ -85,7 +85,6 @@ ion-list{
   padding-left: 0px;
 p{
   color: black;
-  font-size: 10px;
   display: flexbox;
   margin: 2px 5px 0px 0px;
   b{
@@ -93,4 +92,29 @@ p{
   }
 }
 }
+
+.letra {
+  font-size: 10px;
+    line-height: 12px;
+    padding: 4px 0px 5px 0px;
+    }
+
+.letra1 {
+  font-size: 14px; 
+  text-align: justify;
+  p{
+    font-size: 14px; 
+   
+  }
+  padding: 10px 0px 0px 0px;
+  margin: 0px 0px 15px;
+}   
+.tamanio{
+  font-size: 12px;
+}
+
+ion-list{
+  margin: 0px 0px;
+}
+
 

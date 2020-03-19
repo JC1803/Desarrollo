@@ -1,7 +1,5 @@
 <ion-content class="scroller">
-
   <div class="menu1">
-    
     <div class="center2">
       <ion-avatar>
         <img class="iavatar" src="/assets/sinfoto.jpg" alt="">
@@ -10,12 +8,12 @@
   </div>
 
   <ion-list>
-    <ion-item lines="none" >
+    <ion-item lines="none">
       <ion-label>
         <h2 class="texto"> {{postPvdr.Globalusuario.Nombre}} {{postPvdr.Globalusuario.Apellido}} </h2>
         <ion-text class="texto" color="medium">
           <ion-label>
-              {{postPvdr.Globalusuario.Rol}}
+            {{postPvdr.Globalusuario.Rol}}
           </ion-label>
         </ion-text>
       </ion-label>
@@ -28,114 +26,114 @@
         </ion-chip>
         <ion-chip outline color="medium" [routerLink]="['/contrasena']">
           <ion-icon color="tertiary" name="settings"></ion-icon>
-          <ion-label>Configuracion</ion-label>
+          <ion-label>Configuración</ion-label>
         </ion-chip>
       </div>
     </div>
 
-    <div padding class="fuente">  
-     <ion-item lines="none">
-      <ion-icon slot="start" name="transgender" color="tertiary"></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>Sexo</p>
-        <ion-text color="dark">
-          <ion-label>
-            {{postPvdr.Globalusuario.Sexo}}
-          </ion-label>
-        </ion-text>
-      </ion-label>
-     </ion-item>
-     <ion-item lines="none">
-      <ion-icon slot="start" name="calendar" color="tertiary"></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>Fecha Nacimiento</p>
-        <ion-text color="dark">
-          <ion-label>
-            {{postPvdr.Globalusuario.Fecha_Nacimiento}}
-          </ion-label>
-        </ion-text>
-      </ion-label>
-     </ion-item>
-     <ion-item lines="none">
-       <ion-icon slot="start" name="compass" color="tertiary"></ion-icon>
-       <ion-label class="ion-text-wrap">
-         <p>Direccion</p>
-         <ion-text color="dark">
-           <ion-label>
-             {{postPvdr.Globalusuario.Direccion}}
-            </ion-label>
-          </ion-text>
-       </ion-label>
-     </ion-item>
-     <ion-item lines="none">
-      <ion-icon slot="start" name="phone-portrait" color="tertiary"></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>Telefono</p>
-        <ion-text color="dark">
-          <ion-label>
-            {{postPvdr.Globalusuario.Celular}}
-          </ion-label>
-        </ion-text>
-      </ion-label>
-     </ion-item>
-     <ion-item lines="none">
-      <ion-icon slot="start" name="mail" color="tertiary"></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>Email</p>
-        <ion-text color="dark">
-          <ion-label>
-            {{postPvdr.Globalusuario.email}}
-          </ion-label>
-        </ion-text>
-      </ion-label>
-     </ion-item>
-     <ion-item lines="none">
-        <ion-icon slot="start" name="business" color="tertiary"></ion-icon>
+    <div padding class="fuente">
+      <ion-item lines="none">
+        <ion-icon slot="start" name="transgender" color="tertiary"></ion-icon>
         <ion-label class="ion-text-wrap">
-          <p>Area</p>
+          <p>Sexo</p>
           <ion-text color="dark">
             <ion-label>
-                {{postPvdr.Globalusuario.Area}}
+              {{postPvdr.Globalusuario.Sexo}}
             </ion-label>
           </ion-text>
         </ion-label>
-       </ion-item>
-       <ion-item lines="none">
-          <ion-icon slot="start" name="today" color="tertiary"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <p>Subareas</p>
-            <ion-text color="dark">
-              <ion-label>
-                  {{postPvdr.Globalusuario.Sub_Area}}
-              </ion-label>
-            </ion-text>
-          </ion-label>
-        </ion-item>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="calendar" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Fecha de Nacimiento</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.Fecha_Nacimiento}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="compass" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Dirección</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.Direccion}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="phone-portrait" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Teléfono</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.Celular}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="mail" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Email</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.email}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="business" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Área</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.Area}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="today" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Subáreas</p>
+          <ion-text color="dark">
+            <ion-label>
+              {{postPvdr.Globalusuario.Sub_Area}}
+            </ion-label>
+          </ion-text>
+        </ion-label>
+      </ion-item>
 
-        <ion-item-divider lines="none">
-             <ion-label>Social:</ion-label>
-        </ion-item-divider>
-        <ion-item>
-            <ion-icon slot="start" name="logo-facebook" color="tertiary"></ion-icon>
-            <ion-label>  {{postPvdr.Globalusuario.Facebook}} </ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-icon slot="start" name="logo-twitter" color="tertiary"></ion-icon>
-            <ion-label>   {{postPvdr.Globalusuario.Twitter}} </ion-label>
-        </ion-item>
-        <ion-item  lines="none">
-            <ion-icon slot="start" name="logo-instagram" color="tertiary"></ion-icon>
-            <ion-label>   {{postPvdr.Globalusuario.Instagram}} </ion-label>
-        </ion-item>
+      <ion-item-divider lines="none">
+        <ion-label>Social:</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon slot="start" name="logo-facebook" color="tertiary"></ion-icon>
+        <ion-label> {{postPvdr.Globalusuario.Facebook}} </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="logo-twitter" color="tertiary"></ion-icon>
+        <ion-label> {{postPvdr.Globalusuario.Twitter}} </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="logo-instagram" color="tertiary"></ion-icon>
+        <ion-label> {{postPvdr.Globalusuario.Instagram}} </ion-label>
+      </ion-item>
 
-        <ion-item-divider lines="none">
-          <ion-label>Intereses:</ion-label>
-     </ion-item-divider>
-     <ion-item lines="none">
+      <ion-item-divider lines="none">
+        <ion-label>Intereses:</ion-label>
+      </ion-item-divider>
+      <ion-item lines="none">
         <ion-icon slot="start" name="star" color="tertiary"></ion-icon>
-         <ion-text>  {{postPvdr.Globalusuario.Intereses}} </ion-text>
-     </ion-item>
-   </div>
+        <ion-text> {{postPvdr.Globalusuario.Intereses}} </ion-text>
+      </ion-item>
+    </div>
   </ion-list>
 
 

@@ -1,66 +1,83 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-      </ion-buttons>
-      <ion-row>
-        <ion-col size="4" class="centrar">  
-             <ion-title  >Tareas</ion-title>
-        </ion-col>
-        <ion-col size="8">
-             <ion-searchbar mode="ios" animated  showCancelButton="always"></ion-searchbar>
-        </ion-col>
-      </ion-row>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="4" class="centrar">
+        <ion-title>Tareas</ion-title>
+      </ion-col>
+      <ion-col size="8">
+        <ion-searchbar mode="ios" animated showCancelButton="always" (ionChange)="buscar($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
+<div>
+  <ion-item>
+    <ion-label color="medium">Estado</ion-label>
+    <ion-select interface="popover" [(ngModel)]="tipousuario" okText="Ok" cancelText="Cancelar" name="estadotarea"
+      (ionChange)="segmentChanged1($event)" value="1">
+      <ion-select-option value="1">Todas</ion-select-option>
+      <ion-select-option value="2">Pendiente</ion-select-option>
+      <ion-select-option value="3">Terminada</ion-select-option>
+      <ion-select-option value="4">Vencida</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tipo" scrollable (ionChange)="segmentChanged($event)" value="1">
+      <ion-segment-button value="1" checked layout="icon-start">
+        <ion-label class="espacio">Responsable</ion-label>
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="4" layout="icon-start">
+        <ion-label class="espacio">Creadas </ion-label>
+        <ion-icon name="hand"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="3" layout="icon-start">
+        <ion-label class="espacio">Participante</ion-label>
+        <ion-icon name="contacts"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="2" layout="icon-start">
+        <ion-label class="espacio">Observador</ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</div>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-<ion-content >
-    <ion-item>  
-        <ion-label  color="medium">Estado</ion-label>
-        <ion-select interface="popover" [(ngModel)]="tipousuario" okText="Ok" cancelText="Cancelar" name="estadotarea">
-          <ion-select-option value="1">Todas</ion-select-option>
-          <ion-select-option value="2">Terminada</ion-select-option>
-          <ion-select-option value="3">Vencidad</ion-select-option>
-          <ion-select-option value="4">Pendiente</ion-select-option>
-        </ion-select>
-    </ion-item>
-   
-  <div class="bordes"> 
-    <ion-toolbar>
-        <ion-segment  [(ngModel)]="tipo" scrollable (ionChange)="segmentChanged($event)" value="1">
-            <ion-segment-button value="1" checked layout="icon-start">
-              <ion-label class="espacio">Responsable</ion-label>
-              <ion-icon name="person"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button value="2" layout="icon-start">
-              <ion-label class="espacio">Observador</ion-label>
-              <ion-icon name="search"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button value="3" layout="icon-start">
-              <ion-label class="espacio">Participante</ion-label>
-              <ion-icon name="contacts"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button value="4" layout="icon-start">
-                <ion-label class="espacio">Creadas </ion-label>
-                <ion-icon name="hand"></ion-icon>
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
- 
-    <ion-list *ngFor ="let  tarea of postPvdr.Gresta" >
-         <ion-item class="fuente  bord1" (click)="mostrartarea(tarea.Id_Tarea)">
-            <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+  <div class="bordes" *ngIf="ver== 1">
+    <ion-list *ngFor="let  tarea of postPvdr.Gresta">
+      <ion-item class="fuente  bord1" (click)="mostrartarea(tarea.Id_Tarea)">
+        <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+        
+          <ion-text>
+           <p class="letra1"> {{tarea.tarea.Nombre}} </p>  
+           <p class="letra"> <b>Estado: </b>{{ tarea.tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.tarea.FechaFin}} </p>
+          </ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="bordes" *ngIf="ver== 0">
+    <ion-list *ngFor="let  tarea of postPvdr.Gresta |filtro:textoBuscar : 'Nombre'">
+      <ion-item class="fuente  bord1" (click)="mostrartarea(tarea.Id_tarea)">
+        <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+        <ion-label>
+          <ion-text>
             <ion-label>
-              <ion-text> 
-                <ion-label> 
-                  {{tarea.tarea.Nombre}}
-                </ion-label> 
-              </ion-text>
-              <p> <b>Estado: </b>{{ tarea.tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.tarea.FechaFin}} </p>
+              {{tarea.Nombre}}
             </ion-label>
-          </ion-item>
+          </ion-text>
+          <p> <b>Estado: </b>{{ tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.FechaFin}} </p>
+        </ion-label>
+      </ion-item>
     </ion-list>
   </div>
 
@@ -71,5 +88,3 @@
     </ion-fab-button>
   </ion-fab-->
 </ion-content>
-
-

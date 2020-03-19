@@ -21,5 +21,63 @@
   } 
 
   ion-card{
-    --background: #e5e6ea;
+    --background: #fbfcff8c;
   }
+
+  .current {
+    color: #a2631f;
+    position: absolute;
+    margin: 37% 25% 0% 33%;
+    font-weight: 400;
+    font-size: 2rem;
+}
+h3{
+  color: #a2631f;
+}
+round-progress{
+    
+    margin: 5% 25% 0% 3%;
+}
+h2{
+  font-size: 17px;
+}
+
+.colores{
+
+  p{
+    color: #a2631f;
+      margin: 10px 0px 5px 0px;
+      font-size: 15px;
+  }
+}
+
+.fondo1 {
+  --background:#e7ebef;
+
+}
+.fondo2 {
+  --background:#e7ebef;
+  
+}
+.fondo3 {
+ --background:#e7ebef;
+    
+}
+.fondo4 {
+  --background:#ffdfb2;
+
+  }
+.fondo5{
+  background:#efefef;
+  background-size: cover;
+  background-position: center ;
+ 
+}
+
+p{
+  font-size: 12px;
+}
+
+ion-note{
+  margin: 0px 0px 0px 5px;
+}

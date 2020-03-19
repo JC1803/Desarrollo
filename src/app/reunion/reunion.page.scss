@@ -1,6 +1,7 @@
 .letra {
-    font-size: smaller;
+  font-size: 10px;
     line-height: 12px;
+    padding: 4px 0px 5px 0px;
     }
     
     .botones {
@@ -32,13 +33,16 @@
       padding-left: 0px;
     p{
       color:black;
-      font-size: 10px;
       display: flexbox;
       margin: 1px 5px 0px 0px;
       b{
         font-size: 10px;
       }
     }
+    h2{
+      font-size: 15px;
+    }
+
     }
     .form{
       padding: 0px 40px 0px;
@@ -75,3 +79,22 @@
    .espacio {
      margin: 5px 5px;
    }
+
+   .tamanio{
+     font-size: 12px;
+   }
+
+   ion-list{
+    margin: 0px 0px;
+}
+
+.letra1 {
+  font-size: 13px; 
+  text-align: justify;
+  p{
+    font-size: 13px; 
+   
+  }
+  padding: 10px 0px 0px 0px;
+  margin: 0px 0px 15px;
+}   

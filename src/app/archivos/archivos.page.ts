@@ -11,6 +11,7 @@ export class ArchivosPage implements OnInit {
 archivos: any[]=[];
 datos: any[]=[];
 id: string= "";
+textoBuscar = '';
   constructor(private menu: MenuController,
     private postPvdr: PostProvider) { }
 
@@ -30,11 +31,24 @@ id: string= "";
 cargarArchivos(){
   this.postPvdr.buscarDoc(this.id).subscribe(list => {
     //console.log(list)
-    this.archivos= list.json();
+    this.archivos= list;
    
     console.log(this.archivos);
     });
 
+}
+
+doRefresh(evento){
+  this.cargarArchivos();
+
+  setTimeout(() => {
+    evento.target.complete();
+  }, 2000);
+
+}
+//Buscar en la barra de busqueda
+buscar(event){
+  this.textoBuscar=event.detail.value;
 }
 
 }

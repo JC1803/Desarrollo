@@ -4,6 +4,7 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { AlertController } from '@ionic/angular';
 import { ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { PostProvider } from 'src/providers/post-providers'
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.page.html',
@@ -11,6 +12,9 @@ import { formatDate } from '@angular/common';
 })
 export class CalendarioPage implements OnInit {
   eventSource= [];
+  datos: any[] = [];
+  id: string="";
+  tareas: any[] = [];
   event = {
     title: '',
     desc: '',
@@ -26,15 +30,64 @@ export class CalendarioPage implements OnInit {
     currentDate: new Date()
   }
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
+
   constructor(private menu: MenuController,
     private alertCtrl: AlertController,
+    private postPvdr: PostProvider,
     @Inject(LOCALE_ID) private locale: string
-    ) { }
+    ) { 
+
+    }
 
   ngOnInit() {
+    //Obtiene los datos del usuario logueado
+    this.postPvdr.$getListSource.subscribe(list => {
+      this.datos= list;
+     this.id=this.datos[0].Id_Usuario;
+      });
     
     this.menu.close();
+    this.cargarTareas();
     this.resetEvent();
+  }
+
+
+  cargarTareas(){
+    this.postPvdr.getTareasRes(this.id)
+    .subscribe(
+   (data) => { // Success
+     if(data !=null){
+      let start = this.event.startTime;
+      let end = this.event.endTime;
+      
+       this.tareas= data;
+       console.log(this.tareas);
+       this.tareas.forEach( tar => {
+         let fechaini = tar.tarea.FechaInicio+' '+ tar.tarea.Hora_Inicio;
+         let fecahfin = tar.tarea.FechaFin+' '+tar.tarea.Hora_Fin
+         console.log(fechaini);
+        let evento = {
+          title: tar.tarea.Nombre,
+          startTime: new Date(fechaini),
+          endTime: new Date(fecahfin),
+          desc: tar.tarea.Descripcion
+         }
+         this.eventSource.push(evento);
+         console.log(this.eventSource);
+         this.myCal.loadEvents();
+       })
+        
+      
+      }
+
+   
+    },
+   
+   (error) =>{
+     console.error(error);
+   }
+ )
+
   }
   
   resetEvent() {
@@ -57,7 +110,7 @@ export class CalendarioPage implements OnInit {
       allDay: this.event.allDay,
       desc: this.event.desc
     }
- 
+
     if (eventCopy.allDay) {
       let start = eventCopy.startTime;
       let end = eventCopy.endTime;
@@ -107,7 +160,7 @@ async onEventSelected(event) {
   const alert = await this.alertCtrl.create({
     header: event.title,
     subHeader: event.desc,
-    message: 'From: ' + start + '<br><br>To: ' + end,
+    message: 'Inicio: ' + start + '<br><br>Fin: ' + end,
     buttons: ['OK']
   });
   alert.present();

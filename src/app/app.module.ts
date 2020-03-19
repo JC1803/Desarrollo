@@ -18,11 +18,16 @@ import { AddtareaPageModule } from './addtarea/addtarea.module';
 import { VerrolesPageModule } from './verroles/verroles.module';
 import { VerperfilPageModule } from './verperfil/verperfil.module';
 import { ComentariosPageModule } from './comentarios/comentarios.module';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import {Calendar} from '@ionic-native/calendar';
+import { HttpClientModule } from '@angular/common/http';
+import { LocalNotifications} from '@ionic-native/local-notifications/ngx'
+import { PipesModule } from './pipes/pipes.module';
+
 //import { VertareaPage } from './vertarea/vertarea.page';
 //import { TpersonalPageModule } from './tpersonal/tpersonal.module';
 
 //import { LoginPage } from './login/login.page';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,18 +37,25 @@ import { ComentariosPageModule } from './comentarios/comentarios.module';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),  
     AppRoutingModule, 
-  
+    RoundProgressModule,
     AddtareaPageModule,
     VerrolesPageModule,
     VerperfilPageModule,
     ComentariosPageModule,
     HttpModule,
+   
+    HttpClientModule,
+    PipesModule,
+    
     AuthModule],
   providers: [
     StatusBar,
     SplashScreen,
+    LocalNotifications,
     PostProvider,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+   
   ],
   bootstrap: [AppComponent]
 })

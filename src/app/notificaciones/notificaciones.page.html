@@ -1,5 +1,25 @@
 
-
 <ion-content>
-Tienes un nuevo mensaje
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!--ion-button (click)="simpleNotif()">
+    notificacion
+</ion-button-->
+
+    <ion-list *ngFor="let not  of noti">
+        <ion-item class="color" [id]="not.Id_Ttar_Reu" [color]="botones"
+            (click)="ver(not.tipo, not.Id_Ttar_Reu, not.Id_notificaciones)">
+            <ion-icon slot="start" *ngIf="not.VistaMovil == 1" name="radio-button-off"></ion-icon>
+            <ion-icon slot="start" color="tertiary" *ngIf="not.VistaMovil == 0" name="radio-button-on"></ion-icon>
+            <ion-text color="dark">
+                <p class="letra1">
+                    {{not.descripcion}}
+                </p>
+                <p class="letra"> <b> Fecha Fin: </b>{{ not.FechaLimite}} &nbsp;&nbsp; <b> {{not.tipo}} </b> </p>
+            </ion-text>
+        </ion-item>
+
+
+    </ion-list>
 </ion-content>

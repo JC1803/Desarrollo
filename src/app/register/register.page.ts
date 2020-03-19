@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
   area: string="";
   roles: any[] = [];
   rol: string="";
-  subareas: any[] = [];
+  subareas: any[] ;
   subarea: string="";
   fechanac: Date;
   registros: any[] = [];
@@ -50,143 +50,142 @@ export class RegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
-   // this.menu.enable(false,'first');
-    
+    // this.menu.enable(false,'first');
 
-  
-    this.postPvdr.getArea() .subscribe(
+    this.postPvdr.getArea().subscribe(
       (data) => { // Success
-        if(data.json()!=null){
+        if (data != null) {
           //console.log(data.json());
-          this.areas = data.json();
+          this.areas = data;
+          //this.areas =Object.values(data);
         }
       },
-      (error) =>{
+      (error) => {
         console.error(error);
       }
     )
   }
+
   ionViewDidEnter() {
-    this.menu.enable(false,'first');
+    this.menu.enable(false, 'first');
   }
 
-  clicAre($event){
-    this.subareas= [""];
-    this.roles= [""];
-    
-      console.log(this.area);
-      this.postPvdr.getSubareas(this.area).subscribe(
-        (dato)=>{ 
-          this.subareas =dato.json();
-        } 
-      )
+  
+  clicAre($event) {
+    this.subareas = [""];
+    this.roles = [""];
 
-      this.rol="";
+    console.log(this.area);
+    this.postPvdr.getSubareas(this.area).subscribe(
+      (dato) => {
+        this.subareas = dato;
+      }
+    )
+    this.rol = "";
   }
 
-  clicSuba ($event){
-    
+  clicSuba($event) {
     console.log(this.subarea);
     this.postPvdr.getRoles(this.subarea).subscribe(
-      (dato)=>{
-        this.roles =dato.json();
+      (dato) => {
+        this.roles = dato;
       }
-   )
+    )
   }
- 
-  async registro(){
-    if(this.username==""){
-        const toast = await this.toastCtrl.create({
-          message: 'Falta Nombre',
-          duration: 3000
-        });
-        toast.present();
-    }else if(this.apellido==""){
-          const toast = await this.toastCtrl.create({
-          message: 'Falta Apellido',
-          duration: 3000
-        });
-        toast.present();
-      }else if(this.fechanac==null){
-        const toast = await this.toastCtrl.create({
+
+  async registro() {
+    if (this.username == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta Nombre',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.apellido == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta Apellido',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.fechanac == null) {
+      const toast = await this.toastCtrl.create({
         message: 'Falta Fecha de nacimiento',
         duration: 3000
       });
       toast.present();
-    }else if(this.cedula==""){
+    } else if (this.cedula == "") {
       const toast = await this.toastCtrl.create({
-      message: 'Falta cedula',
-      duration: 3000
-    });
-    toast.present();
-  }else if(this.direccion==""){
-    const toast = await this.toastCtrl.create({
-    message: 'Falta Direccion',
-    duration: 3000
-  });
-  toast.present();
-      }else if(this.password==""){
-          const toast = await this.toastCtrl.create({
-          message: 'Falta Password',
-          duration: 3000
-        });
-        toast.present();
-      }else if(this.cedula==""){
-        const toast = await this.toastCtrl.create({
+        message: 'Falta cedula',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.direccion == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta Direccion',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.password == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta Password',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.cedula == "") {
+      const toast = await this.toastCtrl.create({
         message: 'Falta número de celular',
         duration: 3000
       });
       toast.present();
-    }else if(this.sexo==""){
+    } else if (this.sexo == "") {
       const toast = await this.toastCtrl.create({
-      message: 'Falta su sexo',
-      duration: 3000
-    });
-    toast.present();
-  }else if(this.tipousuario==""){
-    const toast = await this.toastCtrl.create({
-    message: 'Falta Apellido',
-    duration: 3000
-  });
-  toast.present();
-}else if(this.area==""){
-  const toast = await this.toastCtrl.create({
-  message: 'Falta seleccionar área',
-  duration: 3000
-});
-toast.present();
-}else if(this.subarea==""){
-  const toast = await this.toastCtrl.create({
-  message: 'Falta seleccionar subarea',
-  duration: 3000
-});
-toast.present();
-}else if(this.rol==""){
-  const toast = await this.toastCtrl.create({
-  message: 'Falta seleccionar rol',
-  duration: 3000
-});
-toast.present();
-}else if(this.intereses==""){
-  const toast = await this.toastCtrl.create({
-  message: 'Falta intereses',
-  duration: 3000
-});
-toast.present();
-    }else if(this.password!=this.confirm_password){
-          const toast = await this.toastCtrl.create({
-          message: 'No coiniciden las passwords',
-          duration: 3000
-        });
-        toast.present();
-    }else if(this.email==""){
-          const toast = await this.toastCtrl.create({
-          message: 'Falta email',
-          duration: 3000
-          });
-        toast.present();
-    }else{
-     
+        message: 'Falta su sexo',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.tipousuario == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta Apellido',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.area == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta seleccionar área',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.subarea == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta seleccionar subarea',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.rol == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta seleccionar rol',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.intereses == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta intereses',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.password != this.confirm_password) {
+      const toast = await this.toastCtrl.create({
+        message: 'No coiniciden las passwords',
+        duration: 3000
+      });
+      toast.present();
+    } else if (this.email == "") {
+      const toast = await this.toastCtrl.create({
+        message: 'Falta email',
+        duration: 3000
+      });
+      toast.present();
+    } else {
+
       let body = {
         Nombre: this.username,
         Apellido: this.apellido,
@@ -195,71 +194,60 @@ toast.present();
         Direccion: this.direccion,
         Celular: this.celular,
         Sexo: this.sexo,
-        Id_tipo_Usuarios : this.tipousuario,
+        Id_tipo_Usuarios: this.tipousuario,
         Password: btoa(this.password),
-        Instagram: this.instagram, 
+        Instagram: this.instagram,
         Twitter: this.twitter,
-        Facebook:this.facebook,
+        Facebook: this.facebook,
         Fecha_Nacimiento: this.fechanac,
         Intereses: this.intereses
         //aksi: 'register'
       };
-      
-      
+
+
       console.log(body);
       this.postPvdr.postUser(body)
-       .subscribe(async data =>{
-           var alertpesan = data.msg;
-           this.registro= data;
-           this.iduser=data.Id_Usuario;
-           console.log(this.iduser);
-           const alert = await this.alertController.create({
-           header: 'FELICITACIONES',
-           message: 'El registro ha sido exitoso',
-           cssClass: 'alertDanger',
-           buttons: ['OK']
-         });
-    
-         console.log(this.iduser);
+        .subscribe(async data => {
+          var alertpesan = data.msg;
+          this.registro = data;
+          this.iduser = data.Id_Usuario;
+          console.log(this.iduser);
+          const alert = await this.alertController.create({
+            header: 'FELICITACIONES',
+            message: 'El registro ha sido exitoso',
+            cssClass: 'alertDanger',
+            buttons: ['OK']
+          });
 
-         let body2 = {
-           Id_Area: this.area,
-           Id_Roles:this.rol,
-           Id_Usuario:this.iduser
-         }
-         console.log(body2);
-         this.postPvdr.postUsuariosRoles(body2).subscribe(
-           (datos)=>{
-          
-         })
-         await alert.present();
-      
-  
-         if(data.succesful){
-       
-           const toast = await this.toastCtrl.create({
-           message: 'Register succesful',
-           duration: 3000
+          console.log(this.iduser);
+
+          let body2 = {
+            Id_Area: this.area,
+            Id_Roles: this.rol,
+            Id_Usuario: this.iduser
+          }
+          console.log(body2);
+          this.postPvdr.postUsuariosRoles(body2).subscribe(
+            (datos) => {
+            })
+          await alert.present();
+          if (data.succesful) {
+            const toast = await this.toastCtrl.create({
+              message: 'Register succesful',
+              duration: 3000
             });
             toast.present();
-          
-          }else{
-          const toast = await this.toastCtrl.create({
-            message: alertpesan,
-            duration: 3000
-          });
-          toast.present();
+
+          } else {
+            const toast = await this.toastCtrl.create({
+              message: alertpesan,
+              duration: 3000
+            });
+            toast.present();
+          }
         }
-       
-        
-       }
-       
-       );
-       
-      
+        );
       this.router.navigate(['/login']);
     }
-
-  
   }
 }

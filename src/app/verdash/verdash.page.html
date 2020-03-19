@@ -1,0 +1,40 @@
+<ion-header  >
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/actividades"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles de Avances</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider color="light"> </ion-item-divider>
+  <ion-item>
+    <ion-label position="stacked" >Año</ion-label>
+    <ion-datetime displayFormat="YYYY" value="anio" [(ngModel)]="anio" picker-format="YYYY" placeholder="Seleccionar"  cancelText="Cancelar" doneText="Aceptar"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Mes</ion-label>
+    <ion-datetime displayFormat="M" value="mes" [(ngModel)]="mes" picker-format="M" placeholder="Seleccionar"  cancelText="Cancelar" doneText="Aceptar"></ion-datetime>
+  </ion-item>
+  <ion-button expand="block" color="tertiary" (click)="cargardash()">Cargar resultados</ion-button>
+  <ion-item-divider color="light"> </ion-item-divider>
+  <h3 text-center>{{mensaje}} </h3>
+  <canvas #doughnutCanvas></canvas>
+
+  <ion-item-divider color="light"> </ion-item-divider>
+  <ion-list>
+    <ion-list-header>
+      <ion-label class="text">Efectividad: {{(datosefectividad.Efectividad)}}%</ion-label>
+    </ion-list-header>
+    <div class="ronda">
+      <round-progress   [semicircle]="true"  [current]="datosefectividad.Efectividad" [max]="max1"
+      [duration]="5000"
+      [animation]="'easeInOutQuart'"
+      [color]="'#3738ef'"
+      [animationDelay]="0"></round-progress>
+    </div>
+  </ion-list>
+  <ion-item-divider color="light"> </ion-item-divider>
+</ion-content>

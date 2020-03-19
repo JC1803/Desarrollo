@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
     <ion-title>Calendario</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
 <ion-content>
  
 
-  <ion-card>
+  <!--ion-card>
       <ion-card-header class="btn" button (click)="collapseCard = !collapseCard">
         <ion-card-title class="texto1">
           <ion-label > Agregar Evento  </ion-label>
@@ -38,23 +38,25 @@
           <ion-label>Todo el dia?</ion-label>
           <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
         </ion-item>
-        <ion-button fill="outline" expand="block" (click)="addEvent()" [disabled]="event.title == ''">Add Event</ion-button>
+        <ion-button fill="outline" expand="block" (click)="addEvent()" [disabled]="event.title == ''">Guardar</ion-button>
    
       </ion-card-content>
-    </ion-card>
+    </ion-card-->
    
     <ion-row>
       <!-- Change the displayed calendar mode -->
       <ion-col size="4">
-        <ion-button expand="block" [color]="calendar.mode == 'month' ? 'tertiary' : 'secondary'" (click)="changeMode('month')">Mes</ion-button>
+        <ion-button expand="block" [color]="calendar.mode == 'month' ? 'tertiary' : 'secondary'"
+          (click)="changeMode('month')">Mes</ion-button>
       </ion-col>
       <ion-col size="4">
-        <ion-button expand="block" [color]="calendar.mode == 'week' ? 'tertiary' : 'secondary'" (click)="changeMode('week')">Semana</ion-button>
+        <ion-button expand="block" [color]="calendar.mode == 'week' ? 'tertiary' : 'secondary'"
+          (click)="changeMode('week')">Semana</ion-button>
       </ion-col>
       <ion-col size="4">
-        <ion-button expand="block" [color]="calendar.mode == 'day' ? 'tertiary' : 'secondary'" (click)="changeMode('day')">Dia</ion-button>
+        <ion-button expand="block" [color]="calendar.mode == 'day' ? 'tertiary' : 'secondary'" (click)="changeMode('day')">
+          Dia</ion-button>
       </ion-col>
-   
       <!-- Move back one screen of the slides -->
       <ion-col size="4" text-left>
         <ion-button fill="clear" (click)="back()">
@@ -63,8 +65,8 @@
       </ion-col>
       <!-- Letra en el centro -->
       <ion-col size="4" class="texto">
-         <ion-label class="palabra"> {{ titulo }} </ion-label>
-        </ion-col>
+        <ion-label class="palabra"> {{ titulo }} </ion-label>
+      </ion-col>
       <!-- Move forward one screen of the slides -->
       <ion-col size="4" text-right>
         <ion-button fill="clear" (click)="next()">
@@ -73,18 +75,16 @@
       </ion-col>
     </ion-row>
    
-      <calendar
-  [eventSource]="eventSource" 
-  [calendarMode]="calendar.mode" 
-  [currentDate]="calendar.currentDate"
-  (onEventSelected)="onEventSelected($event)"
-  (onTitleChanged)="onViewTitleChanged($event)"
-  (onTimeSelected)="onTimeSelected($event)" 
-  startHour="6"
-  endHour="20"
-  step="30"
-  startingDayWeek="1">
-  </calendar>
-
-
-</ion-content>
+    <calendar
+      [eventSource]="eventSource" 
+      [calendarMode]="calendar.mode" 
+      [currentDate]="calendar.currentDate"
+      (onEventSelected)="onEventSelected($event)"
+      (onTitleChanged)="onViewTitleChanged($event)"
+      (onTimeSelected)="onTimeSelected($event)" 
+      startHour="6"
+      endHour="20"
+      step="30"
+      startingDayWeek="1">
+    </calendar>
+  </ion-content>

@@ -2,7 +2,7 @@
   "cordova-sqlite-storage": {
     "source": {
       "type": "registry",
-      "id": "cordova-sqlite-storage"
+      "id": "cordova-sqlite-storage@3.2.0"
     },
     "is_top_level": true,
     "variables": {}
@@ -18,7 +18,7 @@
   "cordova-plugin-statusbar": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-statusbar@2.4.2"
+      "id": "cordova-plugin-statusbar@^2.4.2"
     },
     "is_top_level": true,
     "variables": {}
@@ -55,6 +55,30 @@
       "id": "cordova-plugin-ionic-keyboard@^2.0.5"
     },
     "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-calendar": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-calendar@5.1.5"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-local-notification": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-local-notification"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-badge": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-badge@>=0.8.5"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }

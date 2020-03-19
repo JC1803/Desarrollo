@@ -30,9 +30,9 @@ export class OrganigramaPage implements OnInit {
     this.menu.close();
     this.postPvdr.getAreaSub() .subscribe(
       (data) => { // Success
-        if(data.json()!=null){
+        if(data !=null){
          // console.log(data.json());
-          this.areas = data.json();
+          this.areas = data;
         //  console.log(this.subarea);
         }
       },
@@ -41,6 +41,7 @@ export class OrganigramaPage implements OnInit {
       }
     )
 
+    
       
    
     /*this.postPvdr.getAreaSub() .subscribe(
@@ -55,6 +56,24 @@ export class OrganigramaPage implements OnInit {
       }
     )*/
   }
+
+  doRefresh(evento){
+    this.postPvdr.getAreaSub() .subscribe(
+      (data) => { // Success
+        if(data !=null){
+         // console.log(data.json());
+          this.areas = data;
+        //  console.log(this.subarea);
+        }
+      },
+    );
+
+    setTimeout(() => {
+      evento.target.complete();
+    }, 2000);
+  
+  }
+
   async presentModal(rol:any[]) {
     //console.log(rol);
     const modal = await this.modalCtr.create({
@@ -71,7 +90,7 @@ export class OrganigramaPage implements OnInit {
     console.log(idarea);
       this.postPvdr.getSubareas(idarea).subscribe(
         (dato)=>{ 
-          this.subareas=dato.json();
+          this.subareas=dato;
          
         } 
       )

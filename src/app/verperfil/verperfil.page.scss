@@ -2,7 +2,7 @@ div.iner
 .center {
     text-align: center;
     margin: 0px 0px;
-    
+   padding: 16px 16px 0px 16px;
   }
 
   .bordes {
@@ -43,19 +43,20 @@ div.iner
     
      margin-bottom: 0px;
      margin-top: 0px;
-     color: #131563;
+     color: #22517a;
     }
 
     .nombre2 {
       margin-bottom: 0px;
      margin-top: 0px;
-     color: #575964; 
+     color: #667072; 
     }
   
     .fondo{
       //  background-color: #bce9f8;
         background-size: cover;
         width:100%;
+        font-size: 14px;
 
        
         
@@ -86,6 +87,20 @@ div.iner
  }
 
  .color {
-   background:#f1f1f1;
+   background: #e7ebef;
    
+ }
+
+ ion-list{
+   font-size: 14px;
+   b{
+     font-size: 14px;
+   }
+   p{
+     font-size: 14px;
+   }
+ }
+
+ .texcolor{
+color: #f35959;
  }

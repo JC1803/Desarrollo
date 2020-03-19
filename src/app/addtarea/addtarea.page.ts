@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Time } from '@angular/common';
 import { formatDate } from '@angular/common';
 import { IfStmt } from '@angular/compiler';
+import * as moment from 'moment';
 
 //import { format } from 'path';
 @Component({
@@ -27,8 +28,9 @@ export class AddtareaPage implements OnInit {
   idusuario: string = "";
   idtareacreada: string="";
   idtareacreadas: any[]=[];
-
-
+  horamin;
+  tiempo: Time;
+  valor;
 
 
   constructor(
@@ -43,8 +45,8 @@ export class AddtareaPage implements OnInit {
      
      
     
-     this.creacion = new Date().toISOString().substr(0,10);
-     
+    // this.creacion = new Date().toISOString().substr(0,10);
+     this.creacion=  moment().format('YYYY-MM-DD');
     //var  casa= new Date();
     // console.log(new Intl.DateTimeFormat('en-US').format(casa));
    // console.log(this.creacion.toISOString());
@@ -68,9 +70,9 @@ export class AddtareaPage implements OnInit {
 
     this.postPvdr.getTareasP(id2).subscribe(
       (data) => {
-       if(data.json()!= null){
-         console.log(data.json());
-          this.postPvdr.Globaltpersonal= data.json();
+       if(data!= null){
+         console.log(data);
+          this.postPvdr.Globaltpersonal= data;
           
         }
       },
@@ -140,7 +142,8 @@ export class AddtareaPage implements OnInit {
       Descripcion: this.descripcion,
       Hora_Inicio: this.horai,
       Hora_Fin: this.horaf,
-      tip_tar: "T"
+      tip_tar: "T",
+      estadoEliminar:"0"
 
       //aksi: 'register'
     };
@@ -148,7 +151,11 @@ export class AddtareaPage implements OnInit {
    
     console.log(body);
     this.postPvdr.postTareasP(body).subscribe(async data =>{
-      this.idtareacreada= data.Id_tarea;
+      console.log(data);
+      //let result: Object = data;
+      this.valor= data;
+      this.idtareacreada= this.valor.Id_tarea;
+     
       console.log(this.idtareacreada);
 
       let body1={
@@ -174,5 +181,12 @@ export class AddtareaPage implements OnInit {
   }
 
 }
+
+//Funcion para validar hora minima final
+ horafinal(event){
+  console.log("hola");
+ this.horamin= moment(this.horai).add(2, 'hours').format('HH:mm');
+ console.log(this.horai);
+ }
 
 }

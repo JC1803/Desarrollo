@@ -1,37 +1,34 @@
 <ion-header>
     <ion-toolbar color="tertiary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
-      <ion-title>Configuración</ion-title>
+            <ion-back-button defaultHref="/tabs"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Configuración</ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content>
-    <div class="form3"> 
+    <div class="form3">
         <h2>CAMBIAR CONTRASEÑA </h2>
-      </div>
+    </div>
     <div class="cuerpo">
         <ion-item>
-            <ion-icon  slot="start" name="lock" color="medium"></ion-icon>
+            <ion-icon slot="start" name="lock" color="medium"></ion-icon>
             <ion-input name="c1" type="password" placeholder="Contraseña Actual" [(ngModel)]='c1'></ion-input>
         </ion-item>
         <ion-item>
-            <ion-icon  slot="start" name="lock" color="tertiary"></ion-icon>
+            <ion-icon slot="start" name="lock" color="tertiary"></ion-icon>
             <ion-input name="c2" type="password" placeholder="Contraseña nueva" [(ngModel)]="c2"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-icon  slot="start" name="lock" color="tertiary"></ion-icon>
+            <ion-icon slot="start" name="lock" color="tertiary"></ion-icon>
             <ion-input name="c3" type="password" placeholder="Contraseña nueva" [(ngModel)]="c3"></ion-input>
         </ion-item>
-      </div>
-        <div class="contorno">
-            <ion-button   color="danger"  type="submit"  expand="block"  (click)="actuaContra()">Guardar Cambios</ion-button>
-            
-            </div>
-            <div class="contorno ">
-      
-                <ion-button fill="outline" color="danger"  type="submit"  expand="block" [routerLink]="['/tabs/perfil']" >Cancelar</ion-button>
-              </div>
-     
+    </div>
+    <div class="contorno">
+        <ion-button color="danger" type="submit" expand="block" (click)="actuaContra()">Guardar Cambios</ion-button>
+    </div>
+    <div class="contorno ">
+        <ion-button fill="outline" color="danger" type="submit" expand="block" [routerLink]="['/tabs/perfil']">Cancelar
+        </ion-button>
+    </div>
 </ion-content>

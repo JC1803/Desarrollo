@@ -14,32 +14,26 @@ export class PerfilPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.postPvdr.$getListSource.subscribe(list => {//console.log(list)
-      
-      //this.dato= list;
-      this.id= list[0].Id_Usuario;
-     // console.log(this.id);
-      
-      });
-
-      this.cargarDatosUsuario();
+    this.postPvdr.$getListSource.subscribe(list => {
+      this.id = list[0].Id_Usuario;
+      console.log(this.id);
+    });
+    this.cargarDatosUsuario();
   }
 
-  cargarDatosUsuario(){
+
+  cargarDatosUsuario() {
     this.postPvdr.buscarUsers(this.id).subscribe(
       (data) => { // Success
-      this.postPvdr.Globalusuario= data;
-         
-      this.datos= this.postPvdr.Globalusuario;
-        console.log(this.datos);
-      },)  
+        console.log(data);
+        this.datos= data;
+        this.postPvdr.Globalusuario = this.datos;
+      })
   }
 
  // ionViewWillEnter(){
    // this.cargarDatosUsuario()
  // }
   //ionViewDidEnter(){
-
-    //this.cargarDatosUsuario()
   //}
 }

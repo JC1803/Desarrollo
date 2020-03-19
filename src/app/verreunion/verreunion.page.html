@@ -1,153 +1,153 @@
 <ion-header>
-    <ion-toolbar color="trans" class="fond">
-      <ion-title></ion-title>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-             </ion-buttons> 
-  
-      <ion-buttons slot="end">  
-              <ion-button slot="end" fill="outline">Asistir</ion-button>
-            </ion-buttons>
-            <ion-buttons slot="end">  
-                <ion-button slot="end" fill="outline">Inasistir</ion-button>
-              </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="trans" class="fond">
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reunion"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="ocultarbotones" (click)="confirmarAsist()" slot="end">
+      <ion-button slot="end" fill="outline">Asistir</ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="ocultarbotones" slot="end" (click)="rechazarAsist()">
+      <ion-button slot="end" fill="outline">Inasistir</ion-button>
+    </ion-buttons>
+    <ion-title>Reunion</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-    <ion-list class="fuente" *ngFor ="let  reu of datos">
-        <ion-item-divider color="light">
-            <ion-icon  slot="start" name="cafe" color="dark"></ion-icon>
-              <h3 class="center"> <b>{{reu.Tema }}</b> </h3>
-         </ion-item-divider>
-  
-         <ion-item lines="none" class="taicon">
-               <label> Descripcion: </label>
-               <ion-icon   slot="start" name="list-box" color="dark"></ion-icon>
-               <ion-text>  
-                  <p> 
-              {{reu.Conclusion}}
-               </p>
-             </ion-text>
-          </ion-item>
-         <ion-item lines="none" class="taicon"> 
-            <ion-icon  slot="start" name="time" color="dark">
-              </ion-icon>
-              <label> Estado: </label>
-              <p>
-                  {{reu.Estado}}
-              </p>
-         </ion-item>
-         <ion-item lines="none" class="taicon">
-               <label> Fecha Inicio: </label>
-               <ion-icon   slot="start" name="clock" color=" dark"></ion-icon>
-               <p >
-                {{reu.FechadeReunion}}   
-              </p>
-              
-          </ion-item>
-         
-          <ion-item-divider color="light">
-             </ion-item-divider>
-         <ion-item lines="none" > 
-            <ion-label class="ion-text-wrap">
-           <ion-text>  
-                 <label> <b> Responsable: </b> </label>
-                </ion-text>
-               <p *ngFor ="let  res of reu.responsables">
-                  <ion-icon  slot="start" name="person" color="dark"> </ion-icon>
-              {{res.usuario.Nombre}}  {{res.usuario.Apellido}}
+  <ion-list class="fuente" *ngFor="let  reu of datos">
+    <ion-item-divider color="light">
+      <ion-icon slot="start" name="cafe" color="dark"></ion-icon>
+      <h3 class="center"> <b>{{reu.Tema }}</b> </h3>
+    </ion-item-divider>
+    <ion-item lines="none" class="taicon">
+      <label> Conclusion: </label>
+      <ion-icon slot="start" name="list-box" color="dark"></ion-icon>
+      <ion-text>
+        <p>
+          {{reu.Conclusion}}
+        </p>
+      </ion-text>
+    </ion-item>
+    <ion-item lines="none" class="taicon">
+      <ion-icon slot="start" name="time" color="dark">
+      </ion-icon>
+      <label> Estado: </label>
+      <p>
+        {{reu.Estado}}
+      </p>
+    </ion-item>
+    <ion-item lines="none" class="taicon">
+      <label> Fecha Inicio: </label>
+      <ion-icon slot="start" name="clock" color=" dark"></ion-icon>
+      <p>
+        {{reu.FechadeReunion}}
+      </p>
+    </ion-item>
+    <ion-item lines="none" class="taicon">
+      <label> Asistencia: </label>
+      <ion-icon slot="start" name="checkbox-outline" color=" dark"></ion-icon>
+      <p>
+        {{valor}}
+      </p>
+    </ion-item>
+    <ion-item-divider color="light">
+    </ion-item-divider>
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          <label> <b> Responsable: </b> </label>
+        </ion-text>
+        <p *ngFor="let  res of reu.responsables">
+          <ion-icon slot="start" name="person" color="dark"> </ion-icon>
+          {{res.usuario.Nombre}} {{res.usuario.Apellido}}
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          <ion-label> <b> Participantes:</b> </ion-label>
+        </ion-text>
+        <p *ngFor="let  par of reu.participantes">
+          <ion-icon slot="start" name="person" color="dark"> </ion-icon>
+          {{par.usuario.Nombre}} {{par.usuario.Apellido}}
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="light">
+      <ion-label>Itinerarios:</ion-label>
+    </ion-item-divider>
+    <ion-item class="taicon esp">
+      <p> {{ reu.Orden_del_Dia}} </p>
+      <ion-icon slot="start" name="arrow-dropright-circle" color="dark"></ion-icon>
+    </ion-item>
+    <ion-item-divider color="light" buttons (click)="open = !open">
+      <ion-icon slot="end" name="arrow-dropright" *ngIf="!open"></ion-icon>
+      <ion-icon slot="end" name="arrow-dropdown" *ngIf="open"></ion-icon>
+      <ion-label>Opiniones:</ion-label>
+    </ion-item-divider>
+    <div *ngIf="open" class="message-text bord">
+      <ion-content class="chat" delegate-handle="chatScroll">
+        <div class="message-list" *ngFor="let com of comentarios">
+          <ion-item class="message-text">
+            <ion-avatar slot="start">
+              <img src="/assets/sinfoto.jpg">
+            </ion-avatar>
+            <ion-label>
+              <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b> </h2>
+              <ion-text>
+                <p> {{ com.Descripcion }} </p>
+              </ion-text>
+              <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b
+                  (click)="mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)">Respuestas(0)
+                  &nbsp; &nbsp; &nbsp; Responder</b>
+                &nbsp; &nbsp; <b buttons (click)="com.open = !com.open">
+                  <ion-icon slot="end" name="arrow-dropdown" *ngIf="!com.open"></ion-icon>
+                  <ion-icon slot="end" name="arrow-dropup" *ngIf="com.open"></ion-icon>
+                </b>
               </p>
             </ion-label>
-         </ion-item>
-         <ion-item >
-            <ion-label class="ion-text-wrap">
-                  <ion-text>
-                    <ion-label> <b> Participantes:</b>  </ion-label>
-                 </ion-text>
-                 
-                  <p *ngFor ="let  par of reu.participantes">
-                      <ion-icon  slot="start" name="person" color="dark"> </ion-icon>
-                      {{par.usuario.Nombre}}  {{par.usuario.Apellido}}
-                 </p>
-               </ion-label>
-               </ion-item>
-               
-            
-                   <ion-item-divider color="light">
-                     <ion-label>Itinerarios:</ion-label>
-                   </ion-item-divider>
+          </ion-item>
+          <ion-list *ngIf="com.open">
+            <ion-item *ngFor="let subo of com.sub_observaciones" class="sub-item1">
+              <ion-avatar slot="start">
+                <img src="/assets/sinfoto.jpg">
+              </ion-avatar>
+              <ion-label class="text">
+                <h3> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h3>
+                <h3>
+                  <ion-text> {{ subo.Descripcion }} </ion-text>
+                </h3>
+                <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>
+              </ion-label>
+            </ion-item>
+            <ion-item class="sub-item1">
+              <ion-textarea placeholder="Escribe tu observacion aqui..." [(ngModel)]='comentario1'></ion-textarea>
+              <ion-buttons>
+                <ion-button (click)="enviarSubComentario(com.Id_Reunion, com.Id_observacion_reunion)">
+                  <ion-icon slot="end" name="send" color="dark"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+            <ion-item-divider color="light">
+            </ion-item-divider>
+          </ion-list>
+        </div>
+      </ion-content>
+    </div>
+  </ion-list>
 
-                   <ion-item class="taicon esp">
-                      <p> {{ reu.Orden_del_Dia}} </p>
-                      <ion-icon slot="start" name="arrow-dropright-circle" color="dark"></ion-icon>
-                    </ion-item>
-  
-                <ion-item-divider color="light"  buttons (click)="open = !open">
-                    <ion-icon slot="end" name="arrow-dropright" *ngIf="!open"></ion-icon>
-                    <ion-icon slot="end" name="arrow-dropdown" *ngIf="open"></ion-icon>
-                  <ion-label>Opniniones:</ion-label>
-                </ion-item-divider>
-                <div *ngIf="open"  class="message-text bord">       
-                  <ion-content class="chat" delegate-handle="chatScroll" > 
-                    <div class="message-list" *ngFor = "let com of comentarios">
-                      <ion-item class="message-text">
-                        <ion-avatar slot="start">
-                            <img  src="/assets/sinfoto.jpg" >
-                          </ion-avatar>
-                          <ion-label>
-                            <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b>  </h2>
-                            <ion-text> <p> {{ com.Descripcion }} </p></ion-text>
-                            <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b (click)="mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)">Respuestas(0)  &nbsp; &nbsp; &nbsp; Responder</b> 
-                              &nbsp; &nbsp; <b buttons (click)="com.open = !com.open"> 
-                              <ion-icon slot="end" name="arrow-dropdown" *ngIf="!com.open"></ion-icon>
-                              <ion-icon slot="end" name="arrow-dropup" *ngIf="com.open"></ion-icon></b>
-                            </p>
-                           
-                          </ion-label>   
-                          
-                        </ion-item>
-
-                        <ion-list *ngIf="com.open" >
-                            <ion-item *ngFor = "let subo of com.sub_observaciones" class="sub-item1"> 
-                                <ion-avatar slot="start">
-                                    <img  src="/assets/sinfoto.jpg" >
-                                  </ion-avatar>
-                                  <ion-label class="text">
-                                    <h3> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b>  </h3>
-                                    <h3> <ion-text> {{ subo.Descripcion }} </ion-text></h3>
-                                    <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>
-                                   
-                                  </ion-label>      
-                            </ion-item>
-                            <ion-item  class="sub-item1"> 
-                                <ion-textarea placeholder="Escribe tu observacion aqui..." [(ngModel)]='comentario1' ></ion-textarea>
-                                <ion-buttons>
-                                   <ion-button (click)="enviarSubComentario(com.Id_Reunion, com.Id_observacion_reunion)">
-                                         <ion-icon  slot="end" name="send" color="dark"></ion-icon>
-                                   </ion-button>
-                                </ion-buttons>
-                            </ion-item>
-                            <ion-item-divider color="light">
-                                
-                            </ion-item-divider>
-                            </ion-list>
-               
-                       </div>
-                 </ion-content>
-              </div>  
-    </ion-list>
-  
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-      <ion-item>
-        <ion-textarea placeholder="Escribe tu opinion aqui..." [(ngModel)]='comentario' ></ion-textarea>
-        <ion-buttons>
-           <ion-button (click)="enviarComentario()">
-                 <ion-icon  slot="end" name="send" color="dark"></ion-icon>
-           </ion-button>
-        </ion-buttons>
-      </ion-item>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea placeholder="Escribe tu opinión aquí..." [(ngModel)]='comentario'></ion-textarea>
+      <ion-buttons>
+        <ion-button (click)="enviarComentario()">
+          <ion-icon slot="end" name="send" color="dark"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

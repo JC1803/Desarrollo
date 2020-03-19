@@ -39,37 +39,40 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
 
     });
 
-    this.storage.get('session_storage').then((res)=>{
-      if(res == null){
-        this.router.navigate(['/planificador']);
-      }else{
+    this.storage.get('session_storage').then((res) => {
+      if (res == null) {
         this.router.navigate(['/login']);
+      } else {
+        this.postPvdr.sendListSource(res);
+        this.router.navigate(['/tabs']);
       }
     });
 
-    
+
   }
-  cerrar(){
-  this.menu.close();
+  cerrar() {
+    this.menu.close();
+    let data= null;
+    this.storage.set('session_storage', data);
   }
 
   public detalles() {
-  this.postPvdr.$getListSource.subscribe(list => {
-    //console.log(list)
-    this.id= list[0].Id_Usuario;
+    this.postPvdr.$getListSource.subscribe(list => {
+      //console.log(list)
+      this.id = list[0].Id_Usuario;
     }).unsubscribe();
-    
+
     this.postPvdr.buscarUsers(this.id).subscribe(
       (data) => { // Success
-         
-        this.datos= data;
+
+        this.datos = data;
         //console.log(this.datos);
-      },)  
+      })
 
 
   }

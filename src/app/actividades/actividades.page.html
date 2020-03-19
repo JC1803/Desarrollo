@@ -1,14 +1,63 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
     <ion-title>DashBoard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card-content>
-    <img src="/assets/tarea4.png"/>
-</ion-card-content>
+<ion-content class="colorfondo">
+  <h3  text-center> <b>Efectividad </b></h3>
+  <div class="current1">{{ datosdash.Efectividad }}%</div>
+<div class="ronda">
+  <round-progress   [semicircle]="true"  [current]="datosdash.Efectividad" [max]="max1"
+  [duration]="5000"
+  [animation]="'easeInOutQuart'"
+  [color]="'#a3f8bf'"
+  [animationDelay]="0"></round-progress>
+</div>
+  <p>  </p>
+  <p>  </p>
+  <div padding>
+    <p  text-center> <b>Total de tareas Personales: </b> {{datosdash.Total_ResponsablesP}}</p>
+    <p text-center> <b>Total de tareas Laborales: </b> {{datosdash.Total_Responsables}} </p>
+  </div>
+  
+  <p>  </p>
+  <p>  </p>
+ 
+<ion-item-divider color="light">
+  <ion-label>PROGRESO TAREAS </ion-label>
+</ion-item-divider>
+<div *ngIf="open" class="ronda1">
+
+  </div>
+
+  <ion-card class="graficas">
+    <ion-card-header>
+     <h3> Tareas Laborales </h3> 
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+      <p text-center> <b>Terminadas:</b> {{ (datosdash.Total_Terminada * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
+      <p text-center> <b>Pendientes:</b> {{ (datosdash.Total_Pendiente * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
+      <p text-center> <b>Vencidas:</b> {{ (datosdash.Total_Vencida * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
+      <ion-button fill="outline" slot="end" (click)="verdash(2)">Ver mas</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+    <h3>Tareas Personales </h3>  
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas1></canvas>
+      <p text-center> <b>Terminadas:</b> {{ (datosdash.Total_TerminadaP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}% </p>
+      <p text-center> <b>Pendientes:</b> {{ (datosdash.Total_PendienteP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}%  </p>
+      <p text-center> <b>Vencidas:</b>{{ (datosdash.Total_VencidaP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}% </p>
+      <ion-button fill="outline" slot="end" (click)="verdash(3)">Ver mas</ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

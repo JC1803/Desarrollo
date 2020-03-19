@@ -11,6 +11,8 @@ export class PlanificadorPage implements OnInit {
 usuarios: any[]=[];
 usuarios1: any[]=[];
 rol: string="";
+textoBuscar = '';
+
   constructor(private menu: MenuController,
     private postPvdr: PostProvider,
     public modalCtr:ModalController) { }
@@ -27,6 +29,22 @@ rol: string="";
       });
     
   }
+
+  doRefresh(evento){
+    this.postPvdr.getUsers().subscribe(list => {
+      this.usuarios= list.json();
+      console.log(this.usuarios);
+
+      
+    
+      });
+
+    setTimeout(() => {
+      evento.target.complete();
+    }, 2000);
+  
+  }
+
 
   cargarDatosUsuario(id){
     this.postPvdr.buscarUsers(id).subscribe(
@@ -51,5 +69,11 @@ rol: string="";
        }
      });
      return await modal.present();
-   }  
+   } 
+
+  
+     buscar(event){
+       this.textoBuscar=event.detail.value;
+     }
+   
 }

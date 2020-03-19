@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostProvider } from 'src/providers/post-providers';
 import { AlertController, ToastController } from '@ionic/angular';
-
-//import { TpersonalPage } from '../tpersonal/tpersonal.page';
 import { Time } from '@angular/common';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-vertareap',
@@ -22,7 +20,7 @@ export class VertareapPage implements OnInit {
   fecha2;
   comentario: string= "";
   titulo: string= "";
-
+  creacion;
 
   nombre: string = "";
   descripcion: string = "";
@@ -45,11 +43,13 @@ export class VertareapPage implements OnInit {
   ngOnInit() {
     this.cargarTareas();
     this.botones();
-   
+      
       this.fecha1= new Date().toISOString().substr(0,10);
       this.fecha2= new Date().toISOString().substr(11,8);
-      this.fecha= this.fecha1 +' '+ this.fecha2;
-
+     // this.fecha= this.fecha1 +' '+ this.fecha2;
+      this.fecha= moment().format('YYYY-MM-DD HH:mm:ss');
+     
+      this.creacion=  moment().format('YYYY-MM-DD');
       this.postPvdr.$getListSource.subscribe( data => {
         this.usuario=data[0].Id_Usuario;
        
@@ -78,7 +78,7 @@ export class VertareapPage implements OnInit {
     this.postPvdr.buscarTareas(id).subscribe(
       (dato) => { // Success
         if(dato !=null){
-          this.tareasdetalle = dato.json();
+          this.tareasdetalle = dato;
         console.log(dato);
         this.postPvdr.sendListTarea(this.tareasdetalle);
         }
@@ -106,7 +106,7 @@ export class VertareapPage implements OnInit {
   buscarobservacion(){
     
     this.postPvdr.buscarObser(this.id).subscribe( data => {
-     this.comentarios = data.json();
+     this.comentarios = data;
       });
   }
  // funcion para enviar la observacion a la tarea
@@ -256,13 +256,13 @@ export class VertareapPage implements OnInit {
      Nombre: this.nombre,
      FechaInicio: this.fechai,
      FechaFin: this.fechaf,
-     FechaCreacion: this.fecha1,
+     FechaCreacion: this.creacion,
      Descripcion: this.descripcion,
      tareasIdTareas: this.id,
      Hora_Inicio: this.horai,
      Hora_Fin: this.horaf,
-     tip_tar: "S"
-     
+     tip_tar: "S",
+     estadoEliminar:"0"
   };
 
   console.log(body);
@@ -292,6 +292,7 @@ export class VertareapPage implements OnInit {
       this.fechaf=null;
       this.horaf=null;
       this.horai=null;
+      
  }
    
 
@@ -299,9 +300,9 @@ export class VertareapPage implements OnInit {
  public obtenerTareasp(id2){
   this.postPvdr.getTareasP(id2).subscribe(
     (data) => {
-     if(data.json()!= null){
-       console.log(data.json());
-        this.postPvdr.Globaltpersonal= data.json();
+     if(data!= null){
+       console.log(data);
+        this.postPvdr.Globaltpersonal= data;
         
       }
     },

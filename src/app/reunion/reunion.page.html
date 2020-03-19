@@ -1,62 +1,71 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
-            <ion-row>
-                <ion-col size="4" class="centrar">
-                   
-                           <ion-title> REUNION</ion-title>
-                </ion-col>
-                <ion-col size="8">
-                    <ion-searchbar mode="ios" animated  showCancelButton="focus" cancelButtonText="X"></ion-searchbar>
-                </ion-col>
-              </ion-row>
-    </ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="4" class="centrar">
+        <ion-title> REUNION</ion-title>
+      </ion-col>
+      <ion-col size="8">
+        <ion-searchbar mode="ios" animated showCancelButton="focus" cancelButtonText="X" (ionChange)="buscar($event)">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
 </ion-header>
-
 <div>
-    <ion-item>  
-        <ion-label color="medium">Estado</ion-label>
-        <ion-select placeholder="Todas" [(ngModel)]="estado" name="estado" okText="Ok" cancelText="Cancelar" name="estadotarea" value="Pendiente" (ionChange)="segmentChanged($event)">
-          <ion-select-option value="Pendiente">Pendientes</ion-select-option>
-          <ion-select-option value="Terminada">Terminadas</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-    <ion-toolbar>
-        <ion-segment  [(ngModel)]="tipo" scrollable (ionChange)="segmentChanged1($event)" value="1">
-            <ion-segment-button value="1" checked layout="icon-start">
-              <ion-label class="espacio">Creadas</ion-label>
-              <ion-icon name="hand "></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button value="2" layout="icon-start">
-              <ion-label class="espacio">Responsable</ion-label>
-              <ion-icon name="person"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button value="3" layout="icon-start">
-                <ion-label class="espacio">Participante </ion-label>
-                <ion-icon name="contacts"></ion-icon>
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
+  <ion-item>
+    <ion-label color="medium">Estado</ion-label>
+    <ion-select placeholder="Todas" [(ngModel)]="estado" name="estado" okText="Ok" cancelText="Cancelar"
+      name="estadotarea" value="Pendiente" (ionChange)="segmentChanged($event)">
+      <ion-select-option value="Pendiente">Pendientes</ion-select-option>
+      <ion-select-option value="Terminada">Terminadas</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tipo" scrollable (ionChange)="segmentChanged1($event1)" value="1">
+      <ion-segment-button value="1" checked layout="icon-start">
+        <ion-label class="espacio">Creadas</ion-label>
+        <ion-icon name="hand"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="2" layout="icon-start">
+        <ion-label class="espacio">Responsable</ion-label>
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="3" layout="icon-start">
+        <ion-label class="espacio">Participante </ion-label>
+        <ion-icon name="contacts"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </div>
-
 <ion-content>
-    
-
-      <ion-list *ngFor ="let  reu of reunion">
-          <ion-item class="bord"  (click)="verreunions(reu.Id_Reunion)" > 
-              <ion-icon slot="start" name="paper-plane"></ion-icon>
-              <ion-label class="ion-text-wrap">
-                  <ion-text color="dark">
-                  <ion-label> 
-                      <h2>{{reu.Tema}} </h2>  
-                    </ion-label>
-                  </ion-text>
-                  <p class="letra"> <b> Fecha: </b> {{reu.FechadeReunion}} <b>Lugar:</b>{{reu.Lugar}} </p>
-                </ion-label>
-                <ion-note slot="end" color="tertiary">{{reu.Estado}}</ion-note>
-         </ion-item>
-          </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="ocultar1== 1">
+    <ion-list *ngFor="let  reu of reunion |filtro:textoBuscar : 'Tema'">
+      <ion-item class="bord" (click)="verreunions(reu.Id_Reunion,reu.motivo, reu.asistencia)">
+        <ion-icon slot="start" name="paper-plane"></ion-icon>
+        <ion-text color="dark">
+          <p class="letra1">{{reu.Tema}} </p>
+          <p class="letra"> <b> Fecha: </b> {{reu.FechadeReunion}} <b>Lugar:</b>{{reu.Lugar}} </p>
+        </ion-text>
+        <ion-note class="tamanio" slot="end" color="tertiary">{{reu.Estado}}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="ocultar1== 0">
+    <ion-list *ngFor="let  reu of reunion">
+      <ion-item class="bord" (click)="verreunions(reu.Id_Reunion, reu.motivo, reu.asistencia)">
+        <ion-icon slot="start" name="paper-plane"></ion-icon>
+        <ion-text color="dark">
+          <p class="letra1">{{reu.reunion.Tema}} </p>
+          <p class="letra"> <b> Fecha: </b> {{reu.reunion.FechadeReunion}} <b>Lugar:</b>{{reu.reunion.Lugar}} </p>
+        </ion-text>
+        <ion-note class="tamanio" slot="end" color="tertiary">{{reu.reunion.Estado}}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PostProvider } from '../../providers/post-providers';
 import { ToastController, ModalController, AlertController } from '@ionic/angular';
 import { ComentariosPage } from '../comentarios/comentarios.page';
+import * as moment from 'moment';
 @Component({
   selector: 'app-vertarea',
   templateUrl: './vertarea.page.html',
@@ -21,7 +22,6 @@ export class VertareaPage implements OnInit {
   comentario1: string= "";
   public ocultar1: boolean;
   estado: string= "";
-
   constructor(
 
     private router:  Router,
@@ -37,7 +37,8 @@ export class VertareaPage implements OnInit {
       this.botones();
       this.fecha1= new Date().toISOString().substr(0,10);
       this.fecha2= new Date().toISOString().substr(11,8);
-      this.fecha= this.fecha1 +' '+ this.fecha2;
+     // this.fecha= this.fecha1 +' '+ this.fecha2;
+      this.fecha= moment().format('YYYY-MM-DD HH:mm:ss');
      // console.log(this.fecha);
 
       this.postPvdr.$getListSource.subscribe( data => {
@@ -53,7 +54,7 @@ export class VertareaPage implements OnInit {
     this.postPvdr.buscarTareas(id).subscribe(
       (dato) => { // Success
         if(dato !=null){
-          this.tareasdetalle = dato.json();
+          this.tareasdetalle = dato;
         console.log(dato);
         this.postPvdr.sendListTarea(this.tareasdetalle);
         }
@@ -92,7 +93,7 @@ export class VertareaPage implements OnInit {
  public buscarobservacion(){
     
     this.postPvdr.buscarObser(this.id).subscribe( data => {
-     this.comentarios = data.json();
+     this.comentarios = data;
       });
   }
 
@@ -184,8 +185,8 @@ export class VertareaPage implements OnInit {
        if(dato !=null){
          //this.tarea1 = dato.json();
        
-       this.postPvdr.Gsubta= dato.json();
-       console.log(dato.json());
+       this.postPvdr.Gsubta= dato;
+       console.log(dato);
        this.router.navigate(['/versubtareas']);
        }
  
@@ -200,10 +201,10 @@ export class VertareaPage implements OnInit {
   this.postPvdr.getTareasRes(id2)
   .subscribe(
    (data) => { // Success
-   if(data.json()!=null){
-   console.log(data.json());
+   if(data!=null){
+   console.log(data);
 
-   this.postPvdr.Gresta = data.json();
+   this.postPvdr.Gresta = data;
    this.postPvdr.Gbutunt=false;
    this.postPvdr.Gtipouser= "1";
    }

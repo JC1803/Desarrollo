@@ -1,106 +1,92 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
-      <ion-title>Editar Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-      <div class="menu2">
-          <!--material-design-background-->
-          
-          <ion-row>
-              <ion-col size="4">
-              </ion-col>
-              <ion-col size="4">
-                  <ion-avatar>
-                      <img class="iavatar1" src="/assets/sinfoto.jpg"  alt="">
-                    </ion-avatar>
-              </ion-col>
-              <ion-col size="4">
-              </ion-col>
-              
-            </ion-row>           
-          
-        </div>
-<div class="form"> 
-  <ion-list *ngFor ="let data of datos" > 
-         <ion-item>
-            <ion-icon  slot="start" name="person" color="tertiary"></ion-icon>
-            <ion-label color="medium" position="stacked">Nombres</ion-label>
-            <ion-input name="name" [(ngModel)]='username'>
-               
-            </ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-icon  slot="start" name="person" color="tertiary"></ion-icon>
-              <ion-label color="medium" position="stacked">Apellidos</ion-label>
-              <ion-input name="apellido" [(ngModel)]='apellido'>
-                  
-              </ion-input>
-            </ion-item>
-           
-            <ion-item>
-              <ion-icon  slot="start" name="transgender" color="tertiary"></ion-icon>
-              <ion-label color="medium" position="stacked">Sexo:</ion-label>
-              <ion-select class="tama" [(ngModel)]="sexo"  placeholder="{{sexo}}" name="sexo">
-                <ion-select-option value="Femenino">Femenino</ion-select-option>
-                <ion-select-option value="Masculino">Masculino</ion-select-option>
-              </ion-select>
-            </ion-item>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-          
-          <ion-item>
-              <ion-icon  slot="start" name="calendar" color="tertiary"></ion-icon>
-              <ion-label color="medium"  position="stacked">Fecha de Nacimiento</ion-label>
-              <ion-input type="date" [(ngModel)]='fecha' >
-                 
-              </ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-icon  slot="start" name="compass" color="tertiary"></ion-icon>
-                <ion-label color="medium" position="stacked">Direccion</ion-label>
-                <ion-input name="direccion" [(ngModel)]='direccion'>
-                  
-                </ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-icon  slot="start" name="phone-portrait" color="tertiary"></ion-icon>
-                  <ion-label color="medium" position="stacked">Celular</ion-label>
-                  <ion-input name="celular" [(ngModel)]='celular'>
-                      
-                  </ion-input>
-                </ion-item>
-                <ion-item class="fuent">
-                  <ion-icon  slot="start" name="star" color="tertiary"></ion-icon>
-                  <ion-label color="medium"  position="stacked">Intereses</ion-label>
-                  <ion-textarea name="intereses" type="text" placeholder="Escribe tu intereses aqui...." [(ngModel)]="intereses"></ion-textarea>
-              </ion-item>
-                <ion-item-divider lines="none" color="light">
-                <ion-label>Social:</ion-label>
-              </ion-item-divider>
-
-              <ion-item>
-                  <ion-icon slot="start" name="logo-facebook" color="dark"></ion-icon>
-                <ion-input name="facebook"  placeholder="Facebook" [(ngModel)]='facebook'></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-icon slot="start" name="logo-twitter" color="dark"></ion-icon>
-              <ion-input name="twitter"  placeholder="Twitter" [(ngModel)]='twitter'></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-icon slot="start" name="logo-instagram" color="dark"></ion-icon>
-            <ion-input name="instagram" type="email" placeholder="instagram" [(ngModel)]='instagram'></ion-input>
-          </ion-item>
-                </ion-list>
-
-                </div>
-                   <div class="contorno">
-            <ion-button color="danger" type="submit"  (click)="actualizar()" expand="block">Actualizar Perfil</ion-button>
-           
-          </div>
-  </ion-content>
-  
+<ion-content>
+  <div class="menu2">
+    <!--material-design-background-->
+    <ion-row>
+      <ion-col size="4">
+      </ion-col>
+      <ion-col size="4">
+        <ion-avatar>
+          <img class="iavatar1" src="/assets/sinfoto.jpg" alt="">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="form">
+    <ion-list *ngFor="let data of datos">
+      <ion-item>
+        <ion-icon slot="start" name="person" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Nombres</ion-label>
+        <ion-input name="name" [(ngModel)]='username'>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Apellidos</ion-label>
+        <ion-input name="apellido" [(ngModel)]='apellido'>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="transgender" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Sexo:</ion-label>
+        <ion-select class="tama" [(ngModel)]="sexo" placeholder="{{sexo}}" name="sexo">
+          <ion-select-option value="Femenino">Femenino</ion-select-option>
+          <ion-select-option value="Masculino">Masculino</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="calendar" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Fecha de Nacimiento</ion-label>
+        <ion-input type="date" [(ngModel)]='fecha'>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="compass" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Dirección</ion-label>
+        <ion-input name="direccion" [(ngModel)]='direccion'>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="phone-portrait" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Teléfono</ion-label>
+        <ion-input name="celular" [(ngModel)]='celular'>
+        </ion-input>
+      </ion-item>
+      <ion-item class="fuent">
+        <ion-icon slot="start" name="star" color="tertiary"></ion-icon>
+        <ion-label color="medium" position="stacked">Intereses</ion-label>
+        <ion-textarea name="intereses" type="text" placeholder="Escribe tu intereses aqui...." [(ngModel)]="intereses">
+        </ion-textarea>
+      </ion-item>
+      <ion-item-divider lines="none" color="light">
+        <ion-label>Social:</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon slot="start" name="logo-facebook" color="dark"></ion-icon>
+        <ion-input name="facebook" placeholder="Facebook" [(ngModel)]='facebook'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="logo-twitter" color="dark"></ion-icon>
+        <ion-input name="twitter" placeholder="Twitter" [(ngModel)]='twitter'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="logo-instagram" color="dark"></ion-icon>
+        <ion-input name="instagram" type="email" placeholder="Instagram" [(ngModel)]='instagram'></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="contorno">
+    <ion-button color="danger" type="submit" (click)="actualizar()" expand="block">Actualizar Perfil
+    </ion-button>
+  </div>
+</ion-content>

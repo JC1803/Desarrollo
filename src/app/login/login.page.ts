@@ -8,6 +8,7 @@ import { MenuController } from '@ionic/angular';
 import { BienvenidoPage } from '../bienvenido/bienvenido.page';
 import { async } from 'q';
 import { Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginPage implements OnInit {
   informacion= null;
   password: string= "";
   user: any[] = [];
+  per: any[] = [];
+  ejemplo;
 
   constructor(private router: Router,
   	private postPvdr: PostProvider,
@@ -33,8 +36,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.menu.close('first');
-    
-  
+
   //  this.menu.swipeEnable(false, 'first');
   
   }
@@ -56,11 +58,19 @@ export class LoginPage implements OnInit {
       this.postPvdr.postLogin(body).subscribe(
         (data) => { // Success
            
-           var alertpesan = data.msg;
-          if(data != ""){
+          // var alertpesan = data.msg;
+          if(data.length != 0){
             this.user = (data);
             //console.log(data);
             this.postPvdr.sendListSource(data);
+            this.storage.set('session_storage', data);
+            
+            //this.storage.get('session_storage').then((val) => {
+              //this.postPvdr.sendListSource(val);
+              //console.log(val);
+            //  });
+            
+            console.log(data);
             this.router.navigate(['/tabs']);
             this.email="";
             this.password="";
