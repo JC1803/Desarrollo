@@ -22,6 +22,7 @@ export class TabsPage implements OnInit {
   clickSub: any;
   lastid1 = 0;
   numgenerar=0;
+  
   constructor(public menu: MenuController,
     public ap: AppComponent,
     private localNotifications: LocalNotifications,
@@ -62,7 +63,7 @@ export class TabsPage implements OnInit {
   }
 //Revisiones constante
   Notificaciones() {
-    setInterval(() => {
+      this.postPvdr.intervalo= setInterval(() => {
       this.contarNotif();
       this.Verificar();
     }, 10000);

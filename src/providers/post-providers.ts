@@ -50,6 +50,11 @@ export class PostProvider {
 
    public Gdash: string;
 
+
+   //variable global para el intervalo
+
+   public intervalo: any;
+
 	//Headers
 
 

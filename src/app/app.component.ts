@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/Storage';
 import { MenuController } from '@ionic/angular';
 import { PostProvider } from '../providers/post-providers';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -32,7 +33,8 @@ export class AppComponent {
     private router: Router,
     public menu: MenuController,
     private postPvdr: PostProvider,
-    private storage: Storage
+    private storage: Storage,
+   
   ) {
     this.initializeApp();
   }
@@ -59,6 +61,7 @@ export class AppComponent {
     this.menu.close();
     let data= null;
     this.storage.set('session_storage', data);
+    clearInterval(this.postPvdr.intervalo);
   }
 
   public detalles() {
