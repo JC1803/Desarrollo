@@ -20,8 +20,10 @@ export class VertareaPage implements OnInit {
   fecha2;
   comentario: string= "";
   comentario1: string= "";
-  public ocultar1: boolean;
+  public ocultar1: boolean; //boton terminar
+  public ocultar: boolean = true; //desct/act comentarios
   estado: string= "";
+  verificar: any;
   constructor(
 
     private router:  Router,
@@ -80,13 +82,20 @@ export class VertareaPage implements OnInit {
   //Funcion para ocultar o mostrar el boton de terminar tarea
   public botones(){
     this.ocultar1= this.postPvdr.Gbutunt;
+    console.log(this.ocultar1);
+    
    // console.log(this.ocultar1);
   //  console.log(this.estado);
    // console.log(this.postPvdr.Gtipouser);
 
     if(this.postPvdr.Gtipouser== "1" && this.estado=="Terminada"){
          this.ocultar1=false;
+
     }
+    if(this.postPvdr.Gtipouser!= "1" && this.estado=="Terminada"){
+      this.ocultar=false;
+
+ }
   }
 
   //Funcion para cargar las observaciones de la tarea
@@ -196,16 +205,19 @@ export class VertareaPage implements OnInit {
      }
    )
    }
-   //Funcion para obtenr las tareas una vez que se ha actualizado algun campo
+   //Funcion para obtenr todas las tareas del responsable una vez que se ha actualizado algun campo
  public obtenerTareasR(id2){
   this.postPvdr.getTareasRes(id2)
   .subscribe(
    (data) => { // Success
    if(data!=null){
    console.log(data);
-
-   this.postPvdr.Gresta = data;
-   this.postPvdr.Gbutunt=false;
+   this.verificar= data;
+   this.postPvdr.Gresta = this.verificar.filter(
+    iniciartareas => iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0);
+    console.log(this.postPvdr.Gresta);
+;
+   this.postPvdr.Gbutunt=true;
    this.postPvdr.Gtipouser= "1";
    }
  },
@@ -257,7 +269,8 @@ export class VertareaPage implements OnInit {
       toast.present();
      this.recargarSubta(this.id);
       this.cargarTareas();
-      this.botones();
+      this.ocultar1= false;
+     
       this.obtenerTareasR(this.usuario);
     //this.router.navigate(['/tabs/perfil']);
     });

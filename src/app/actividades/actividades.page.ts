@@ -16,8 +16,9 @@ export class ActividadesPage implements OnInit {
   id: string="";
   datosdash: any;
   max: number=0;
-  max1=1;
+  max1=100;
   max2: number=0;
+  curr: any;
   pendente: number;
   terminada:number;
   vencida:number;
@@ -49,6 +50,25 @@ doughnutChart1: any;
       });
 
       this.cargarValores();
+  }
+
+  cargarValores(){
+    this.postPvdr.getdasboard(this.id)
+    .subscribe(
+   (data) => { // Success
+     if(data !=null){
+     //this.postPvdr.Gresta= data.json();
+     this.datosdash = data;
+     console.log(this.datosdash);
+     
+     }
+   },
+   (error) =>{
+     console.error(error);
+   }
+ );
+ this.calculopercent();
+
   }
 
 
@@ -105,23 +125,7 @@ doughnutChart1: any;
   }
 
 
-  cargarValores(){
-    this.postPvdr.getdasboard(this.id)
-    .subscribe(
-   (data) => { // Success
-     if(data !=null){
-     //this.postPvdr.Gresta= data.json();
-     this.datosdash = data;
-     console.log(this.datosdash);
-     }
-   },
-   (error) =>{
-     console.error(error);
-   }
- );
- this.calculopercent();
-
-  }
+  
 
   //Calcula el procentaje
   calculopercent(){

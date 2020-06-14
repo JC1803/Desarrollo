@@ -124,6 +124,20 @@ var ActividadesPage = /** @class */ (function () {
         });
         this.cargarValores();
     };
+    ActividadesPage.prototype.cargarValores = function () {
+        var _this = this;
+        this.postPvdr.getdasboard(this.id)
+            .subscribe(function (data) {
+            if (data != null) {
+                //this.postPvdr.Gresta= data.json();
+                _this.datosdash = data;
+                console.log(_this.datosdash);
+            }
+        }, function (error) {
+            console.error(error);
+        });
+        this.calculopercent();
+    };
     ActividadesPage.prototype.ngAfterViewInit = function () {
         var _this = this;
         setTimeout(function () {
@@ -167,20 +181,6 @@ var ActividadesPage = /** @class */ (function () {
                 }]
         };
         return this.getChart(this.doughnutCanvas1.nativeElement, 'doughnut', data);
-    };
-    ActividadesPage.prototype.cargarValores = function () {
-        var _this = this;
-        this.postPvdr.getdasboard(this.id)
-            .subscribe(function (data) {
-            if (data != null) {
-                //this.postPvdr.Gresta= data.json();
-                _this.datosdash = data;
-                console.log(_this.datosdash);
-            }
-        }, function (error) {
-            console.error(error);
-        });
-        this.calculopercent();
     };
     //Calcula el procentaje
     ActividadesPage.prototype.calculopercent = function () {

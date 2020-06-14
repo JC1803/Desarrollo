@@ -46,7 +46,7 @@ export class AddtareaPage implements OnInit {
      
     
     // this.creacion = new Date().toISOString().substr(0,10);
-     this.creacion=  moment().format('YYYY-MM-DD');
+     this.creacion=  moment().format('YYYY-MM-DD HH:mm:ss');
     //var  casa= new Date();
     // console.log(new Intl.DateTimeFormat('en-US').format(casa));
    // console.log(this.creacion.toISOString());
@@ -72,7 +72,10 @@ export class AddtareaPage implements OnInit {
       (data) => {
        if(data!= null){
          console.log(data);
-          this.postPvdr.Globaltpersonal= data;
+         this.postPvdr.Globaltpersonal= data.sort(function(a,b){
+          return a.FechaCreacion - b.FechaCreacion;
+        }).reverse().filter(tareasmostrar=> tareasmostrar.estadoEliminar === 0);
+       
           
         }
       },

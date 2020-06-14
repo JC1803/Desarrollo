@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _providers_post_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../providers/post-providers */ "./src/providers/post-providers.ts");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _ionic_Storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/Storage */ "./node_modules/@ionic/Storage/fesm5/ionic-storage.js");
+
+
 
 
 
@@ -105,14 +108,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var BienvenidoPage = /** @class */ (function () {
-    function BienvenidoPage(menu, _navCtrl, activatedRoute, postPvdr, router
+    function BienvenidoPage(menu, _navCtrl, activatedRoute, postPvdr, storage, router, platform
     //private navPr: NavParams
     ) {
         this.menu = menu;
         this._navCtrl = _navCtrl;
         this.activatedRoute = activatedRoute;
         this.postPvdr = postPvdr;
+        this.storage = storage;
         this.router = router;
+        this.platform = platform;
         this.argumento = null;
         this.datos = [];
         this.id = "";
@@ -128,6 +133,7 @@ var BienvenidoPage = /** @class */ (function () {
         this.postPvdr.$getListSource.subscribe(function (list) {
             _this.datos = list;
             _this.id = _this.datos[0].Id_Usuario;
+            console.log(list);
             console.log(_this.id);
         });
         this.cargarValores();
@@ -137,8 +143,12 @@ var BienvenidoPage = /** @class */ (function () {
     };
     BienvenidoPage.prototype.ngAfterViewInit = function () {
         var _this = this;
+        this.doughnutChart = this.getDoughnutChart();
         setTimeout(function () {
-            _this.doughnutChart = _this.getDoughnutChart();
+            _this.postPvdr.intervalo2 = setInterval(function () {
+                _this.cargarValores();
+                _this.doughnutChart = _this.getDoughnutChart();
+            }, 60000);
         }, 250);
     };
     BienvenidoPage.prototype.getChart = function (context, chartType, data, options) {
@@ -225,6 +235,7 @@ var BienvenidoPage = /** @class */ (function () {
         this.cargarTareasRecientes();
         this.cargarTareasPersonales();
         this.cargarReunionesVigentes();
+        this.doughnutChart = this.getDoughnutChart();
         setTimeout(function () {
             evento.target.complete();
         }, 2000);
@@ -259,7 +270,9 @@ var BienvenidoPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _providers_post_providers__WEBPACK_IMPORTED_MODULE_4__["PostProvider"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+            _ionic_Storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
             //private navPr: NavParams
         ])
     ], BienvenidoPage);

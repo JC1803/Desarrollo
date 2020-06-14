@@ -128,6 +128,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
 /* harmony import */ var src_providers_post_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/providers/post-providers */ "./src/providers/post-providers.ts");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_Storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/Storage */ "./node_modules/@ionic/Storage/fesm5/ionic-storage.js");
+
+
 
 
 
@@ -136,13 +139,15 @@ __webpack_require__.r(__webpack_exports__);
 
 //import { SettingPage } from '../setting/setting.page'
 var TabsPage = /** @class */ (function () {
-    function TabsPage(menu, ap, localNotifications, alertController, postPvdr, navCtrl) {
+    function TabsPage(menu, ap, localNotifications, alertController, postPvdr, storage, navCtrl, platform) {
         this.menu = menu;
         this.ap = ap;
         this.localNotifications = localNotifications;
         this.alertController = alertController;
         this.postPvdr = postPvdr;
+        this.storage = storage;
         this.navCtrl = navCtrl;
+        this.platform = platform;
         this.textoBuscar = '';
         this.datos = [];
         this.noti = [];
@@ -151,14 +156,26 @@ var TabsPage = /** @class */ (function () {
         this.mostrarnun = 0;
         this.lastid1 = 0;
         this.numgenerar = 0;
+        // this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+        //  if (this.constructor.name == "TabsPage") {
+        //   if (window.confirm("Quieres cerrar la app")) {
+        //      navigator["app"].exitApp();
+        //    }
+        //     }
+        //  }
+        //  )
     }
     TabsPage.prototype.ngOnInit = function () {
         var _this = this;
         this.menu.enable(true, 'first');
         this.menu.close();
         this.postPvdr.$getListSource.subscribe(function (list) {
-            _this.datos = list;
-            _this.id2 = _this.datos[0].Id_Usuario;
+            if (list != null || list.length != 0) {
+                _this.datos = list;
+                _this.id2 = _this.datos[0].Id_Usuario;
+            }
+            else {
+            }
             //console.log(this.id2);
         });
         this.contarNotif();
@@ -166,12 +183,18 @@ var TabsPage = /** @class */ (function () {
         console.log(this.mostrarnun);
         this.Notificaciones();
     };
-    TabsPage.prototype.ionViewCanLeave = function () {
+    TabsPage.prototype.ionViewDidEnter = function () {
+        this.subscribe = this.platform.backButton.subscribe(function () {
+            navigator["app"].exitApp();
+        });
+    };
+    TabsPage.prototype.ionViewWillLeave = function () {
+        this.subscribe.unsubscribe();
     };
     //Revisiones constante
     TabsPage.prototype.Notificaciones = function () {
         var _this = this;
-        setInterval(function () {
+        this.postPvdr.intervalo = setInterval(function () {
             _this.contarNotif();
             _this.Verificar();
         }, 10000);
@@ -248,7 +271,9 @@ var TabsPage = /** @class */ (function () {
             _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
             src_providers_post_providers__WEBPACK_IMPORTED_MODULE_4__["PostProvider"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])
+            _ionic_Storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]])
     ], TabsPage);
     return TabsPage;
 }());

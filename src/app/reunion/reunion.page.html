@@ -44,6 +44,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <!--Para tareas de no responsable-->
   <div *ngIf="ocultar1== 1">
     <ion-list *ngFor="let  reu of reunion |filtro:textoBuscar : 'Tema'">
       <ion-item class="bord" (click)="verreunions(reu.Id_Reunion,reu.motivo, reu.asistencia)">
@@ -56,6 +57,7 @@
       </ion-item>
     </ion-list>
   </div>
+  <!--Para reuniones de responsable -->
   <div *ngIf="ocultar1== 0">
     <ion-list *ngFor="let  reu of reunion">
       <ion-item class="bord" (click)="verreunions(reu.Id_Reunion, reu.motivo, reu.asistencia)">

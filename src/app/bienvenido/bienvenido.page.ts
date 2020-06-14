@@ -6,6 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostProvider } from '../../providers/post-providers';
 import { Chart }  from 'chart.js';
 import { Storage } from '@ionic/Storage';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-bienvenido',
@@ -22,6 +23,10 @@ export class BienvenidoPage implements OnInit {
   tareasp: any[] = [];
   tareasreci: any[] = [];
   reunionvigentes: any[] = [];
+  mostrtap: any[]=[];
+  mostrtal: any[]=[];
+  mostrreu: any[]=[];
+
   @ViewChild("doughnutCanvas") doughnutCanvas;
 
   doughnutChart: any;
@@ -32,8 +37,8 @@ export class BienvenidoPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private postPvdr: PostProvider,
     private storage: Storage,
-    private router: Router
-
+    private router: Router,
+    public platform: Platform
     //private navPr: NavParams
 
     ) { 
@@ -52,7 +57,6 @@ export class BienvenidoPage implements OnInit {
     
     console.log(this.id);
     });
-  
    this.cargarValores();
    this.cargarTareasRecientes();
    this.cargarTareasPersonales();
@@ -61,13 +65,14 @@ export class BienvenidoPage implements OnInit {
 
   }
 
+
   ngAfterViewInit(){
-    
-    setTimeout(() => {
-      this.doughnutChart = this.getDoughnutChart();
   
+    setTimeout(() => {
+        this.doughnutChart = this.getDoughnutChart();
     }, 250)
   }
+
 
 
   getChart(context, chartType, data, options?) {
@@ -191,7 +196,7 @@ export class BienvenidoPage implements OnInit {
     this.cargarTareasRecientes();
     this.cargarTareasPersonales();
     this.cargarReunionesVigentes();
-
+    this.doughnutChart = this.getDoughnutChart();
     setTimeout(() => {
       evento.target.complete();
     }, 2000);
@@ -215,5 +220,65 @@ export class BienvenidoPage implements OnInit {
 //Busqueda
   buscar(event){
     this.textoBuscar=event.detail.value;
+  }
+
+  mostrartareap(id){
+    this.postPvdr.buscarTareas(id).subscribe(
+      (dato) => { // Success
+        if(dato !=null){
+          this.mostrtap = dato;
+        console.log(dato);
+        this.postPvdr.sendListTarea(this.mostrtap);
+        this.router.navigate(['/vertareap']);
+        }
+        
+  
+      },
+      (error) =>{
+        console.error(error);
+      }
+    )
+
+  }
+
+  mostrartareat(id){
+    this.postPvdr.buscarTareas(id).subscribe(
+      (dato) => { // Success
+        if(dato !=null){
+          this.mostrtal = dato;
+        console.log(dato);
+        this.postPvdr.sendListTarea(this.mostrtal);
+        this.router.navigate(['/vertarea']);
+        }
+        
+  
+      },
+      (error) =>{
+        console.error(error);
+      }
+    )
+  }
+
+  mostrarreunion(id, motivo, asistencia){
+    this.postPvdr.getReunion(id).subscribe(
+      (dato) => { // Success
+        if (dato != null) {
+          this.mostrreu = dato;
+          console.log(this.mostrreu);
+          this.postPvdr.sendListReunion(this.mostrreu);
+          this.postPvdr.Gmotivo = motivo;
+          this.postPvdr.Gasistencia = asistencia;
+
+          this.router.navigate(['/verreunion']);
+        }
+
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+
+    
   }
 }

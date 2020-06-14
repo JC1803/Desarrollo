@@ -49,7 +49,7 @@ export class VertareapPage implements OnInit {
      // this.fecha= this.fecha1 +' '+ this.fecha2;
       this.fecha= moment().format('YYYY-MM-DD HH:mm:ss');
      
-      this.creacion=  moment().format('YYYY-MM-DD');
+      this.creacion=  moment().format('YYYY-MM-DD HH:mm:ss');
       this.postPvdr.$getListSource.subscribe( data => {
         this.usuario=data[0].Id_Usuario;
        
@@ -302,7 +302,10 @@ export class VertareapPage implements OnInit {
     (data) => {
      if(data!= null){
        console.log(data);
-        this.postPvdr.Globaltpersonal= data;
+       this.postPvdr.Globaltpersonal= data.sort(function(a,b){
+        return a.FechaCreacion - b.FechaCreacion;
+      }).reverse().filter(tareasmostrar=> tareasmostrar.estadoEliminar === 0);
+      
         
       }
     },
@@ -352,10 +355,10 @@ export class VertareapPage implements OnInit {
       message: 'Tarea finalizada con exito',
       duration: 4000
     });
+    this.ocultar=false;
     toast.present();
    this.recargarSubta(this.id);
     this.cargarTareas();
-    this.botones();
     this.obtenerTareasp(this.usuario);
   //this.router.navigate(['/tabs/perfil']);
   });

@@ -51,7 +51,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
+<!--Para tareas de responsable participante observador-->
   <div class="bordes" *ngIf="ver== 1">
     <ion-list *ngFor="let  tarea of postPvdr.Gresta">
       <ion-item class="fuente  bord1" (click)="mostrartarea(tarea.Id_Tarea)">
@@ -64,7 +64,7 @@
       </ion-item>
     </ion-list>
   </div>
-
+<!--Para tareas que son creadas-->
   <div class="bordes" *ngIf="ver== 0">
     <ion-list *ngFor="let  tarea of postPvdr.Gresta |filtro:textoBuscar : 'Nombre'">
       <ion-item class="fuente  bord1" (click)="mostrartarea(tarea.Id_tarea)">

@@ -61,7 +61,7 @@ var TareasPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"tertiary\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/tabs\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"start\">\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"4\" class=\"centrar\">\n        <ion-title>Tareas</ion-title>\n      </ion-col>\n      <ion-col size=\"8\">\n        <ion-searchbar mode=\"ios\" animated showCancelButton=\"always\" (ionChange)=\"buscar($event)\"></ion-searchbar>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n<div>\n  <ion-item>\n    <ion-label color=\"medium\">Estado</ion-label>\n    <ion-select interface=\"popover\" [(ngModel)]=\"tipousuario\" okText=\"Ok\" cancelText=\"Cancelar\" name=\"estadotarea\"\n      (ionChange)=\"segmentChanged1($event)\" value=\"1\">\n      <ion-select-option value=\"1\">Todas</ion-select-option>\n      <ion-select-option value=\"2\">Pendiente</ion-select-option>\n      <ion-select-option value=\"3\">Terminada</ion-select-option>\n      <ion-select-option value=\"4\">Vencida</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-toolbar>\n    <ion-segment [(ngModel)]=\"tipo\" scrollable (ionChange)=\"segmentChanged($event)\" value=\"1\">\n      <ion-segment-button value=\"1\" checked layout=\"icon-start\">\n        <ion-label class=\"espacio\">Responsable</ion-label>\n        <ion-icon name=\"person\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"4\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Creadas </ion-label>\n        <ion-icon name=\"hand\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"3\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Participante</ion-label>\n        <ion-icon name=\"contacts\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"2\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Observador</ion-label>\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-segment-button>\n    </ion-segment>\n  </ion-toolbar>\n</div>\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n  <div class=\"bordes\" *ngIf=\"ver== 1\">\n    <ion-list *ngFor=\"let  tarea of postPvdr.Gresta\">\n      <ion-item class=\"fuente  bord1\" (click)=\"mostrartarea(tarea.Id_Tarea)\">\n        <ion-icon slot=\"start\" name=\"checkbox-outline\"></ion-icon>\n        <ion-label>\n          <ion-text>\n            <ion-label>\n              {{tarea.tarea.Nombre}}\n            </ion-label>\n          </ion-text>\n          <p> <b>Estado: </b>{{ tarea.tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.tarea.FechaFin}} </p>\n        </ion-label>\n      </ion-item>\n    </ion-list>\n  </div>\n\n  <div class=\"bordes\" *ngIf=\"ver== 0\">\n    <ion-list *ngFor=\"let  tarea of postPvdr.Gresta |filtro:textoBuscar : 'Nombre'\">\n      <ion-item class=\"fuente  bord1\" (click)=\"mostrartarea(tarea.Id_tarea)\">\n        <ion-icon slot=\"start\" name=\"checkbox-outline\"></ion-icon>\n        <ion-label>\n          <ion-text>\n            <ion-label>\n              {{tarea.Nombre}}\n            </ion-label>\n          </ion-text>\n          <p> <b>Estado: </b>{{ tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.FechaFin}} </p>\n        </ion-label>\n      </ion-item>\n    </ion-list>\n  </div>\n\n\n  <!--ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\"  [routerLink]=\"['/addtareat']\">\n    <ion-fab-button color=\"tertiary\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab-->\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"tertiary\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/tabs\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"start\">\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"4\" class=\"centrar\">\n        <ion-title>Tareas</ion-title>\n      </ion-col>\n      <ion-col size=\"8\">\n        <ion-searchbar mode=\"ios\" animated showCancelButton=\"always\" (ionChange)=\"buscar($event)\"></ion-searchbar>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n<div>\n  <ion-item>\n    <ion-label color=\"medium\">Estado</ion-label>\n    <ion-select interface=\"popover\" [(ngModel)]=\"tipousuario\" okText=\"Ok\" cancelText=\"Cancelar\" name=\"estadotarea\"\n      (ionChange)=\"segmentChanged1($event)\" value=\"1\">\n      <ion-select-option value=\"1\">Todas</ion-select-option>\n      <ion-select-option value=\"2\">Pendiente</ion-select-option>\n      <ion-select-option value=\"3\">Terminada</ion-select-option>\n      <ion-select-option value=\"4\">Vencida</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-toolbar>\n    <ion-segment [(ngModel)]=\"tipo\" scrollable (ionChange)=\"segmentChanged($event)\" value=\"1\">\n      <ion-segment-button value=\"1\" checked layout=\"icon-start\">\n        <ion-label class=\"espacio\">Responsable</ion-label>\n        <ion-icon name=\"person\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"4\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Creadas </ion-label>\n        <ion-icon name=\"hand\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"3\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Participante</ion-label>\n        <ion-icon name=\"contacts\"></ion-icon>\n      </ion-segment-button>\n      <ion-segment-button value=\"2\" layout=\"icon-start\">\n        <ion-label class=\"espacio\">Observador</ion-label>\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-segment-button>\n    </ion-segment>\n  </ion-toolbar>\n</div>\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n<!--Para tareas que no son creadas-->\n  <div class=\"bordes\" *ngIf=\"ver== 1\">\n    <ion-list *ngFor=\"let  tarea of postPvdr.Gresta\">\n      <ion-item class=\"fuente  bord1\" (click)=\"mostrartarea(tarea.Id_Tarea)\">\n        <ion-icon slot=\"start\" name=\"checkbox-outline\"></ion-icon>\n        \n          <ion-text>\n           <p class=\"letra1\"> {{tarea.tarea.Nombre}} </p>  \n           <p class=\"letra\"> <b>Estado: </b>{{ tarea.tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.tarea.FechaFin}} </p>\n          </ion-text>\n      </ion-item>\n    </ion-list>\n  </div>\n<!--Para tareas que no son creadas-->\n  <div class=\"bordes\" *ngIf=\"ver== 0\">\n    <ion-list *ngFor=\"let  tarea of postPvdr.Gresta |filtro:textoBuscar : 'Nombre'\">\n      <ion-item class=\"fuente  bord1\" (click)=\"mostrartarea(tarea.Id_tarea)\">\n        <ion-icon slot=\"start\" name=\"checkbox-outline\"></ion-icon>\n        <ion-label>\n          <ion-text>\n            <ion-label>\n              {{tarea.Nombre}}\n            </ion-label>\n          </ion-text>\n          <p> <b>Estado: </b>{{ tarea.Estado_Tarea }} <b>Limite:</b> {{ tarea.FechaFin}} </p>\n        </ion-label>\n      </ion-item>\n    </ion-list>\n  </div>\n\n\n  <!--ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\"  [routerLink]=\"['/addtareat']\">\n    <ion-fab-button color=\"tertiary\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab-->\n</ion-content>"
 
 /***/ }),
 
@@ -72,7 +72,7 @@ module.exports = "<ion-header>\n  <ion-toolbar color=\"tertiary\">\n    <ion-but
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-segment-button {\n  --padding-start: unset;\n  --padding-end: unset;\n  --padding-top: 2px;\n  --padding-bottom: 2px;\n  --border-color:#251f81;\n  --color: #a5b7ac;\n  --color-checked: #251f81; }\n  ion-segment-button ion-button {\n    --max-width: 500px; }\n  ion-segment-button ion-label {\n    font-size: smaller; }\n  ion-segment-button ion-icon {\n    font-size: 16px; }\n  .bordes {\n  padding: 5px 10px; }\n  .sc-ion-segment-ios-hion-toolbar.sc-ion-segment-ios-s > ion-segment-button, ion-toolbar .sc-ion-segment-ios-h.sc-ion-segment-ios-s > ion-segment-button {\n  max-width: unset;\n  --background-checked: #251f81;\n  --color-checked: #ffffff;\n  /* font-size: 12px; */\n  /* line-height: 22px; */ }\n  .espacio {\n  margin: 5px 5px; }\n  .seleccion {\n  background: darkblue;\n  max-width: 50%; }\n  .seleccion ion-button {\n    font-size: 10px; }\n  .seleccion ion-select {\n    max-width: 100%; }\n  ion-title {\n  font-family: menu;\n  padding: 0px 5px 0px; }\n  .centrar {\n  line-height: 50px;\n  align-items: center; }\n  ion-searchbar {\n  padding: 0px 7px;\n  font-size: 14px;\n  height: 50px; }\n  ion-col {\n  padding: 0px 5px;\n  height: 50px; }\n  .fuente ion-label {\n  font-size: 14px; }\n  ion-list {\n  padding: 8px 0px 0px 0px;\n  margin: 0px 0px 0px 0px; }\n  .bord1 {\n  padding-right: 0px;\n  padding-left: 0px; }\n  .bord1 p {\n    color: black;\n    font-size: 10px;\n    display: flexbox;\n    margin: 2px 5px 0px 0px; }\n  .bord1 p b {\n      font-size: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFyZWFzL0M6XFx4YW1wcFxcaHRkb2NzXFxDYXJkaW9jZW50cm9NYW50YVxcaW5pY2lvL3NyY1xcYXBwXFx0YXJlYXNcXHRhcmVhcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0U7RUFDRSxzQkFBZ0I7RUFDaEIsb0JBQWM7RUFDZCxrQkFBYztFQUNkLHFCQUFpQjtFQUNsQixzQkFBZTtFQUdkLGdCQUFRO0VBQ1Isd0JBQWdCLEVBQUE7RUFUbEI7SUFVZSxrQkFBWSxFQUFBO0VBVjNCO0lBWUcsa0JBQWtCLEVBQUE7RUFackI7SUFlSSxlQUFlLEVBQUE7RUFHbkI7RUFDRSxpQkFBaUIsRUFBQTtFQUduQjtFQUNHLGdCQUFnQjtFQUNoQiw2QkFBcUI7RUFDckIsd0JBQWdCO0VBQ2pCLHFCQUFBO0VBQ0EsdUJBQUEsRUFBd0I7RUFHMUI7RUFDRSxlQUFlLEVBQUE7RUFJbEI7RUFDRSxvQkFBb0I7RUFDbkIsY0FBYyxFQUFBO0VBRmpCO0lBTUssZUFBZSxFQUFBO0VBTnBCO0lBU0ssZUFBYyxFQUFBO0VBS2xCO0VBQ0UsaUJBQWlCO0VBQ2pCLG9CQUFxQixFQUFBO0VBR3pCO0VBRUUsaUJBQWlCO0VBQ2pCLG1CQUFtQixFQUFBO0VBR3JCO0VBQ0MsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixZQUFZLEVBQUE7RUFHYjtFQUNFLGdCQUFnQjtFQUNoQixZQUFZLEVBQUE7RUFHZDtFQUVFLGVBQWMsRUFBQTtFQUloQjtFQUNFLHdCQUF3QjtFQUN4Qix1QkFBdUIsRUFBQTtFQUV6QjtFQUNFLGtCQUFrQjtFQUNsQixpQkFBaUIsRUFBQTtFQUZuQjtJQUlFLFlBQVk7SUFDWixlQUFlO0lBQ2YsZ0JBQWdCO0lBQ2hCLHVCQUF1QixFQUFBO0VBUHpCO01BU0ksZUFBZSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvdGFyZWFzL3RhcmVhcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuICBpb24tc2VnbWVudC1idXR0b24ge1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiB1bnNldDtcclxuICAgIC0tcGFkZGluZy1lbmQ6IHVuc2V0OyBcclxuICAgIC0tcGFkZGluZy10b3A6IDJweDsgXHJcbiAgICAtLXBhZGRpbmctYm90dG9tOiAycHg7ICAgXHJcbiAgIC0tYm9yZGVyLWNvbG9yOiMyNTFmODE7XHJcbiAgIC8vLS1mb250LXNpemU6IDEycHg7XHJcbiAgIC8vLS1iYWNrZ3JvdW5kLWNoZWNrZWQ6ICNkM2Y4ZjA7XHJcbiAgICAtLWNvbG9yOiAjYTViN2FjOztcclxuICAgIC0tY29sb3ItY2hlY2tlZDogIzI1MWY4MTtcclxuICAgaW9uLWJ1dHRvbiB7ICAtLW1heC13aWR0aDogNTAwcHg7IH1cclxuICAgaW9uLWxhYmVsIHtcclxuICAgICBmb250LXNpemU6IHNtYWxsZXI7XHJcbiAgIH1cclxuICAgIGlvbi1pY29uIHtcclxuICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAuYm9yZGVzIHtcclxuICAgIHBhZGRpbmc6IDVweCAxMHB4O1xyXG4gIH1cclxuXHJcbiAgLnNjLWlvbi1zZWdtZW50LWlvcy1oaW9uLXRvb2xiYXIuc2MtaW9uLXNlZ21lbnQtaW9zLXMgPiBpb24tc2VnbWVudC1idXR0b24sIGlvbi10b29sYmFyIC5zYy1pb24tc2VnbWVudC1pb3MtaC5zYy1pb24tc2VnbWVudC1pb3MtcyA+IGlvbi1zZWdtZW50LWJ1dHRvbiB7XHJcbiAgICAgbWF4LXdpZHRoOiB1bnNldDtcclxuICAgICAtLWJhY2tncm91bmQtY2hlY2tlZDogIzI1MWY4MTs7XHJcbiAgICAgLS1jb2xvci1jaGVja2VkOiAjZmZmZmZmO1xyXG4gICAgLyogZm9udC1zaXplOiAxMnB4OyAqL1xyXG4gICAgLyogbGluZS1oZWlnaHQ6IDIycHg7ICovXHJcbn1cclxuICBcclxuICAuZXNwYWNpbyB7XHJcbiAgICBtYXJnaW46IDVweCA1cHg7XHJcbiAgfVxyXG5cclxuICAvL2VzIHBhcmEgaGFjZXIgcGVxdWVuaW8gZWwgc2VsZWN0IGEgbGEgbWl0YWQgZGUgc3UgdGFtYW5pb1xyXG4gLnNlbGVjY2lvbiB7XHJcbiAgIGJhY2tncm91bmQ6IGRhcmtibHVlO1xyXG4gICAgbWF4LXdpZHRoOiA1MCU7ICAgXHJcblxyXG5cclxuICAgIGlvbi1idXR0b257XHJcbiAgICAgIGZvbnQtc2l6ZToxMHB4IDtcclxuICAgIH1cclxuICAgIGlvbi1zZWxlY3Qge1xyXG4gICAgICBtYXgtd2lkdGg6MTAwJTtcclxuICAgIH1cclxuICAgIFxyXG4gIFxyXG4gIH1cclxuICBpb24tdGl0bGV7XHJcbiAgICBmb250LWZhbWlseTogbWVudTtcclxuICAgIHBhZGRpbmc6MHB4IDVweCAwcHggIDtcclxufVxyXG4vL2NlbnRyYXIgdGV4dG8gdmVydGljYWxtZW50ZVxyXG4uY2VudHJhciB7XHJcbiAgXHJcbiAgbGluZS1oZWlnaHQ6IDUwcHg7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuaW9uLXNlYXJjaGJhciB7XHJcbiBwYWRkaW5nOiAwcHggN3B4O1xyXG4gZm9udC1zaXplOiAxNHB4O1xyXG4gaGVpZ2h0OiA1MHB4O1xyXG59XHJcblxyXG5pb24tY29se1xyXG4gIHBhZGRpbmc6IDBweCA1cHg7XHJcbiAgaGVpZ2h0OiA1MHB4O1xyXG59XHJcblxyXG4uZnVlbnRlIHtcclxuIGlvbi1sYWJlbHtcclxuICBmb250LXNpemU6MTRweDtcclxuIH1cclxuXHJcbn1cclxuaW9uLWxpc3R7XHJcbiAgcGFkZGluZzogOHB4IDBweCAwcHggMHB4O1xyXG4gIG1hcmdpbjogMHB4IDBweCAwcHggMHB4O1xyXG59XHJcbi5ib3JkMXtcclxuICBwYWRkaW5nLXJpZ2h0OiAwcHg7XHJcbiAgcGFkZGluZy1sZWZ0OiAwcHg7XHJcbnB7XHJcbiAgY29sb3I6IGJsYWNrO1xyXG4gIGZvbnQtc2l6ZTogMTBweDtcclxuICBkaXNwbGF5OiBmbGV4Ym94O1xyXG4gIG1hcmdpbjogMnB4IDVweCAwcHggMHB4O1xyXG4gIGJ7XHJcbiAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgfVxyXG59XHJcbn1cclxuXHJcbiJdfQ== */"
+module.exports = "ion-segment-button {\n  --padding-start: unset;\n  --padding-end: unset;\n  --padding-top: 2px;\n  --padding-bottom: 2px;\n  --border-color:#251f81;\n  --color: #a5b7ac;\n  --color-checked: #251f81; }\n  ion-segment-button ion-button {\n    --max-width: 500px; }\n  ion-segment-button ion-label {\n    font-size: smaller; }\n  ion-segment-button ion-icon {\n    font-size: 16px; }\n  .bordes {\n  padding: 5px 10px; }\n  .sc-ion-segment-ios-hion-toolbar.sc-ion-segment-ios-s > ion-segment-button, ion-toolbar .sc-ion-segment-ios-h.sc-ion-segment-ios-s > ion-segment-button {\n  max-width: unset;\n  --background-checked: #251f81;\n  --color-checked: #ffffff;\n  /* font-size: 12px; */\n  /* line-height: 22px; */ }\n  .espacio {\n  margin: 5px 5px; }\n  .seleccion {\n  background: darkblue;\n  max-width: 50%; }\n  .seleccion ion-button {\n    font-size: 10px; }\n  .seleccion ion-select {\n    max-width: 100%; }\n  ion-title {\n  font-family: menu;\n  padding: 0px 5px 0px; }\n  .centrar {\n  line-height: 50px;\n  align-items: center; }\n  ion-searchbar {\n  padding: 0px 7px;\n  font-size: 14px;\n  height: 50px; }\n  ion-col {\n  padding: 0px 5px;\n  height: 50px; }\n  .fuente ion-label {\n  font-size: 14px; }\n  ion-list {\n  padding: 8px 0px 0px 0px;\n  margin: 0px 0px 0px 0px; }\n  .bord1 {\n  padding-right: 0px;\n  padding-left: 0px; }\n  .bord1 p {\n    color: black;\n    display: flexbox;\n    margin: 2px 5px 0px 0px; }\n  .bord1 p b {\n      font-size: 10px; }\n  .letra {\n  font-size: 10px;\n  line-height: 12px;\n  padding: 4px 0px 5px 0px; }\n  .letra1 {\n  font-size: 14px;\n  text-align: justify;\n  padding: 10px 0px 0px 0px;\n  margin: 0px 0px 15px; }\n  .letra1 p {\n    font-size: 14px; }\n  .tamanio {\n  font-size: 12px; }\n  ion-list {\n  margin: 0px 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFyZWFzL0M6XFx4YW1wcFxcaHRkb2NzXFxDYXJkaW9jZW50cm9NYW50YVxcaW5pY2lvL3NyY1xcYXBwXFx0YXJlYXNcXHRhcmVhcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0U7RUFDRSxzQkFBZ0I7RUFDaEIsb0JBQWM7RUFDZCxrQkFBYztFQUNkLHFCQUFpQjtFQUNsQixzQkFBZTtFQUdkLGdCQUFRO0VBQ1Isd0JBQWdCLEVBQUE7RUFUbEI7SUFVZSxrQkFBWSxFQUFBO0VBVjNCO0lBWUcsa0JBQWtCLEVBQUE7RUFackI7SUFlSSxlQUFlLEVBQUE7RUFHbkI7RUFDRSxpQkFBaUIsRUFBQTtFQUduQjtFQUNHLGdCQUFnQjtFQUNoQiw2QkFBcUI7RUFDckIsd0JBQWdCO0VBQ2pCLHFCQUFBO0VBQ0EsdUJBQUEsRUFBd0I7RUFHMUI7RUFDRSxlQUFlLEVBQUE7RUFJbEI7RUFDRSxvQkFBb0I7RUFDbkIsY0FBYyxFQUFBO0VBRmpCO0lBTUssZUFBZSxFQUFBO0VBTnBCO0lBU0ssZUFBYyxFQUFBO0VBS2xCO0VBQ0UsaUJBQWlCO0VBQ2pCLG9CQUFxQixFQUFBO0VBR3pCO0VBRUUsaUJBQWlCO0VBQ2pCLG1CQUFtQixFQUFBO0VBR3JCO0VBQ0MsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixZQUFZLEVBQUE7RUFHYjtFQUNFLGdCQUFnQjtFQUNoQixZQUFZLEVBQUE7RUFHZDtFQUVFLGVBQWMsRUFBQTtFQUloQjtFQUNFLHdCQUF3QjtFQUN4Qix1QkFBdUIsRUFBQTtFQUV6QjtFQUNFLGtCQUFrQjtFQUNsQixpQkFBaUIsRUFBQTtFQUZuQjtJQUlFLFlBQVk7SUFDWixnQkFBZ0I7SUFDaEIsdUJBQXVCLEVBQUE7RUFOekI7TUFRSSxlQUFlLEVBQUE7RUFLbkI7RUFDRSxlQUFlO0VBQ2IsaUJBQWlCO0VBQ2pCLHdCQUF3QixFQUFBO0VBRzVCO0VBQ0UsZUFBZTtFQUNmLG1CQUFtQjtFQUtuQix5QkFBeUI7RUFDekIsb0JBQW9CLEVBQUE7RUFSdEI7SUFJSSxlQUFlLEVBQUE7RUFNbkI7RUFDRSxlQUFlLEVBQUE7RUFHakI7RUFDRSxlQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC90YXJlYXMvdGFyZWFzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4gIGlvbi1zZWdtZW50LWJ1dHRvbiB7XHJcbiAgICAtLXBhZGRpbmctc3RhcnQ6IHVuc2V0O1xyXG4gICAgLS1wYWRkaW5nLWVuZDogdW5zZXQ7IFxyXG4gICAgLS1wYWRkaW5nLXRvcDogMnB4OyBcclxuICAgIC0tcGFkZGluZy1ib3R0b206IDJweDsgICBcclxuICAgLS1ib3JkZXItY29sb3I6IzI1MWY4MTtcclxuICAgLy8tLWZvbnQtc2l6ZTogMTJweDtcclxuICAgLy8tLWJhY2tncm91bmQtY2hlY2tlZDogI2QzZjhmMDtcclxuICAgIC0tY29sb3I6ICNhNWI3YWM7O1xyXG4gICAgLS1jb2xvci1jaGVja2VkOiAjMjUxZjgxO1xyXG4gICBpb24tYnV0dG9uIHsgIC0tbWF4LXdpZHRoOiA1MDBweDsgfVxyXG4gICBpb24tbGFiZWwge1xyXG4gICAgIGZvbnQtc2l6ZTogc21hbGxlcjtcclxuICAgfVxyXG4gICAgaW9uLWljb24ge1xyXG4gICAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gIC5ib3JkZXMge1xyXG4gICAgcGFkZGluZzogNXB4IDEwcHg7XHJcbiAgfVxyXG5cclxuICAuc2MtaW9uLXNlZ21lbnQtaW9zLWhpb24tdG9vbGJhci5zYy1pb24tc2VnbWVudC1pb3MtcyA+IGlvbi1zZWdtZW50LWJ1dHRvbiwgaW9uLXRvb2xiYXIgLnNjLWlvbi1zZWdtZW50LWlvcy1oLnNjLWlvbi1zZWdtZW50LWlvcy1zID4gaW9uLXNlZ21lbnQtYnV0dG9uIHtcclxuICAgICBtYXgtd2lkdGg6IHVuc2V0O1xyXG4gICAgIC0tYmFja2dyb3VuZC1jaGVja2VkOiAjMjUxZjgxOztcclxuICAgICAtLWNvbG9yLWNoZWNrZWQ6ICNmZmZmZmY7XHJcbiAgICAvKiBmb250LXNpemU6IDEycHg7ICovXHJcbiAgICAvKiBsaW5lLWhlaWdodDogMjJweDsgKi9cclxufVxyXG4gIFxyXG4gIC5lc3BhY2lvIHtcclxuICAgIG1hcmdpbjogNXB4IDVweDtcclxuICB9XHJcblxyXG4gIC8vZXMgcGFyYSBoYWNlciBwZXF1ZW5pbyBlbCBzZWxlY3QgYSBsYSBtaXRhZCBkZSBzdSB0YW1hbmlvXHJcbiAuc2VsZWNjaW9uIHtcclxuICAgYmFja2dyb3VuZDogZGFya2JsdWU7XHJcbiAgICBtYXgtd2lkdGg6IDUwJTsgICBcclxuXHJcblxyXG4gICAgaW9uLWJ1dHRvbntcclxuICAgICAgZm9udC1zaXplOjEwcHggO1xyXG4gICAgfVxyXG4gICAgaW9uLXNlbGVjdCB7XHJcbiAgICAgIG1heC13aWR0aDoxMDAlO1xyXG4gICAgfVxyXG4gICAgXHJcbiAgXHJcbiAgfVxyXG4gIGlvbi10aXRsZXtcclxuICAgIGZvbnQtZmFtaWx5OiBtZW51O1xyXG4gICAgcGFkZGluZzowcHggNXB4IDBweCAgO1xyXG59XHJcbi8vY2VudHJhciB0ZXh0byB2ZXJ0aWNhbG1lbnRlXHJcbi5jZW50cmFyIHtcclxuICBcclxuICBsaW5lLWhlaWdodDogNTBweDtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG59XHJcblxyXG5pb24tc2VhcmNoYmFyIHtcclxuIHBhZGRpbmc6IDBweCA3cHg7XHJcbiBmb250LXNpemU6IDE0cHg7XHJcbiBoZWlnaHQ6IDUwcHg7XHJcbn1cclxuXHJcbmlvbi1jb2x7XHJcbiAgcGFkZGluZzogMHB4IDVweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbn1cclxuXHJcbi5mdWVudGUge1xyXG4gaW9uLWxhYmVse1xyXG4gIGZvbnQtc2l6ZToxNHB4O1xyXG4gfVxyXG5cclxufVxyXG5pb24tbGlzdHtcclxuICBwYWRkaW5nOiA4cHggMHB4IDBweCAwcHg7XHJcbiAgbWFyZ2luOiAwcHggMHB4IDBweCAwcHg7XHJcbn1cclxuLmJvcmQxe1xyXG4gIHBhZGRpbmctcmlnaHQ6IDBweDtcclxuICBwYWRkaW5nLWxlZnQ6IDBweDtcclxucHtcclxuICBjb2xvcjogYmxhY2s7XHJcbiAgZGlzcGxheTogZmxleGJveDtcclxuICBtYXJnaW46IDJweCA1cHggMHB4IDBweDtcclxuICBie1xyXG4gICAgZm9udC1zaXplOiAxMHB4O1xyXG4gIH1cclxufVxyXG59XHJcblxyXG4ubGV0cmEge1xyXG4gIGZvbnQtc2l6ZTogMTBweDtcclxuICAgIGxpbmUtaGVpZ2h0OiAxMnB4O1xyXG4gICAgcGFkZGluZzogNHB4IDBweCA1cHggMHB4O1xyXG4gICAgfVxyXG5cclxuLmxldHJhMSB7XHJcbiAgZm9udC1zaXplOiAxNHB4OyBcclxuICB0ZXh0LWFsaWduOiBqdXN0aWZ5O1xyXG4gIHB7XHJcbiAgICBmb250LXNpemU6IDE0cHg7IFxyXG4gICBcclxuICB9XHJcbiAgcGFkZGluZzogMTBweCAwcHggMHB4IDBweDtcclxuICBtYXJnaW46IDBweCAwcHggMTVweDtcclxufSAgIFxyXG4udGFtYW5pb3tcclxuICBmb250LXNpemU6IDEycHg7XHJcbn1cclxuXHJcbmlvbi1saXN0e1xyXG4gIG1hcmdpbjogMHB4IDBweDtcclxufVxyXG5cclxuXHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -108,7 +108,7 @@ var TareasPage = /** @class */ (function () {
         this.valor = "";
         this.id1 = "";
         this.tipo = "";
-        this.estado = "";
+        this.estado = "Pendiente";
         this.ver = "1";
         this.tipousuario = "";
         this.responsable = [];
@@ -116,6 +116,7 @@ var TareasPage = /** @class */ (function () {
         this.observador = [];
         this.creadas = [];
         this.textoBuscar = '';
+        this.verificar = [];
     }
     TareasPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -129,12 +130,18 @@ var TareasPage = /** @class */ (function () {
         });
         this.tipo = "1";
         this.tipousuario = "1";
+        this.iniciarobservardor();
+        this.iniciarparticipante();
+        this.iniciarresponsable();
+        this.iniciarcreadas();
         //extraer todas las tareas donde el usuarip loggeado es responsable
         this.postPvdr.getTareasRes(this.id2).subscribe(function (data) {
             if (data != null) {
                 console.log(data);
+                _this.verificar = data;
                 //ojo con la variable demora mucho en mostrar los datos
-                _this.postPvdr.Gresta = data.filter(function (iniciartareas) { return iniciartareas.tarea.Id_Tipo_Tarea == 5; });
+                _this.postPvdr.Gresta = _this.verificar.filter(function (iniciartareas) { return iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0; });
+                console.log(_this.postPvdr.Gresta);
                 _this.tareas = data;
                 _this.postPvdr.Gbutunt = true;
                 _this.postPvdr.Gtipouser = "1";
@@ -142,10 +149,6 @@ var TareasPage = /** @class */ (function () {
         }, function (error) {
             console.error(error);
         });
-        this.iniciarobservardor();
-        this.iniciarparticipante();
-        this.iniciarresponsable();
-        this.iniciarcreadas();
     };
     TareasPage.prototype.cargarparticipante = function () {
         var _this = this;
@@ -170,7 +173,7 @@ var TareasPage = /** @class */ (function () {
             .subscribe(function (data) {
             if (data != null) {
                 console.log(data);
-                _this.postPvdr.Gresta = data.filter(function (iniciartareas) { return iniciartareas.tarea.Id_Tipo_Tarea == 5; });
+                _this.postPvdr.Gresta = data.filter(function (iniciartareas) { return iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0; });
             }
         }, function (error) {
             console.error(error);
@@ -200,7 +203,7 @@ var TareasPage = /** @class */ (function () {
             .subscribe(function (data) {
             if (data != null) {
                 console.log(data);
-                _this.postPvdr.Gresta = _this.creadas.filter(function (creadas) { return creadas.Id_Tipo_Tarea === "5"; });
+                _this.postPvdr.Gresta = _this.creadas.filter(function (creadas) { return creadas.Id_Tipo_Tarea === "5" && creadas.estadoEliminar === 0; });
                 console.log(_this.responsable);
                 //this.tareas = data.json();
                 _this.postPvdr.Gbutunt = false;
@@ -217,17 +220,17 @@ var TareasPage = /** @class */ (function () {
         }
         else if (this.tipousuario == "2" && this.tipo == "1") {
             this.ver = "1";
-            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5; });
             console.log(this.responsable);
         }
         else if (this.tipousuario == "3" && this.tipo == "1") {
             this.ver = "1";
-            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5; });
             console.log(this.responsable);
         }
         else if (this.tipousuario == "4" && this.tipo == "1") {
             this.ver = "1";
-            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5; });
             console.log(this.responsable);
         }
         // Observador
@@ -427,23 +430,77 @@ var TareasPage = /** @class */ (function () {
         });
     };
     TareasPage.prototype.doRefresh = function (evento) {
-        var _this = this;
-        this.postPvdr.getTareasRes(this.id2).subscribe(function (data) {
-            if (data != null) {
-                console.log(data);
-                //ojo con la variable demora mucho en mostrar los datos
-                _this.postPvdr.Gresta = data;
-                _this.tareas = data;
-                _this.postPvdr.Gbutunt = true;
-                _this.postPvdr.Gtipouser = "1";
-            }
-        }, function (error) {
-            console.error(error);
-        });
-        this.iniciarobservardor();
-        this.iniciarparticipante();
-        this.iniciarresponsable();
-        this.iniciarcreadas();
+        this.ver = "1";
+        if (this.tipousuario == "1" && this.tipo == "1") {
+            this.cargarresposable();
+        }
+        else if (this.tipousuario == "2" && this.tipo == "1") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            console.log(this.responsable);
+        }
+        else if (this.tipousuario == "3" && this.tipo == "1") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            console.log(this.responsable);
+        }
+        else if (this.tipousuario == "4" && this.tipo == "1") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.responsable.filter(function (responsable) { return responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5; });
+            console.log(this.responsable);
+        }
+        // Observador
+        else if (this.tipousuario == "1" && this.tipo == "2") {
+            this.ver = "1";
+            this.cargarobservador();
+        }
+        else if (this.tipousuario == "2" && this.tipo == "2") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.observador.filter(function (observador) { return observador.tarea.Estado_Tarea === "Pendiente"; });
+        }
+        else if (this.tipousuario == "3" && this.tipo == "2") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.observador.filter(function (observador) { return observador.tarea.Estado_Tarea === "Terminada"; });
+        }
+        else if (this.tipousuario == "4" && this.tipo == "2") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.observador.filter(function (observador) { return observador.tarea.Estado_Tarea === "Vencida"; });
+        }
+        else 
+        // Partcipante
+        if (this.tipousuario == "1" && this.tipo == "3") {
+            this.ver = "1";
+            this.cargarparticipante();
+        }
+        else if (this.tipousuario == "2" && this.tipo == "3") {
+            this.ver = "1";
+            console.log(this.tipousuario);
+            this.postPvdr.Gresta = this.participante.filter(function (participante) { return participante.tarea.Estado_Tarea === "Pendiente"; });
+            // console.log(this.participante);
+        }
+        else if (this.tipousuario == "3" && this.tipo == "3") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.participante.filter(function (participante) { return participante.tarea.Estado_Tarea === "Terminada"; });
+            // console.log(this.participante);
+        }
+        else if (this.tipousuario == "4" && this.tipo == "3") {
+            this.ver = "1";
+            this.postPvdr.Gresta = this.participante.filter(function (participante) { return participante.tarea.Estado_Tarea === "Vencida"; });
+            // Creadas
+        }
+        else if (this.tipousuario == "1" && this.tipo == "4") {
+            this.ver = "0";
+            this.cargarcreadas();
+        }
+        else if (this.tipousuario == "2" && this.tipo == "4") {
+            this.cargarcreadas();
+        }
+        else if (this.tipousuario == "3" && this.tipo == "4") {
+            this.cargarcreadas();
+        }
+        else if (this.tipousuario == "4" && this.tipo == "4") {
+            this.cargarcreadas();
+        }
         setTimeout(function () {
             evento.target.complete();
         }, 2000);

@@ -62,6 +62,7 @@ export class AppComponent {
     let data= null;
     this.storage.set('session_storage', data);
     clearInterval(this.postPvdr.intervalo);
+    clearInterval(this.postPvdr.intervalo2);
   }
 
   public detalles() {

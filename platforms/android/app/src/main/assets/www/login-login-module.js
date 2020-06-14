@@ -137,6 +137,11 @@ var LoginPage = /** @class */ (function () {
                                 _this.user = (data);
                                 //console.log(data);
                                 _this.postPvdr.sendListSource(data);
+                                _this.storage.set('session_storage', data);
+                                //this.storage.get('session_storage').then((val) => {
+                                //this.postPvdr.sendListSource(val);
+                                //console.log(val);
+                                //  });
                                 console.log(data);
                                 _this.router.navigate(['/tabs']);
                                 _this.email = "";

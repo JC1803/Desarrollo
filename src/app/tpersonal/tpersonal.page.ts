@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { AddtareaPage } from '../addtarea/addtarea.page';
@@ -29,7 +29,8 @@ export class TpersonalPage implements OnInit {
     public modalController: ModalController,
     private router: Router,
     private postPvdr: PostProvider,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private toastCtrl: ToastController,
     ) {   }
 
   ngOnInit() {
@@ -53,7 +54,10 @@ export class TpersonalPage implements OnInit {
         (data) => {
          if(data!= null){
            console.log(data);
-            this.postPvdr.Globaltpersonal= data;
+           //Carga los datos de la api a una variable global y la ordena por fecha de creacion
+            this.postPvdr.Globaltpersonal= data.sort(function(a,b){
+              return a.FechaCreacion - b.FechaCreacion;
+            }).reverse().filter(tareasmostrar=> tareasmostrar.estadoEliminar === 0);
             this.tareasp= this.postPvdr.Globaltpersonal;
           }
         },
@@ -190,6 +194,53 @@ export class TpersonalPage implements OnInit {
       // trigger: {at: new Date(new Date().getTime() + 3600)},
       data: { secret: dato }
     });
-    console.log("sexy");
+    console.log("Tarea personal por cumplir");
+  }
+
+
+//Mensaje de confirmacion de eliminacion de tarea personal
+    async confirmarEl(Id_tarea){
+      const alert = await this.alertController.create({
+        header: 'Advertencia',
+        message: 'Desea Eliminar la Tarea',
+        cssClass: 'alertDanger',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Aceptar',
+            handler: () => {
+             this.deleteItem(Id_tarea);
+              console.log('Confirm Ok');
+            }
+          }
+        ]
+      });
+      await alert.present();
+    
+     }
+    
+     
+  //Funcion para eliminar tarea
+  deleteItem(Id_tarea){
+     
+    let body2 ={
+      estadoEliminar: 1
+    };
+
+this.postPvdr.postTarea(body2, Id_tarea).subscribe(async data=> {
+    const toast = await this.toastCtrl.create({
+      message: 'La tarea ha sido eliminada',
+      duration: 4000
+    });
+    toast.present();
+     this.obtenerTareasp();
+  //this.router.navigate(['/tabs/perfil']);
+  });
   }
 }

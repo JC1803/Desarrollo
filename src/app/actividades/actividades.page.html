@@ -15,6 +15,7 @@
   [duration]="5000"
   [animation]="'easeInOutQuart'"
   [color]="'#a3f8bf'"
+  [rounded]="true"
   [animationDelay]="0"></round-progress>
 </div>
   <p>  </p>
@@ -43,7 +44,7 @@
       <p text-center> <b>Terminadas:</b> {{ (datosdash.Total_Terminada * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
       <p text-center> <b>Pendientes:</b> {{ (datosdash.Total_Pendiente * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
       <p text-center> <b>Vencidas:</b> {{ (datosdash.Total_Vencida * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
-      <ion-button fill="outline" slot="end" (click)="verdash(2)">Ver mas</ion-button>
+      <ion-button class="botones" fill="outline" slot="end" (click)="verdash(2)">Ver mas</ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -56,7 +57,7 @@
       <p text-center> <b>Terminadas:</b> {{ (datosdash.Total_TerminadaP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}% </p>
       <p text-center> <b>Pendientes:</b> {{ (datosdash.Total_PendienteP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}%  </p>
       <p text-center> <b>Vencidas:</b>{{ (datosdash.Total_VencidaP * 100) / datosdash.Total_ResponsablesP | number:'1.1-2'}}% </p>
-      <ion-button fill="outline" slot="end" (click)="verdash(3)">Ver mas</ion-button>
+      <ion-button class="botones" fill="outline" slot="end" (click)="verdash(3)">Ver mas</ion-button>
     </ion-card-content>
   </ion-card>
 

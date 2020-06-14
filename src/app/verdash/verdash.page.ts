@@ -16,7 +16,7 @@ export class VerdashPage implements OnInit {
   datosdash: any;
   datosefectividad: any[]= [];
   id: any;
-  max1=1;
+  max1=100;
   doughnutChart: any;
   constructor(
     private postPvdr: PostProvider

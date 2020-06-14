@@ -5,7 +5,7 @@
     </ion-refresher>
   <div class="fondo5" padding>  
    
-  <ion-card (click)="irdashboard()" class="colores">
+  <ion-card  class="colores">
     <ion-card-header class="fondo4">
       <ion-card-title>
         <h2 text-center>Avances de <b> Tareas</b></h2>
@@ -17,9 +17,10 @@
       <p text-center> <b>Terminadas:</b> {{ (datosdash.Total_Terminada * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
       <p text-center> <b>Pendientes:</b> {{ (datosdash.Total_Pendiente * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
       <p text-center> <b>Vencidas:</b> {{ (datosdash.Total_Vencida * 100) / datosdash.Total_Responsables | number:'1.1-2'}}% </p>
+      <ion-button class="botones" fill="outline" slot="end" (click)="irdashboard()">Ver Detalles</ion-button>
           </ion-card-content>
           </ion-card>
-          <ion-card (click)="irtareas()">
+          <ion-card>
             <ion-card-header class="fondo1">
               <ion-card-title>
                 <h2>Tareas Laborales <b> Pendientes</b></h2>
@@ -28,16 +29,19 @@
             <ion-card-content>
               <ion-item *ngFor="let  laboral of tareasreci">
                 <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-                <p>
+                <p  (click)="mostrartareat(laboral.Id_Tarea)">
                   {{laboral.tarea.Nombre}}
                 </p>
                 <ion-note slot="end">
                   <p><b>Limite:</b>{{ laboral.tarea.FechaFin }} </p>
                 </ion-note>
               </ion-item>
+              <ion-item (click)="irtareas()">
+                <p> Ver todas </p>
+              </ion-item>
             </ion-card-content>
           </ion-card>
-          <ion-card (click)="irreunion()">
+          <ion-card >
             <ion-card-header class="fondo2">
               <ion-card-title>
                 <h2>Reuniones <b> Vigentes</b></h2>
@@ -46,16 +50,19 @@
             <ion-card-content>
               <ion-item *ngFor="let  reunion of reunionvigentes">
                 <ion-icon slot="start" name="paper-plane"></ion-icon>
-                <p>
+                <p (click)="mostrarreunion(reunion.Id_Reunion, reunion.motivo, reunion.asistencia)">
                   {{reunion.reunion.Tema}}
                 </p>
                 <ion-note slot="end">
                   <p><b>Fecha:</b>{{ reunion.reunion.FechadeReunion }} </p>
                 </ion-note>
               </ion-item>
+              <ion-item (click)="irreunion()">
+                <p> Ver todas </p>
+              </ion-item>
             </ion-card-content>
           </ion-card>
-          <ion-card (click)="irtareasp()">
+          <ion-card >
             <ion-card-header class="fondo3">
               <ion-card-title>
                 <h2>Tareas <b> Personales</b></h2>
@@ -64,12 +71,15 @@
             <ion-card-content>
               <ion-item *ngFor="let  personal of tareasp">
                 <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-                <p>
+                <p  (click)="mostrartareat(personal.Id_tarea)">
                   {{personal.Nombre}}
                 </p>
                 <ion-note slot="end">
                   <p><b>Limite:</b>{{ personal.FechaFin }} </p>
                 </ion-note>
+              </ion-item>
+              <ion-item (click)="irtareasp()">
+                <p> Ver todas </p>
               </ion-item>
             </ion-card-content>
           </ion-card>

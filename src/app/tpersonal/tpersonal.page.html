@@ -34,6 +34,7 @@
     <h2> Tareas Personales </h2>
   </div>
   <ion-list *ngFor="let tp of postPvdr.Globaltpersonal| filtro:textoBuscar : 'Nombre'">
+    <ion-item-sliding>
     <ion-item class="bord" (click)="mostrartareap(tp.Id_tarea)">
       <ion-icon slot="start" name="checkbox-outline"></ion-icon>
       
@@ -45,7 +46,19 @@
         {{ tp.Estado_Tarea }} 
       </ion-note>
     </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option expandable (click)="confirmarEl(tp.Id_tarea)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
   </ion-list>
+
+  
+   
+
+    
+ 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="presentModal(id2)">
     <ion-fab-button color="tertiary">
       <ion-icon name="add"></ion-icon>

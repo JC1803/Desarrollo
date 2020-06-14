@@ -82,6 +82,7 @@
 
 .letra1 {
   font-size: 15px;
+ color: #333131;
   .icon-inner, svg {
     display: none;
     
@@ -110,4 +111,9 @@
  justify-content: center;
  align-items: center;
 
+}
+
+.colbtn{
+background: darken($color: #000000, $amount: 0)
+ 
 }

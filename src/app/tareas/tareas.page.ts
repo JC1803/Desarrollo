@@ -16,7 +16,7 @@ export class TareasPage implements OnInit {
   valor: string = "";
   id1: string = "";
   tipo: string = "";
-  estado: String="";
+  estado: String="Pendiente";
   ver: String="1";
   tipousuario: String="";
   responsable: any[] = [];
@@ -24,6 +24,7 @@ export class TareasPage implements OnInit {
   observador: any[] = [];
   creadas: any[] = [];
   textoBuscar = '';
+  verificar: any[] = [];
   
   constructor(private menu: MenuController,
     private router: Router,
@@ -38,19 +39,27 @@ export class TareasPage implements OnInit {
       this.datos= list;
       this.id2=this.datos[0].Id_Usuario;
       console.log(this.id2);
+    
     });
 
     this.tipo="1";
     this.tipousuario="1";
+    this.iniciarobservardor();
+    this.iniciarparticipante();
+    this.iniciarresponsable();
+    this.iniciarcreadas();
 
    //extraer todas las tareas donde el usuarip loggeado es responsable
     this.postPvdr.getTareasRes(this.id2).subscribe(
       (data) => { // Success
         if(data!=null){
          console.log(data);
+         this.verificar= data;
+        
          //ojo con la variable demora mucho en mostrar los datos
-         this.postPvdr.Gresta = data.filter(
-          iniciartareas => iniciartareas.tarea.Id_Tipo_Tarea == 5);
+         this.postPvdr.Gresta = this.verificar.filter(
+          iniciartareas => iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0);
+          console.log(this.postPvdr.Gresta);
          this.tareas = data;
          this.postPvdr.Gbutunt=true;
          this.postPvdr.Gtipouser= "1";
@@ -61,10 +70,7 @@ export class TareasPage implements OnInit {
       }
     )
 
-    this.iniciarobservardor();
-    this.iniciarparticipante();
-    this.iniciarresponsable();
-    this.iniciarcreadas();
+    
 
   }
 
@@ -94,9 +100,11 @@ cargarresposable(){
   .subscribe(
     (data) => { // Success
         if(data!=null){
+          
          console.log(data);
          this.postPvdr.Gresta = data.filter(
-          iniciartareas => iniciartareas.tarea.Id_Tipo_Tarea == 5);
+          iniciartareas => iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0);
+          
         }
       },
       (error) =>{
@@ -136,7 +144,7 @@ cargarcreadas(){
     console.log(data);
 
     this.postPvdr.Gresta= this.creadas.filter(
-      creadas => creadas.Id_Tipo_Tarea === "5");
+      creadas => creadas.Id_Tipo_Tarea === "5" && creadas.estadoEliminar === 0);
       console.log(this.responsable);
     //this.tareas = data.json();
     this.postPvdr.Gbutunt=false;
@@ -160,19 +168,19 @@ cargarcreadas(){
   } else  if(this.tipousuario=="2" && this.tipo =="1"){
     this.ver= "1";
    this.postPvdr.Gresta = this.responsable.filter(
-   responsable => responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5 );
+   responsable => responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5 );
    console.log(this.responsable);
 
   } else  if(this.tipousuario=="3" && this.tipo =="1"){
     this.ver= "1";
     this.postPvdr.Gresta = this.responsable.filter(
-      responsable => responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5);
+      responsable => responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5);
     console.log(this.responsable);
 
   }else  if(this.tipousuario=="4" && this.tipo =="1"){
     this.ver= "1";
     this.postPvdr.Gresta = this.responsable.filter(
-      responsable => responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5);
+      responsable => responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5 && responsable.tarea.estadoEliminar == 5);
     console.log(this.responsable);
   } 
 
@@ -415,26 +423,89 @@ iniciarobservardor(){
   }
 
   doRefresh(evento){
-    this.postPvdr.getTareasRes(this.id2).subscribe(
-      (data) => { // Success
-        if(data!=null){
-         console.log(data);
-         //ojo con la variable demora mucho en mostrar los datos
-         this.postPvdr.Gresta= data;
-         this.tareas = data;
-         this.postPvdr.Gbutunt=true;
-         this.postPvdr.Gtipouser= "1";
-        }
-      },
-      (error) =>{
-       console.error(error);
-      }
-    )
+    
 
-    this.iniciarobservardor();
-    this.iniciarparticipante();
-    this.iniciarresponsable();
-    this.iniciarcreadas();
+    this.ver= "1";  
+    if(this.tipousuario=="1" && this.tipo =="1"){
+        this.cargarresposable();
+
+    } else  if(this.tipousuario=="2" && this.tipo =="1"){
+      this.ver= "1";
+     this.postPvdr.Gresta = this.responsable.filter(
+     responsable => responsable.tarea.Estado_Tarea === "Pendiente" && responsable.tarea.Id_Tipo_Tarea == 5 );
+     console.log(this.responsable);
+
+    } else  if(this.tipousuario=="3" && this.tipo =="1"){
+      this.ver= "1";
+      this.postPvdr.Gresta = this.responsable.filter(
+        responsable => responsable.tarea.Estado_Tarea === "Terminada" && responsable.tarea.Id_Tipo_Tarea == 5 );
+      console.log(this.responsable);
+ 
+    }else  if(this.tipousuario=="4" && this.tipo =="1"){
+      this.ver= "1";
+      this.postPvdr.Gresta = this.responsable.filter(
+        responsable => responsable.tarea.Estado_Tarea === "Vencida" && responsable.tarea.Id_Tipo_Tarea == 5 );
+      console.log(this.responsable);
+    } 
+
+     // Observador
+     else  if(this.tipousuario=="1" && this.tipo =="2"){
+        this.ver= "1";
+        this.cargarobservador();
+
+      } else  if(this.tipousuario=="2" && this.tipo =="2"){
+        this.ver= "1";
+        this.postPvdr.Gresta = this.observador.filter(
+          observador => observador.tarea.Estado_Tarea === "Pendiente");
+  
+      } else  if(this.tipousuario=="3" && this.tipo =="2"){
+        this.ver= "1";
+        this.postPvdr.Gresta = this.observador.filter(
+          observador => observador.tarea.Estado_Tarea === "Terminada"); 
+
+      }else  if(this.tipousuario=="4" && this.tipo =="2"){
+        this.ver= "1";
+        this.postPvdr.Gresta = this.observador.filter(
+          observador => observador.tarea.Estado_Tarea === "Vencida"); 
+      } else
+
+     // Partcipante
+      if(this.tipousuario=="1" && this.tipo =="3"){
+        this.ver= "1";
+       this.cargarparticipante();
+
+      } else  if(this.tipousuario=="2" && this.tipo =="3"){
+        this.ver= "1";
+        console.log(this.tipousuario);
+        this.postPvdr.Gresta = this.participante.filter(
+          participante => participante.tarea.Estado_Tarea ==="Pendiente");
+         // console.log(this.participante);
+
+      } else  if(this.tipousuario=="3" && this.tipo =="3"){
+        this.ver= "1";
+        this.postPvdr.Gresta = this.participante.filter(
+          participante => participante.tarea.Estado_Tarea === "Terminada");
+         // console.log(this.participante);
+
+      }else  if(this.tipousuario=="4" && this.tipo =="3"){
+        this.ver= "1";
+        this.postPvdr.Gresta = this.participante.filter(
+          participante => participante.tarea.Estado_Tarea === "Vencida");
+     // Creadas
+    } else 
+      
+     if(this.tipousuario=="1" && this.tipo =="4"){
+      this.ver= "0";
+     this.cargarcreadas();
+      } else  if(this.tipousuario=="2" && this.tipo =="4"){
+        this.cargarcreadas();
+
+      } else  if(this.tipousuario=="3" && this.tipo =="4"){
+        this.cargarcreadas();
+
+      }else  if(this.tipousuario=="4" && this.tipo =="4"){
+        this.cargarcreadas();
+      } 
   
     setTimeout(() => {
       evento.target.complete();

@@ -51,9 +51,10 @@ export class PostProvider {
    public Gdash: string;
 
 
-   //variable global para el intervalo
+   //variable global para el intervalo de notificacion y grafico respectivamente
 
    public intervalo: any;
+   public intervalo2: any;
 
 	//Headers
 
@@ -357,7 +358,7 @@ actualizarAsist(iduser, idreunion, body) {
 
   //Funcion que trae el analisis para el dashboard
   getdasboard(iduser){
-	return this.http1.get(`${this.url}TotalTareasResponsables/`+iduser,{headers:this._headers});
+	return this.http1.get<any[]>(`${this.url}TotalTareasResponsables/`+iduser,{headers:this._headers});
   }
 
 

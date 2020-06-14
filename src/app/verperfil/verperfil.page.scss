@@ -43,13 +43,13 @@ div.iner
     
      margin-bottom: 0px;
      margin-top: 0px;
-     color: #22517a;
+     color: #292a0c;
     }
 
     .nombre2 {
       margin-bottom: 0px;
      margin-top: 0px;
-     color: #667072; 
+     color: #3a3a3a; 
     }
   
     .fondo{
@@ -57,8 +57,10 @@ div.iner
         background-size: cover;
         width:100%;
         font-size: 14px;
-
-       
+        ion-icon{
+          color: #4a5892 !important;
+        }
+        
         
       ion-item {
         --border-color:  #ffffff;
@@ -68,7 +70,7 @@ div.iner
             color: #ffffff;
         }
         ion-toolbar {
-            background: #ffffff;
+            background: #e7ebef;
         }
     }
 
@@ -87,7 +89,7 @@ div.iner
  }
 
  .color {
-   background: #e7ebef;
+   background: #ffffff;
    
  }
 
@@ -102,5 +104,5 @@ div.iner
  }
 
  .texcolor{
-color: #f35959;
+color: #586dc2;
  }

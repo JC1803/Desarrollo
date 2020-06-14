@@ -87,7 +87,7 @@
               <ion-button class="butn" color="secondary" (click)="addTareap()" > Crear Subtarea </ion-button>
               </ion-item-->
 
-    <ion-card>
+    <ion-card *ngIf="ocultar">
       <ion-card-header text-center class="btn" button (click)="collapseCard = !collapseCard" class="organ">
         <ion-card-title class="texto1">
           Crear Subtarea

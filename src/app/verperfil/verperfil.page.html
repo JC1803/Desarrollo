@@ -1,9 +1,10 @@
 
 <div class="fondo">
-  <ion-toolbar color="trans" class="bordes">
+  <ion-toolbar color="#e7ebef" class="bordes">
     <ion-buttons class="icon1" slot="start" (click)="closeModal()">
       <ion-icon slot="start" name="arrow-round-back" color="dark"></ion-icon>
     </ion-buttons>
+    <ion-title>  {{ usuario.Nombre }} </ion-title>
   </ion-toolbar>
 </div>
 
@@ -36,27 +37,27 @@
     </ion-row>
   </div>
   <div class="center fondo bordes" text-center>
-    <h1 class="center">DATOS DEL USUARIO</h1>
+    
   </div>
   <div>
     <ion-list padding class="fondo bordes">
       <ion-item lines="none">
-        <ion-icon slot="start" name="mail" color="dark"></ion-icon>
+        <ion-icon slot="start" name="mail" ></ion-icon>
         <label> <b>Email:</b> &nbsp;</label>
         <p>{{ usuario.email }} </p>
       </ion-item>
       <ion-item lines="none">
-        <ion-icon slot="start" name="compass" color="dark"></ion-icon>
+        <ion-icon slot="start" name="compass"></ion-icon>
         <label> <b>Dirección: </b> &nbsp;</label>
         <p> {{ usuario.Direccion }} </p>
       </ion-item>
       <ion-item lines="none">
-        <ion-icon slot="start" name="transgender" color="dark"></ion-icon>
+        <ion-icon slot="start" name="transgender" ></ion-icon>
         <label> <b>Sexo: </b>&nbsp;</label>
         <p> {{ usuario.Sexo }} </p>
       </ion-item>
       <ion-item lines="none">
-        <ion-icon slot="start" name="calendar" color="dark"></ion-icon>
+        <ion-icon slot="start" name="calendar"></ion-icon>
         <label><b>Fecha Nacimiento: </b>&nbsp;</label>
         <p> {{ usuario.Fecha_Nacimiento }} </p>
       </ion-item>
@@ -64,15 +65,15 @@
         <ion-label> <b class="texcolor">Social:</b></ion-label>
       </ion-item-divider>
       <ion-item>
-        <ion-icon slot="start" name="logo-facebook" color="dark"></ion-icon>
+        <ion-icon slot="start" name="logo-facebook" ></ion-icon>
         <ion-label> {{ usuario.Facebook }} </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon slot="start" name="logo-twitter" color="dark"></ion-icon>
+        <ion-icon slot="start" name="logo-twitter" ></ion-icon>
         <ion-label>{{ usuario.Twitter }} </ion-label>
       </ion-item>
       <ion-item lines="none">
-        <ion-icon slot="start" name="logo-instagram" color="dark"></ion-icon>
+        <ion-icon slot="start" name="logo-instagram" ></ion-icon>
         <ion-label> {{ usuario.Instagram }} </ion-label>
       </ion-item>
       <ion-item-divider color="trans" lines="none">
