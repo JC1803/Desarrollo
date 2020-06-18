@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostProvider } from 'src/providers/post-providers';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, ModalController } from '@ionic/angular';
 import { async } from '@angular/core/testing';
+import { ComentariosPage } from '../comentarios/comentarios.page';
+import { VerperfilPage } from '../verperfil/verperfil.page';
 import * as moment from 'moment';
 
 @Component({
@@ -26,12 +28,16 @@ export class VerreunionPage implements OnInit {
   public ocultarbotones: boolean;
   vAsisitencia: any;
   reuniondetalle: any[];
+  respuestas: any;
+  datouser: any[] = [];
+  rol: any;
   
   constructor(
     private router:  Router,
     private postPvdr: PostProvider,
     private toastCtrl: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public modalCtr: ModalController
   ) { }
 
   ngOnInit() {
@@ -97,7 +103,10 @@ export class VerreunionPage implements OnInit {
     
     this.postPvdr.buscarObsereu(this.id).subscribe( data => {
      this.comentarios = data.json();
+    
       });
+
+ 
   }
 
 
@@ -261,4 +270,52 @@ export class VerreunionPage implements OnInit {
       this.ocultarbotones = false;
     }
   }
+
+   //funcion es para mostrar las observaciones opcion 2 (no la uso)
+
+   async mostrarObs(obser: any[], nombre, apellido, descrip, fech, idt, idu, ido){
+    this.postPvdr.comentary= 0;
+    const modal = await this.modalCtr.create({
+      component: ComentariosPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+       obser,
+       nombre,
+       apellido,
+       descrip,
+       fech,
+       idt,
+       idu,
+       ido
+
+      }
+    });
+    return await modal.present();  
+  }
+
+  //Busca el usuario para cargar sus datos en la modal
+  cargarDatosUsuario(id){
+    this.postPvdr.buscarUsers(id).subscribe(
+      (data) => { // Success
+        console.log(data);
+      this.postPvdr.Gusuarioc= data;
+      this.datouser=data;
+      this.rol=data.Rol;
+      this,this.perfilModal(this.datouser,this.rol);
+      //this.datos= this.postPvdr.Globalusuario;
+       // console.log(this.datos);
+      },)  
+  }
+  async perfilModal(usuario:any[], rol) {
+    // console.log(usuario);
+     const modal = await this.modalCtr.create({
+       component: VerperfilPage,
+       cssClass: 'my-custom-modal-css',
+       componentProps: {
+        usuario, 
+        rol
+       }
+     });
+     return await modal.present();
+   } 
 }

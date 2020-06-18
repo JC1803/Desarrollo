@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="trans" class="fond">
-    <ion-title></ion-title>
+    <ion-title>Comentarios</ion-title>
     <ion-buttons slot="start" (click)="closeModal()">
       <ion-button>
         <ion-icon slot="start" name="arrow-round-back" color="dark"> </ion-icon>
@@ -18,7 +18,7 @@
       <h3>
         <ion-text> {{ descrip }} </ion-text>
       </h3>
-      <p> {{fech}} &nbsp; &nbsp; &nbsp; <b>Respuestas(0)</b></p>
+      <p> {{fech}} &nbsp; &nbsp; &nbsp; <b>Respuestas({{obser.length}})</b></p>
       <p> </p>
     </ion-label>
   </ion-item>

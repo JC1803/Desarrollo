@@ -58,7 +58,7 @@ var VertareaPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"trans\" class=\"fond\">\n    <ion-title></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/tareas\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\" *ngIf=\"ocultar1\" (click)=\"confirmaract()\">\n      <ion-button slot=\"end\" fill=\"outline\">Terminar Tarea</ion-button>\n    </ion-buttons>\n    <ion-title>Tarea</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list *ngFor=\"let tarea of datos\" class=\"fuente\">\n    <ion-item-divider color=\"light\">\n      <ion-icon slot=\"start\" name=\"send\" color=\"dark\"></ion-icon>\n      <h3 class=\"center\"> <b>{{tarea.Nombre}}</b> </h3>\n    </ion-item-divider>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Descripción: </label>\n      <ion-icon slot=\"start\" name=\"list-box\" color=\"dark\"></ion-icon>\n      <ion-text>\n        <p>\n          {{ tarea.Descripcion }}\n        </p>\n      </ion-text>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <ion-icon slot=\"start\" name=\"time\" color=\"dark\">\n      </ion-icon>\n      <label> Estado: </label>\n      <p>\n        {{ tarea.Estado_Tarea }}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Inicio: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\" dark\"></ion-icon>\n      <p> {{ tarea.FechaInicio }} {{ tarea.Hora_Inicio }}</p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Fin: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\"dark\"></ion-icon>\n      <p> {{ tarea.FechaFin }} {{ tarea.Hora_Fin }}</p>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Responsable: </b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let res of tarea.responsables\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ res.usuario.Nombre }} {{ res.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b>Observadores:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let obs of tarea.observadores\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ obs.usuario.Nombre }} {{ obs.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Participantes:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let par of tarea.participantes\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ par.usuario.Nombre }} {{ par.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n      <ion-label>Archivos:</ion-label>\n    </ion-item-divider>\n    <ion-item *ngFor=\"let doc of tarea.documento\">\n      {{doc.Descripcion}}\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    \n    <ion-item lines=\"none\">\n      \n    </ion-item>\n    <ion-item-divider color=\"light\" buttons (click)=\"open = !open\" class=\"sub-item2\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"open\"></ion-icon>\n      <ion-label>SUBTAREAS</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"open\">\n      <ion-item *ngFor=\"let sub of tarea.sub_tareas\" class=\"bord\">\n        <ion-icon slot=\"start\" name=\"send\" color=\"tertiary\"></ion-icon>\n        <ion-label (click)=\"mostrartarea(sub.Id_tarea)\">\n          <ion-text>\n            <ion-label> {{ sub.Nombre }} </ion-label>\n          </ion-text>\n          <p> <b>Estado: </b>{{ sub.Estado_Tarea }} <b>Límite:</b> {{ sub.FechaFin}} </p>\n        </ion-label>\n        <ion-icon slot=\"end\" name=\"eye\" color=\"tertiary\" (click)=\"mostrartarea(sub.Id_tarea)\"></ion-icon>\n      </ion-item>\n    </div>\n    <ion-item-divider color=\"light\" buttons (click)=\"tarea.open = !tarea.open\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!tarea.open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"tarea.open\"></ion-icon>\n      <ion-label>OBSERVACIONES:</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"tarea.open\" class=\"message-text bord\">\n      <ion-content class=\"chat\" delegate-handle=\"chatScroll\">\n        <div class=\"message-list\" *ngFor=\"let com of comentarios\">\n          <ion-item class=\"message-text\">\n            <ion-avatar slot=\"start\">\n              <img src=\"/assets/sinfoto.jpg\">\n            </ion-avatar>\n            <ion-label>\n              <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b> </h2>\n              <ion-text>\n                <p> {{ com.Descripcion }} </p>\n              </ion-text>\n              <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b\n                  (click)=\"mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)\">Respuestas(0)\n                  &nbsp; &nbsp; &nbsp; Responder</b>\n                &nbsp; &nbsp; <b buttons (click)=\"com.open = !com.open\">\n                  <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"!com.open\"></ion-icon>\n                  <ion-icon slot=\"end\" name=\"arrow-dropup\" *ngIf=\"com.open\"></ion-icon>\n                </b>\n              </p>\n            </ion-label>\n          </ion-item>\n          <ion-list *ngIf=\"com.open\">\n            <ion-item *ngFor=\"let subo of com.sub_observaciones\" class=\"sub-item1\">\n              <ion-avatar slot=\"start\">\n                <img src=\"/assets/sinfoto.jpg\">\n              </ion-avatar>\n              <ion-label class=\"text\">\n                <h3> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h3>\n                <h3>\n                  <ion-text> {{ subo.Descripcion }} </ion-text>\n                </h3>\n                <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>\n              </ion-label>\n            </ion-item>\n            <ion-item class=\"sub-item1\">\n              <ion-textarea placeholder=\"Escribe tu observacion aqui...\" [(ngModel)]='comentario1'></ion-textarea>\n              <ion-buttons>\n                <ion-button (click)=\"enviarSubComentario(com.Id_Tarea, com.Id_Observacion)\">\n                  <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n                </ion-button>\n              </ion-buttons>\n            </ion-item>\n            <ion-item-divider color=\"light\">\n            </ion-item-divider>\n          </ion-list>\n        </div>\n      </ion-content>\n    </div>\n  </ion-list>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar *ngIf=\"ocultar\">\n    <ion-item>\n      <ion-textarea placeholder=\"Escribe tu observación aquí...\" [(ngModel)]='comentario'></ion-textarea>\n      <ion-buttons>\n        <ion-button (click)=\"enviarComentario()\">\n          <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-item>\n  </ion-toolbar>\n</ion-footer>"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"trans\" class=\"fond\">\n    <ion-title></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/tareas\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\" *ngIf=\"ocultar1\" (click)=\"confirmaract()\">\n      <ion-button slot=\"end\" fill=\"outline\">Terminar Tarea</ion-button>\n    </ion-buttons>\n    <ion-title>Tarea</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list *ngFor=\"let tarea of datos\" class=\"fuente\">\n    <ion-item-divider color=\"light\">\n      <ion-icon slot=\"start\" name=\"send\" color=\"dark\"></ion-icon>\n      <h3 class=\"center\"> <b>{{tarea.Nombre}}</b> </h3>\n    </ion-item-divider>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Descripción: </label>\n      <ion-icon slot=\"start\" name=\"list-box\" color=\"dark\"></ion-icon>\n      <ion-text>\n        <p>\n          {{ tarea.Descripcion }}\n        </p>\n      </ion-text>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <ion-icon slot=\"start\" name=\"time\" color=\"dark\">\n      </ion-icon>\n      <label> Estado: </label>\n      <p>\n        {{ tarea.Estado_Tarea }}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Inicio: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\" dark\"></ion-icon>\n      <p> {{ tarea.FechaInicio }} {{ tarea.Hora_Inicio }}</p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Fin: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\"dark\"></ion-icon>\n      <p> {{ tarea.FechaFin }} {{ tarea.Hora_Fin }}</p>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Responsable: </b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let res of tarea.responsables\" (click)=\"cargarDatosUsuario(res.usuario.Id_Usuario)\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ res.usuario.Nombre }} {{ res.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b>Observadores:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let obs of tarea.observadores\" (click)=\"cargarDatosUsuario(obs.Id_Usuario)\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ obs.usuario.Nombre }} {{ obs.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Participantes:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let par of tarea.participantes\" (click)=\"cargarDatosUsuario(par.usuario.Id_Usuario)\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{ par.usuario.Nombre }} {{ par.usuario.Apellido }}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n      <ion-label>Archivos:</ion-label>\n    </ion-item-divider>\n    <ion-item *ngFor=\"let doc of tarea.documento\">\n      {{doc.Descripcion}}\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    \n    <ion-item lines=\"none\">\n      \n    </ion-item>\n    <ion-item-divider color=\"light\" buttons (click)=\"open = !open\" class=\"sub-item2\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"open\"></ion-icon>\n      <ion-label>SUBTAREAS</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"open\">\n      <ion-item *ngFor=\"let sub of tarea.sub_tareas\" class=\"bord\">\n        <ion-icon slot=\"start\" name=\"send\" color=\"tertiary\"></ion-icon>\n        <ion-label (click)=\"mostrartarea(sub.Id_tarea)\">\n          <ion-text>\n            <ion-label> {{ sub.Nombre }} </ion-label>\n          </ion-text>\n          <p> <b>Estado: </b>{{ sub.Estado_Tarea }} <b>Límite:</b> {{ sub.FechaFin}} </p>\n        </ion-label>\n        <ion-icon slot=\"end\" name=\"eye\" color=\"tertiary\" (click)=\"mostrartarea(sub.Id_tarea)\"></ion-icon>\n      </ion-item>\n    </div>\n    <ion-item-divider color=\"light\" buttons (click)=\"tarea.open = !tarea.open\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!tarea.open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"tarea.open\"></ion-icon>\n      <ion-label>OBSERVACIONES:</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"tarea.open\" class=\"message-text bord\">\n      <ion-content class=\"chat\" delegate-handle=\"chatScroll\">\n        <div class=\"message-list\" *ngFor=\"let com of comentarios\">\n          <ion-item class=\"message-text\">\n            <ion-avatar slot=\"start\">\n              <img src=\"/assets/sinfoto.jpg\">\n            </ion-avatar>\n            <ion-label>\n              <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b> </h2>\n              <ion-text>\n                <p> {{ com.Descripcion }} </p>\n              </ion-text>\n              <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b\n                  (click)=\"mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)\">Respuestas({{com.sub_observaciones.length}})\n                  &nbsp; &nbsp; &nbsp; Responder</b>\n                &nbsp; &nbsp; <b buttons (click)=\"com.open = !com.open\">\n                  <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"!com.open\"></ion-icon>\n                  <ion-icon slot=\"end\" name=\"arrow-dropup\" *ngIf=\"com.open\"></ion-icon>\n                </b>\n              </p>\n            </ion-label>\n          </ion-item>\n          <ion-list *ngIf=\"com.open\">\n            <ion-item *ngFor=\"let subo of com.sub_observaciones\" class=\"sub-item1\">\n              <ion-avatar slot=\"start\">\n                <img src=\"/assets/sinfoto.jpg\">\n              </ion-avatar>\n              <ion-label class=\"text\">\n                <h2> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h2>\n               \n                  <ion-text> <p> {{ subo.Descripcion }} </p></ion-text>\n               \n                <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>\n              </ion-label>\n            </ion-item>\n            <ion-item class=\"sub-item1\">\n              <ion-textarea placeholder=\"Escribe tu observacion aqui...\" [(ngModel)]='comentario1'></ion-textarea>\n              <ion-buttons>\n                <ion-button (click)=\"enviarSubComentario(com.Id_Tarea, com.Id_Observacion)\">\n                  <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n                </ion-button>\n              </ion-buttons>\n            </ion-item>\n            <ion-item-divider color=\"light\">\n            </ion-item-divider>\n          </ion-list>\n        </div>\n      </ion-content>\n    </div>\n  </ion-list>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar *ngIf=\"ocultar\">\n    <ion-item>\n      <ion-textarea placeholder=\"Escribe tu observación aquí...\" [(ngModel)]='comentario'></ion-textarea>\n      <ion-buttons>\n        <ion-button (click)=\"enviarComentario()\">\n          <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-item>\n  </ion-toolbar>\n</ion-footer>"
 
 /***/ }),
 
@@ -89,8 +89,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _providers_post_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../providers/post-providers */ "./src/providers/post-providers.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _comentarios_comentarios_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comentarios/comentarios.page */ "./src/app/comentarios/comentarios.page.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _verperfil_verperfil_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../verperfil/verperfil.page */ "./src/app/verperfil/verperfil.page.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -112,8 +114,9 @@ var VertareaPage = /** @class */ (function () {
         this.usuario = "";
         this.comentario = "";
         this.comentario1 = "";
-        this.ocultar = true;
+        this.ocultar = true; //desct/act comentarios
         this.estado = "";
+        this.datouser = [];
     }
     VertareaPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -122,7 +125,7 @@ var VertareaPage = /** @class */ (function () {
         this.fecha1 = new Date().toISOString().substr(0, 10);
         this.fecha2 = new Date().toISOString().substr(11, 8);
         // this.fecha= this.fecha1 +' '+ this.fecha2;
-        this.fecha = moment__WEBPACK_IMPORTED_MODULE_6__().format('YYYY-MM-DD HH:mm:ss');
+        this.fecha = moment__WEBPACK_IMPORTED_MODULE_7__().format('YYYY-MM-DD HH:mm:ss');
         // console.log(this.fecha);
         this.postPvdr.$getListSource.subscribe(function (data) {
             _this.usuario = data[0].Id_Usuario;
@@ -161,6 +164,7 @@ var VertareaPage = /** @class */ (function () {
     //Funcion para ocultar o mostrar el boton de terminar tarea
     VertareaPage.prototype.botones = function () {
         this.ocultar1 = this.postPvdr.Gbutunt;
+        console.log(this.ocultar1);
         // console.log(this.ocultar1);
         //  console.log(this.estado);
         // console.log(this.postPvdr.Gtipouser);
@@ -263,20 +267,22 @@ var VertareaPage = /** @class */ (function () {
             var modal;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.modalCtr.create({
-                            component: _comentarios_comentarios_page__WEBPACK_IMPORTED_MODULE_5__["ComentariosPage"],
-                            cssClass: 'my-custom-modal-css',
-                            componentProps: {
-                                obser: obser,
-                                nombre: nombre,
-                                apellido: apellido,
-                                descrip: descrip,
-                                fech: fech,
-                                idt: idt,
-                                idu: idu,
-                                ido: ido
-                            }
-                        })];
+                    case 0:
+                        this.postPvdr.comentary = 1;
+                        return [4 /*yield*/, this.modalCtr.create({
+                                component: _comentarios_comentarios_page__WEBPACK_IMPORTED_MODULE_5__["ComentariosPage"],
+                                cssClass: 'my-custom-modal-css',
+                                componentProps: {
+                                    obser: obser,
+                                    nombre: nombre,
+                                    apellido: apellido,
+                                    descrip: descrip,
+                                    fech: fech,
+                                    idt: idt,
+                                    idu: idu,
+                                    ido: ido
+                                }
+                            })];
                     case 1:
                         modal = _a.sent();
                         return [4 /*yield*/, modal.present()];
@@ -305,7 +311,7 @@ var VertareaPage = /** @class */ (function () {
             });
         });
     };
-    //Funcion para obtenr las tareas una vez que se ha actualizado algun campo
+    //Funcion para obtenr todas las tareas del responsable una vez que se ha actualizado algun campo
     VertareaPage.prototype.obtenerTareasR = function (id2) {
         var _this = this;
         this.postPvdr.getTareasRes(id2)
@@ -316,7 +322,7 @@ var VertareaPage = /** @class */ (function () {
                 _this.postPvdr.Gresta = _this.verificar.filter(function (iniciartareas) { return iniciartareas.tarea.Id_Tipo_Tarea === 5 && iniciartareas.tarea.estadoEliminar === 0; });
                 console.log(_this.postPvdr.Gresta);
                 ;
-                _this.postPvdr.Gbutunt = false;
+                _this.postPvdr.Gbutunt = true;
                 _this.postPvdr.Gtipouser = "1";
             }
         }, function (error) {
@@ -384,7 +390,6 @@ var VertareaPage = /** @class */ (function () {
                                 toast.present();
                                 this.recargarSubta(this.id);
                                 this.cargarTareas();
-                                //this.botones();
                                 this.ocultar1 = false;
                                 this.obtenerTareasR(this.usuario);
                                 return [2 /*return*/];
@@ -392,6 +397,40 @@ var VertareaPage = /** @class */ (function () {
                     });
                 }); });
                 return [2 /*return*/];
+            });
+        });
+    };
+    //Busca el usuario para cargar sus datos en la modal
+    VertareaPage.prototype.cargarDatosUsuario = function (id) {
+        var _this = this;
+        this.postPvdr.buscarUsers(id).subscribe(function (data) {
+            console.log(data);
+            _this.postPvdr.Gusuarioc = data;
+            _this.datouser = data;
+            _this.rol = data.Rol;
+            _this, _this.perfilModal(_this.datouser, _this.rol);
+            //this.datos= this.postPvdr.Globalusuario;
+            // console.log(this.datos);
+        });
+    };
+    VertareaPage.prototype.perfilModal = function (usuario, rol) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalCtr.create({
+                            component: _verperfil_verperfil_page__WEBPACK_IMPORTED_MODULE_6__["VerperfilPage"],
+                            cssClass: 'my-custom-modal-css',
+                            componentProps: {
+                                usuario: usuario,
+                                rol: rol
+                            }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };

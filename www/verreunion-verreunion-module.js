@@ -58,7 +58,7 @@ var VerreunionPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"trans\" class=\"fond\">\n    <ion-title></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/reunion\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons *ngIf=\"ocultarbotones\" (click)=\"confirmarAsist()\" slot=\"end\">\n      <ion-button slot=\"end\" fill=\"outline\">Asistir</ion-button>\n    </ion-buttons>\n    <ion-buttons *ngIf=\"ocultarbotones\" slot=\"end\" (click)=\"rechazarAsist()\">\n      <ion-button slot=\"end\" fill=\"outline\">Inasistir</ion-button>\n    </ion-buttons>\n    <ion-title>Reunion</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list class=\"fuente\" *ngFor=\"let  reu of datos\">\n    <ion-item-divider color=\"light\">\n      <ion-icon slot=\"start\" name=\"cafe\" color=\"dark\"></ion-icon>\n      <h3 class=\"center\"> <b>{{reu.Tema }}</b> </h3>\n    </ion-item-divider>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Conclusion: </label>\n      <ion-icon slot=\"start\" name=\"list-box\" color=\"dark\"></ion-icon>\n      <ion-text>\n        <p>\n          {{reu.Conclusion}}\n        </p>\n      </ion-text>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <ion-icon slot=\"start\" name=\"time\" color=\"dark\">\n      </ion-icon>\n      <label> Estado: </label>\n      <p>\n        {{reu.Estado}}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Inicio: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\" dark\"></ion-icon>\n      <p>\n        {{reu.FechadeReunion}}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Asistencia: </label>\n      <ion-icon slot=\"start\" name=\"checkbox-outline\" color=\" dark\"></ion-icon>\n      <p>\n        {{valor}}\n      </p>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <label> <b> Responsable: </b> </label>\n        </ion-text>\n        <p *ngFor=\"let  res of reu.responsables\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{res.usuario.Nombre}} {{res.usuario.Apellido}}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Participantes:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let  par of reu.participantes\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{par.usuario.Nombre}} {{par.usuario.Apellido}}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n      <ion-label>Itinerarios:</ion-label>\n    </ion-item-divider>\n    <ion-item class=\"taicon esp\">\n      <p> {{ reu.Orden_del_Dia}} </p>\n      <ion-icon slot=\"start\" name=\"arrow-dropright-circle\" color=\"dark\"></ion-icon>\n    </ion-item>\n    <ion-item-divider color=\"light\" buttons (click)=\"open = !open\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"open\"></ion-icon>\n      <ion-label>Opiniones:</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"open\" class=\"message-text bord\">\n      <ion-content class=\"chat\" delegate-handle=\"chatScroll\">\n        <div class=\"message-list\" *ngFor=\"let com of comentarios\">\n          <ion-item class=\"message-text\">\n            <ion-avatar slot=\"start\">\n              <img src=\"/assets/sinfoto.jpg\">\n            </ion-avatar>\n            <ion-label>\n              <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b> </h2>\n              <ion-text>\n                <p> {{ com.Descripcion }} </p>\n              </ion-text>\n              <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b\n                  (click)=\"mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)\">Respuestas(0)\n                  &nbsp; &nbsp; &nbsp; Responder</b>\n                &nbsp; &nbsp; <b buttons (click)=\"com.open = !com.open\">\n                  <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"!com.open\"></ion-icon>\n                  <ion-icon slot=\"end\" name=\"arrow-dropup\" *ngIf=\"com.open\"></ion-icon>\n                </b>\n              </p>\n            </ion-label>\n          </ion-item>\n          <ion-list *ngIf=\"com.open\">\n            <ion-item *ngFor=\"let subo of com.sub_observaciones\" class=\"sub-item1\">\n              <ion-avatar slot=\"start\">\n                <img src=\"/assets/sinfoto.jpg\">\n              </ion-avatar>\n              <ion-label class=\"text\">\n                <h3> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h3>\n                <h3>\n                  <ion-text> {{ subo.Descripcion }} </ion-text>\n                </h3>\n                <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>\n              </ion-label>\n            </ion-item>\n            <ion-item class=\"sub-item1\">\n              <ion-textarea placeholder=\"Escribe tu observacion aqui...\" [(ngModel)]='comentario1'></ion-textarea>\n              <ion-buttons>\n                <ion-button (click)=\"enviarSubComentario(com.Id_Reunion, com.Id_observacion_reunion)\">\n                  <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n                </ion-button>\n              </ion-buttons>\n            </ion-item>\n            <ion-item-divider color=\"light\">\n            </ion-item-divider>\n          </ion-list>\n        </div>\n      </ion-content>\n    </div>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-toolbar>\n    <ion-item>\n      <ion-textarea placeholder=\"Escribe tu opinión aquí...\" [(ngModel)]='comentario'></ion-textarea>\n      <ion-buttons>\n        <ion-button (click)=\"enviarComentario()\">\n          <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-item>\n  </ion-toolbar>\n</ion-footer>"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"trans\" class=\"fond\">\n    <ion-title></ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/reunion\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons *ngIf=\"ocultarbotones\" (click)=\"confirmarAsist()\" slot=\"end\">\n      <ion-button slot=\"end\" fill=\"outline\">Asistir</ion-button>\n    </ion-buttons>\n    <ion-buttons *ngIf=\"ocultarbotones\" slot=\"end\" (click)=\"rechazarAsist()\">\n      <ion-button slot=\"end\" fill=\"outline\">Inasistir</ion-button>\n    </ion-buttons>\n    <ion-title>Reunion</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list class=\"fuente\" *ngFor=\"let  reu of datos\">\n    <ion-item-divider color=\"light\">\n      <ion-icon slot=\"start\" name=\"cafe\" color=\"dark\"></ion-icon>\n      <h3 class=\"center\"> <b>{{reu.Tema }}</b> </h3>\n    </ion-item-divider>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Conclusion: </label>\n      <ion-icon slot=\"start\" name=\"list-box\" color=\"dark\"></ion-icon>\n      <ion-text>\n        <p>\n          {{reu.Conclusion}}\n        </p>\n      </ion-text>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <ion-icon slot=\"start\" name=\"time\" color=\"dark\">\n      </ion-icon>\n      <label> Estado: </label>\n      <p>\n        {{reu.Estado}}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Fecha Inicio: </label>\n      <ion-icon slot=\"start\" name=\"clock\" color=\" dark\"></ion-icon>\n      <p>\n        {{reu.FechadeReunion}}\n      </p>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"taicon\">\n      <label> Asistencia: </label>\n      <ion-icon slot=\"start\" name=\"checkbox-outline\" color=\" dark\"></ion-icon>\n      <p>\n        {{valor}}\n      </p>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n    </ion-item-divider>\n    <ion-item lines=\"none\">\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <label> <b> Responsable: </b> </label>\n        </ion-text>\n        <p *ngFor=\"let  res of reu.responsables\" (click)=\"cargarDatosUsuario(res.usuario.Id_Usuario)\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{res.usuario.Nombre}} {{res.usuario.Apellido}}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label class=\"ion-text-wrap\">\n        <ion-text>\n          <ion-label> <b> Participantes:</b> </ion-label>\n        </ion-text>\n        <p *ngFor=\"let  par of reu.participantes\" (click)=\"cargarDatosUsuario(par.usuario.Id_Usuario)\">\n          <ion-icon slot=\"start\" name=\"person\" color=\"dark\"> </ion-icon>\n          {{par.usuario.Nombre}} {{par.usuario.Apellido}}\n        </p>\n      </ion-label>\n    </ion-item>\n    <ion-item-divider color=\"light\">\n      <ion-label>Itinerarios:</ion-label>\n    </ion-item-divider>\n    <ion-item class=\"taicon esp\">\n      <p> {{ reu.Orden_del_Dia}} </p>\n      <ion-icon slot=\"start\" name=\"arrow-dropright-circle\" color=\"dark\"></ion-icon>\n    </ion-item>\n    <ion-item-divider color=\"light\" buttons (click)=\"open = !open\">\n      <ion-icon slot=\"end\" name=\"arrow-dropright\" *ngIf=\"!open\"></ion-icon>\n      <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"open\"></ion-icon>\n      <ion-label>Opiniones:</ion-label>\n    </ion-item-divider>\n    <div *ngIf=\"open\" class=\"message-text bord\">\n      <ion-content class=\"chat\" delegate-handle=\"chatScroll\">\n        <div class=\"message-list\" *ngFor=\"let com of comentarios\">\n          <ion-item class=\"message-text\">\n            <ion-avatar slot=\"start\">\n              <img src=\"/assets/sinfoto.jpg\">\n            </ion-avatar>\n            <ion-label>\n              <h2> <b>{{ com.usuario.Nombre }} {{ com.usuario.Apellido }}</b> </h2>\n              <ion-text>\n                <p> {{ com.Descripcion }} </p>\n              </ion-text>\n              <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b\n                  (click)=\"mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Reunion, com.Id_Usuario, com.Id_observacion_reunion)\">Respuestas({{com.sub_observaciones.length}})\n                  &nbsp; &nbsp; &nbsp; Responder</b>\n                &nbsp; &nbsp; <b buttons (click)=\"com.open = !com.open\">\n                  <ion-icon slot=\"end\" name=\"arrow-dropdown\" *ngIf=\"!com.open\"></ion-icon>\n                  <ion-icon slot=\"end\" name=\"arrow-dropup\" *ngIf=\"com.open\"></ion-icon>\n                </b>\n              </p>\n            </ion-label>\n          </ion-item>\n          <ion-list *ngIf=\"com.open\">\n            <ion-item *ngFor=\"let subo of com.sub_observaciones\" class=\"sub-item1\">\n              <ion-avatar slot=\"start\">\n                <img src=\"/assets/sinfoto.jpg\">\n              </ion-avatar>\n              <ion-label class=\"text\">\n                <h2> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h2>\n              \n                  <ion-text> <p>{{ subo.Descripcion }} </p> </ion-text>\n               \n                <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>\n              </ion-label>\n            </ion-item>\n            <ion-item class=\"sub-item1\">\n              <ion-textarea placeholder=\"Escribe tu observacion aqui...\" [(ngModel)]='comentario1'></ion-textarea>\n              <ion-buttons>\n                <ion-button (click)=\"enviarSubComentario(com.Id_Reunion, com.Id_observacion_reunion)\">\n                  <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n                </ion-button>\n              </ion-buttons>\n            </ion-item>\n            <ion-item-divider color=\"light\">\n            </ion-item-divider>\n          </ion-list>\n        </div>\n      </ion-content>\n    </div>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-toolbar>\n    <ion-item>\n      <ion-textarea placeholder=\"Escribe tu opinión aquí...\" [(ngModel)]='comentario'></ion-textarea>\n      <ion-buttons>\n        <ion-button (click)=\"enviarComentario()\">\n          <ion-icon slot=\"end\" name=\"send\" color=\"dark\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-item>\n  </ion-toolbar>\n</ion-footer>"
 
 /***/ }),
 
@@ -88,8 +88,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_providers_post_providers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/providers/post-providers */ "./src/providers/post-providers.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _comentarios_comentarios_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comentarios/comentarios.page */ "./src/app/comentarios/comentarios.page.ts");
+/* harmony import */ var _verperfil_verperfil_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../verperfil/verperfil.page */ "./src/app/verperfil/verperfil.page.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -97,11 +101,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var VerreunionPage = /** @class */ (function () {
-    function VerreunionPage(router, postPvdr, toastCtrl, alertController) {
+    function VerreunionPage(router, postPvdr, toastCtrl, alertController, modalCtr) {
         this.router = router;
         this.postPvdr = postPvdr;
         this.toastCtrl = toastCtrl;
         this.alertController = alertController;
+        this.modalCtr = modalCtr;
         this.datos = [];
         this.id = "";
         this.usuario = "";
@@ -110,6 +115,7 @@ var VerreunionPage = /** @class */ (function () {
         this.comentarios = [];
         this.asistencia = "";
         this.motivo = "";
+        this.datouser = [];
     }
     VerreunionPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -122,7 +128,7 @@ var VerreunionPage = /** @class */ (function () {
         this.fecha1 = new Date().toISOString().substr(0, 10);
         this.fecha2 = new Date().toISOString().substr(11, 8);
         // this.fecha= this.fecha1 +' '+ this.fecha2;
-        this.fecha = moment__WEBPACK_IMPORTED_MODULE_5__().format('YYYY-MM-DD HH:mm:ss');
+        this.fecha = moment__WEBPACK_IMPORTED_MODULE_7__().format('YYYY-MM-DD HH:mm:ss');
         this.buscarobservacion();
     };
     VerreunionPage.prototype.cargarReunion = function () {
@@ -384,6 +390,70 @@ var VerreunionPage = /** @class */ (function () {
             this.ocultarbotones = false;
         }
     };
+    //funcion es para mostrar las observaciones opcion 2 (no la uso)
+    VerreunionPage.prototype.mostrarObs = function (obser, nombre, apellido, descrip, fech, idt, idu, ido) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.postPvdr.comentary = 0;
+                        return [4 /*yield*/, this.modalCtr.create({
+                                component: _comentarios_comentarios_page__WEBPACK_IMPORTED_MODULE_5__["ComentariosPage"],
+                                cssClass: 'my-custom-modal-css',
+                                componentProps: {
+                                    obser: obser,
+                                    nombre: nombre,
+                                    apellido: apellido,
+                                    descrip: descrip,
+                                    fech: fech,
+                                    idt: idt,
+                                    idu: idu,
+                                    ido: ido
+                                }
+                            })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    //Busca el usuario para cargar sus datos en la modal
+    VerreunionPage.prototype.cargarDatosUsuario = function (id) {
+        var _this = this;
+        this.postPvdr.buscarUsers(id).subscribe(function (data) {
+            console.log(data);
+            _this.postPvdr.Gusuarioc = data;
+            _this.datouser = data;
+            _this.rol = data.Rol;
+            _this, _this.perfilModal(_this.datouser, _this.rol);
+            //this.datos= this.postPvdr.Globalusuario;
+            // console.log(this.datos);
+        });
+    };
+    VerreunionPage.prototype.perfilModal = function (usuario, rol) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalCtr.create({
+                            component: _verperfil_verperfil_page__WEBPACK_IMPORTED_MODULE_6__["VerperfilPage"],
+                            cssClass: 'my-custom-modal-css',
+                            componentProps: {
+                                usuario: usuario,
+                                rol: rol
+                            }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     VerreunionPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-verreunion',
@@ -393,7 +463,8 @@ var VerreunionPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
             src_providers_post_providers__WEBPACK_IMPORTED_MODULE_3__["PostProvider"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]])
     ], VerreunionPage);
     return VerreunionPage;
 }());

@@ -37,29 +37,65 @@ export class ComentariosPage implements OnInit {
 
     async enviarComentario(idtar, iduser, idobser){
 
-      console.log(idtar);
-      if(this.comentario == ""){
-        const toast = await this.toastCtrl.create({
-        message: 'No hay comentario',
-        duration: 3000
-        });
-        toast.present();
-       } else {
-         let body={
-           Id_Tarea: idtar,
-           Id_Usuario: iduser,
-           Descripcion:this.comentario,
-           Fecha:this.fecha,
-           ObservacionID: idobser,
-           tipo:"S"
-         }
-         this.postPvdr.ingreObserv(body).subscribe(
-           async data =>{
-             this.comentario="";
-           
-            
-           }
-         )
+      // si es 0 son comentarios de reuniones
+if (this.postPvdr.comentary == 0 ){
+  console.log(idtar);
+  if(this.comentario == ""){
+    const toast = await this.toastCtrl.create({
+    message: 'No hay comentario',
+    duration: 3000
+    });
+    toast.present();
+   } else {
+     let body={
+       Id_Reunion: idtar,
+       Id_Usuario: iduser,
+       Fecha:this.fecha,
+       Descripcion:this.comentario,
+       Observacion_ID: idobser,
+       tipo:"S"
+     }
+     console.log(body);
+     this.postPvdr.ingreObservr(body).subscribe(
+       async data =>{
+         this.comentario="";
+         
+        
        }
+     )
+   }
+
+
+} else if (this.postPvdr.comentary==1 ){
+  console.log(idtar);
+  if(this.comentario == ""){
+    const toast = await this.toastCtrl.create({
+    message: 'No hay comentario',
+    duration: 3000
+    });
+    toast.present();
+   } else {
+     let body={
+       Id_Tarea: idtar,
+       Id_Usuario: iduser,
+       Descripcion:this.comentario,
+       Fecha:this.fecha,
+       ObservacionID: idobser,
+       tipo:"S"
+     }
+     this.postPvdr.ingreObserv(body).subscribe(
+       async data =>{
+         this.comentario="";
+       
+        
+       }
+     )
+   }
+
+}
+
+      //si es 1 son comentarios de tareas laborales 
+
+    
      }
 }

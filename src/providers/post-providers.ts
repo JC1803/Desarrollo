@@ -56,6 +56,12 @@ export class PostProvider {
    public intervalo: any;
    public intervalo2: any;
 
+
+//variable global para comentarios
+
+public comentary: any;
+
+
 	//Headers
 
 

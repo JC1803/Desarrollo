@@ -51,7 +51,7 @@
         <ion-text>
           <ion-label> <b> Responsable: </b> </ion-label>
         </ion-text>
-        <p *ngFor="let res of tarea.responsables">
+        <p *ngFor="let res of tarea.responsables" (click)="cargarDatosUsuario(res.usuario.Id_Usuario)">
           <ion-icon slot="start" name="person" color="dark"> </ion-icon>
           {{ res.usuario.Nombre }} {{ res.usuario.Apellido }}
         </p>
@@ -62,7 +62,7 @@
         <ion-text>
           <ion-label> <b>Observadores:</b> </ion-label>
         </ion-text>
-        <p *ngFor="let obs of tarea.observadores">
+        <p *ngFor="let obs of tarea.observadores" (click)="cargarDatosUsuario(obs.Id_Usuario)">
           <ion-icon slot="start" name="person" color="dark"> </ion-icon>
           {{ obs.usuario.Nombre }} {{ obs.usuario.Apellido }}
         </p>
@@ -73,7 +73,7 @@
         <ion-text>
           <ion-label> <b> Participantes:</b> </ion-label>
         </ion-text>
-        <p *ngFor="let par of tarea.participantes">
+        <p *ngFor="let par of tarea.participantes" (click)="cargarDatosUsuario(par.usuario.Id_Usuario)">
           <ion-icon slot="start" name="person" color="dark"> </ion-icon>
           {{ par.usuario.Nombre }} {{ par.usuario.Apellido }}
         </p>
@@ -126,7 +126,7 @@
                 <p> {{ com.Descripcion }} </p>
               </ion-text>
               <p> {{com.Fecha}} &nbsp; &nbsp; &nbsp; <b
-                  (click)="mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)">Respuestas(0)
+                  (click)="mostrarObs(com.sub_observaciones,com.usuario.Nombre, com.usuario.Apellido, com.Descripcion, com.Fecha, com.Id_Tarea, com.Id_Usuario, com.Id_Observacion)">Respuestas({{com.sub_observaciones.length}})
                   &nbsp; &nbsp; &nbsp; Responder</b>
                 &nbsp; &nbsp; <b buttons (click)="com.open = !com.open">
                   <ion-icon slot="end" name="arrow-dropdown" *ngIf="!com.open"></ion-icon>
@@ -141,10 +141,10 @@
                 <img src="/assets/sinfoto.jpg">
               </ion-avatar>
               <ion-label class="text">
-                <h3> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h3>
-                <h3>
-                  <ion-text> {{ subo.Descripcion }} </ion-text>
-                </h3>
+                <h2> <b>{{ subo.usuario.Nombre }} {{ subo.usuario.Apellido }}</b> </h2>
+               
+                  <ion-text> <p> {{ subo.Descripcion }} </p></ion-text>
+               
                 <p> {{subo.Fecha}} &nbsp; &nbsp; &nbsp; <b>Eliminar</b></p>
               </ion-label>
             </ion-item>
